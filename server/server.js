@@ -1,22 +1,11 @@
 const express = require('express');
-const fileUpload = require('express-fileupload');
 const app = express();
 const cors = require('cors');
 const port = 5000;
 const fs = require('fs');
-const { parse } = require('path');
 
 app.use(express.json());
 app.use(cors());
-app.use(fileUpload());
-
-app.get('/', (req, res) => {
-  res.set({
-    'Access-Control-Allow-Origin': '*'
-  });
-  res.send(JSON.stringify('This is the wine we whine about'));
-});
-
 
 const readData = () => {
   return fs.readFileSync('./data.json', (err, data) => {
@@ -33,32 +22,62 @@ const writeData = data => {
   });
 }
 
+app.get('/', (req, res) => {
+  try {
+    res.send(JSON.stringify('This is the wine we whine about'));
+  } catch (err) {
+    console.error(err, 'IN GET ROOT');
+    res.send(err, 'IN GET ROOT');
+  }
+});
+
+
 app.get('/wines', async (req, res) => {
-  const data = readData();
-  const parsedData = JSON.parse(data);
-  res.send(JSON.stringify(parsedData));
+  try {
+    const data = readData();
+    const parsedData = JSON.parse(data);
+    res.status(200).send(JSON.stringify(parsedData));
+  } catch (err) {
+    console.error(err, 'IN GET /WINES');
+    res.status(500).send('IN GET /WINES');
+  }
 });
 
 app.post('/wines', (req, res) => {
-  const data = readData();
-  const parsedData = JSON.parse(data);
-  const wineArr = parsedData.wineArr;
-  wineArr.push(req.body);
-  const finishedJson = { "wineArr": wineArr };
-  const jsonWine = JSON.stringify(finishedJson);
-  writeData(jsonWine);
-  res.status(203).send();
+  try {
+    const data = readData();
+    const parsedData = JSON.parse(data);
+    const wineArr = parsedData.wineArr;
+    wineArr.push(req.body);
+    const finishedJson = { "wineArr": wineArr };
+    const jsonWine = JSON.stringify(finishedJson);
+    writeData(jsonWine);
+    res.status(203).send();
+  } catch (err) {
+    console.error(err, 'IN POST /WINES');
+    res.status(500).send(err, 'IN POST /WINES');
+  }
 });
 
-// app.delete('/wines', (req, res) => {
-//   const data = readData();
-//   const parsedData = JSON.parse(data);
-//   const wineArr = parsedData.wineArr;
-//   wineArr.forEach(wine => )
-//   const finishedJson = { "wineArr": wineArr };
-//   const jsonWine = JSON.stringify(finishedJson);
-//   writeData(jsonWine);
-//   // res.status(203).send();
-// });
+app.delete('/wines', (req, res) => {
+  try {
+    const data = readData();
+    const parsedData = JSON.parse(data);
+    const wineArr = parsedData.wineArr;
+    const id = req.body.id;
+    wineArr.forEach( (wine, i) => {
+      if(`${wine.shelf}:${wine.row}` === id) {
+        wineArr.splice(i, 1);
+      }
+    })
+    const finishedJson = { "wineArr": wineArr };
+    const jsonWine = JSON.stringify(finishedJson);
+    writeData(jsonWine);
+    res.status(204).send();
+  } catch (err) {
+    console.error(err, 'IN DELETE /WINES');
+    res.status(500).send(err, 'IN DELETE /WINES');
+  }
+});
 
 app.listen(port, () => console.log(`test-api is running on port ${port}`));
