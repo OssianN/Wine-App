@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>{title}</h1>
+      <h1 className="header">{title}</h1>
       <AddWine
         setCardArr={setCardArr}
         setDisplayForm={setDisplayForm}

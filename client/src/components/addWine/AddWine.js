@@ -12,9 +12,9 @@ const AddWine = props => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const wineTitle = e.target.children[1];
-    const wineCountry = e.target.children[3];
-    const wineDesc = e.target.children[5];
+    const wineTitle = e.target.children[2];
+    const wineCountry = e.target.children[4];
+    const wineDesc = e.target.children[6];
     const wineShelf = props.position[0];
     const wineRow = props.position[1];
     const data = {
@@ -28,16 +28,21 @@ const AddWine = props => {
     props.setDisplayForm('none');
   }
 
+  const cancel = () => {
+    props.setDisplayForm('none');
+  }
+
   return (
     <form style={{display: props.displayForm}} onSubmit={handleSubmit} className="addWineForm">
+      <button onClick={cancel} className='cancelButton' >&#10005;</button>
       <label htmlFor='newWineName'>Wine Name</label>
       <input type='text' id="newWineName" />
       <label htmlFor='newWineCountry'>Country</label>
       <input type='text' id="newWineCountry" />
-      <label htmlFor='newWineDesc'>Description</label>
+      <label htmlFor='newWineDesc'>Year</label>
       <input type='text' id="newWineDesc" />
       <button type='submit' id="addNewWineButton">
-        Add
+        Add Wine
       </button>
     </form>
   )

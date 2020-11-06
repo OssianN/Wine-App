@@ -9,6 +9,13 @@ html, body, #root {
   width: 100%;
   min-height: 100vh;
   text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.header {
+  font-family: 'Dancing Script', cursive;
+  font-size: 50px;
+  margin: 30px;
 }
 
 .addWineForm {
@@ -16,6 +23,7 @@ html, body, #root {
   margin: 5% 0;
   width: 50%;
   height: 70%;
+  padding-bottom: 30px;
   display: none;
   flex-direction: column;
   align-self: center;
@@ -24,6 +32,16 @@ html, body, #root {
   justify-content: center;
   border: solid 1px gray;
   border-radius: 20px;
+  animation: addWineForm 2s;
+}
+
+@keyframes addWineForm {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .addWineForm input, button {
@@ -32,6 +50,19 @@ html, body, #root {
   border-radius: 20px;
   margin: 10px;
   height: 35px;
+}
+
+.cancelButton {
+  width: 30px;
+  height: 30px;
+  justify-self: flex-end;
+  align-self: flex-end;
+  background-color: transparent;
+  color: #550000;
+}
+
+.addWineForm button[type="submit"] {
+  width: 20%;
 }
 
 .wineGrid {
@@ -61,7 +92,7 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   padding: 10px;
-  background: linear-gradient(#dfdfdf, #d1d1d1);
+  background: linear-gradient(#ebebeb, #ececec);
 }
 
 .showForm button {
@@ -70,7 +101,7 @@ html, body, #root {
   background-color: transparent;
   border: none;
   font-size: 50px;
-  color: #ebebeb;
+  color: #ffffff;
 }
 
 .card {
@@ -84,8 +115,23 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
   padding: 10px;
   color: white;
   background:linear-gradient(#700000, #550000);
 }
 
+.card h1 {
+  font-size: 35px;
+  margin: 10px 0 5px 0;
+}
+
+.card h4 {
+  font-size: 25px;
+  margin: 5px 0 5px 0;
+}
+
+.card p {
+  font-size: 20px;
+  margin: 5px 0 10px 0;
+}
