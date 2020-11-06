@@ -7,6 +7,7 @@ const AddWine = props => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     })
+    console.log('postData updates');
     props.setUpdateOnPost(!props.updateOnPost);
   }
 

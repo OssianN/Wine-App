@@ -7,7 +7,7 @@ const WineGrid = props => {
     return (
       <div 
         className="showForm"
-        key={`${i}:${j}2`}
+        key={`${i}:${j}`}
         id={`${i}:${j}`} >
         <button 
           onClick={handleClick}>
@@ -26,6 +26,8 @@ const WineGrid = props => {
         desc={card.desc}
         x={card.shelf}
         y={card.row}
+        updateOnPost={props.updateOnPost}
+        setUpdateOnPost={props.setUpdateOnPost}
       />
     );
   };
