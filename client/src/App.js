@@ -32,7 +32,8 @@ function App() {
 
   useEffect(() => {
     getBackend();
-    getWines()
+    getWines();
+    console.log('updated!')
   }, [title, updateOnPost]);
 
   return (
@@ -52,6 +53,8 @@ function App() {
         setDisplayForm={setDisplayForm}
         displayForm={displayForm}
         setPosition={setPosition}
+        updateOnPost={updateOnPost}
+        setUpdateOnPost={setUpdateOnPost}
       />
     </div>
   );
