@@ -6,36 +6,36 @@ const AddWine = props => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
-    })
-    console.log('postData updates');
-    props.setUpdateOnPost(!props.updateOnPost);
-  }
+    }).then(() => {
+      props.setUpdateOnPost(props.updateOnPost + 1);
+    }).catch(err => alert('A server error occured.', err));
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const wineTitle = e.target.children[2];
     const wineCountry = e.target.children[4];
-    const wineDesc = e.target.children[6];
+    const wineYear = e.target.children[6];
     const wineShelf = props.position[0];
     const wineRow = props.position[1];
     const data = {
       title: wineTitle.value,
       country: wineCountry.value,
-      desc: wineDesc.value,
+      year: wineYear.value,
       shelf: wineShelf,
       row: wineRow,
     }
     postData(data);
-    props.setDisplayForm('none');
+    props.setDisplayForm('hideWineForm');
   }
 
   const cancel = () => {
-    props.setDisplayForm('none');
+    props.setDisplayForm('hideWineForm');
   }
 
   return (
-    <form style={{display: props.displayForm}} onSubmit={handleSubmit} className="addWineForm">
-      <button onClick={cancel} className='cancelButton' >&#10005;</button>
+    <form onSubmit={handleSubmit} className={props.displayForm}>
+      <button type='reset' onClick={cancel} className='cancelButton' >&#10005;</button>
       <label htmlFor='newWineName'>Wine Name</label>
       <input type='text' id="newWineName" />
       <label htmlFor='newWineCountry'>Country</label>
