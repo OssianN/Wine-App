@@ -29,6 +29,7 @@ const Card = props => {
   return (
     <div className='card' id={id} onMouseOver={handleShowRemove} onMouseOut={handleHideRemove}>
       <button className='removeButton' onClick={handleRemove} style={showRemove}>&#10005;</button>
+      <p className='cardPosition'>{`${props.x + 1}:${props.y + 1}`}</p>
       <h1>{props.title}</h1>
       <h4>{props.country}</h4>
       <p>{props.year}</p>
