@@ -6,12 +6,11 @@ import AddWine from './components/addWine/AddWine';
 function App() {
   const [cardArr, setCardArr] = useState();
   const [title, setTitle] = useState(null);
-  const [displayForm, setDisplayForm] = useState('none');
+  const [displayForm, setDisplayForm] = useState('doNotDisplay');
   const [position, setPosition] = useState(null);
-  const [updateOnPost, setUpdateOnPost] = useState(false)
+  const [updateOnPost, setUpdateOnPost] = useState(0);
 
-
-  const getBackend = async () => {
+  const getTitle = async () => {
     const title = await fetch('http://localhost:5000')
       .then(res => res.json());
     setTitle(title);
@@ -23,18 +22,16 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
       });
       const resData = await response.json();
-      const wineArr = resData.wineArr;
-      setCardArr(wineArr);
+      setCardArr(resData);
     } catch (err) {
       console.error(err, 'getWines error')
     }
   }
 
   useEffect(() => {
-    getBackend();
+    getTitle();
     getWines();
-    console.log('updated!')
-  }, [title, updateOnPost]);
+  }, [updateOnPost]);
 
   return (
     <div className="App">
