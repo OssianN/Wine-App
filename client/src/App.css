@@ -207,6 +207,12 @@ form button[type="submit"] {
   margin: 5px 0 10px 0;
 }
 
+.cardPosition {
+  align-self: flex-start;
+  padding: 0 0 0 10px;
+  color: #ffffff9f;
+}
+
 .removeButton {
   position: absolute;
   align-self: flex-end;
