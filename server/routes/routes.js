@@ -5,21 +5,6 @@ const { getData } = require('../mongoDB/getData');
 const { postNewWine } = require('../mongoDB/postNewWine');
 const { deleteWine } = require('../mongoDB/deleteWine');
 
-const readData = () => {
-  return fs.readFileSync('./data.json', (err, data) => {
-    if (err) console.error(err, 'error in read');
-    if (!data) return false;
-    return data;
-  });
-};
-
-const writeData = data => {
-  return fs.writeFile('./data.json', data, err => {
-    if (err) console.error(err, 'error in post');
-    return data;
-  });
-}
-
 route.get('/', (req, res) => {
   try {
     res.send(JSON.stringify('This is the wine we whine about'));
