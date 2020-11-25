@@ -5,7 +5,11 @@ const { getData } = require('../mongoDB/getData');
 const { postNewWine } = require('../mongoDB/postNewWine');
 const { deleteWine } = require('../mongoDB/deleteWine');
 
-route.get('/wines', async (req, res) => {
+route.use((req, res) => {
+	res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
+route.get('/', async (req, res) => {
   try {
     const data = await getData();
     res.status(200).send(JSON.stringify(data));
@@ -15,7 +19,7 @@ route.get('/wines', async (req, res) => {
   }
 });
 
-route.post('/wines', (req, res) => {
+route.post('/', (req, res) => {
   try {
     postNewWine(req.body);
     res.status(203).send();
@@ -25,7 +29,7 @@ route.post('/wines', (req, res) => {
   }
 });
 
-route.delete('/wines', (req, res) => {
+route.delete('/', (req, res) => {
   try {
     deleteWine(req.body);
     res.status(200).send();
@@ -33,10 +37,6 @@ route.delete('/wines', (req, res) => {
     console.error(err, 'IN DELETE /WINES');
     res.status(500).send(err, 'IN DELETE /WINES');
   }
-});
-
-route.use((req, res) => {
-	res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
 module.exports = route;
