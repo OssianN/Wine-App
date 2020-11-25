@@ -178,7 +178,7 @@ form button[type="submit"] {
   flex-direction: column;
   align-items: center;
   color: white;
-  padding: 10px 5px;
+  padding: .5%;
   background:linear-gradient(#7c0000, #550000);
   animation-name: card;
   animation-duration: 1s;

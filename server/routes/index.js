@@ -44,4 +44,8 @@ route.delete('/wines', (req, res) => {
   }
 });
 
+route.use((req, res) => {
+	res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
 module.exports = route;

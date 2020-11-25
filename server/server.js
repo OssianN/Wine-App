@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const wine = require('./routes/routes');
+const wine = require('./routes');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
@@ -18,9 +18,10 @@ connection
   .on('error', err => console.log('Ooopsiwhoops, some sort of error', err));
 
 const port = 5000;
-
 app.use(express.json());
 app.use(cors());
+app.use(express.static('client/build'));
+
 app.use('/', wine);
 
 app.listen(port, () => console.log(`test-api is running on port ${port}`));
