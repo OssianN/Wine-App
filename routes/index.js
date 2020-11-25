@@ -5,10 +5,6 @@ const { getData } = require('../mongoDB/getData');
 const { postNewWine } = require('../mongoDB/postNewWine');
 const { deleteWine } = require('../mongoDB/deleteWine');
 
-route.use((req, res) => {
-	res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
-
 route.get('/', async (req, res) => {
   try {
     const data = await getData();
@@ -37,6 +33,10 @@ route.delete('/', (req, res) => {
     console.error(err, 'IN DELETE /WINES');
     res.status(500).send(err, 'IN DELETE /WINES');
   }
+});
+
+route.use((req, res) => {
+	res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
 module.exports = route;
