@@ -5,8 +5,7 @@ const wine = require('./routes');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const dbName = 'WineDB';
-const uri = `mongodb://ossian:${process.env.SECRET_KEY}@winedb-shard-00-00.a5qld.mongodb.net:27017,winedb-shard-00-01.a5qld.mongodb.net:27017,winedb-shard-00-02.a5qld.mongodb.net:27017/${dbName}?ssl=true&replicaSet=atlas-13pr7v-shard-0&authSource=admin&retryWrites=true&w=majority`;
+const uri = process.env.SECRET_KEY;
 const { connection } = mongoose;
 
 mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true } );
