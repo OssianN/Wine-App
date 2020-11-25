@@ -1,6 +1,6 @@
-const fs = require('fs');
 const express = require('express');
 const route = express.Router();
+const path = require('path');
 const { getData } = require('../mongoDB/getData');
 const { postNewWine } = require('../mongoDB/postNewWine');
 const { deleteWine } = require('../mongoDB/deleteWine');
