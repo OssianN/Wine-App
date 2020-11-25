@@ -24,4 +24,4 @@ app.use(express.static('client/build'));
 
 app.use('/', wine);
 
-app.listen(process.env.PORT || localPort, () => console.log(`test-api is running on port ${port}`));
+app.listen(process.env.PORT || localPort, () => console.log(`test-api is running on port ${localPort}`));
