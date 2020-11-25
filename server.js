@@ -17,11 +17,11 @@ connection
 })
   .on('error', err => console.log('Ooopsiwhoops, some sort of error', err));
 
-const port = 5000;
+const localPort = 5000;
 app.use(express.json());
 app.use(cors());
 app.use(express.static('client/build'));
 
 app.use('/', wine);
 
-app.listen(port, () => console.log(`test-api is running on port ${port}`));
+app.listen(process.env.PORT || localPort, () => console.log(`test-api is running on port ${port}`));
