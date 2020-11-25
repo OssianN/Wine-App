@@ -19,7 +19,7 @@ connection
 
 const localPort = 5000;
 app.use(express.json());
-// app.use(cors());
+app.use(cors());
 app.use(express.static('client/build'));
 app.use('/wines', wine);
 

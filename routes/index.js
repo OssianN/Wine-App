@@ -8,6 +8,7 @@ const { deleteWine } = require('../mongoDB/deleteWine');
 route.get('/', async (req, res) => {
   try {
     const data = await getData();
+    res.header('Access-Control-Allow-Origin', '*');
     res.status(200).send(JSON.stringify(data));
   } catch (err) {
     console.error(err, 'IN GET /WINES');
@@ -18,6 +19,7 @@ route.get('/', async (req, res) => {
 route.post('/', (req, res) => {
   try {
     postNewWine(req.body);
+    res.header('Access-Control-Allow-Origin', '*');
     res.status(203).send();
   } catch (err) {
     console.error(err, 'IN POST /WINES');
@@ -28,6 +30,7 @@ route.post('/', (req, res) => {
 route.delete('/', (req, res) => {
   try {
     deleteWine(req.body);
+    res.header('Access-Control-Allow-Origin', '*');
     res.status(200).send();
   } catch (err) {
     console.error(err, 'IN DELETE /WINES');
