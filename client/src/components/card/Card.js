@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+z
 const Card = props => {
   const [showRemove, setShowRemove] = useState({display: 'none'})
   const id = `${props.x}:${props.y}`;
