@@ -5,15 +5,6 @@ const { getData } = require('../mongoDB/getData');
 const { postNewWine } = require('../mongoDB/postNewWine');
 const { deleteWine } = require('../mongoDB/deleteWine');
 
-route.get('/', (req, res) => {
-  try {
-    res.send(JSON.stringify('This is the wine we whine about'));
-  } catch (err) {
-    console.error(err, 'IN GET ROOT');
-    res.send(err, 'IN GET ROOT');
-  }
-});
-
 route.get('/wines', async (req, res) => {
   try {
     const data = await getData();

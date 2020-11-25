@@ -5,16 +5,9 @@ import AddWine from './components/addWine/AddWine';
 
 function App() {
   const [cardArr, setCardArr] = useState();
-  const [title, setTitle] = useState(null);
   const [displayForm, setDisplayForm] = useState('doNotDisplay');
   const [position, setPosition] = useState(null);
   const [updateOnPost, setUpdateOnPost] = useState(0);
-
-  const getTitle = async () => {
-    const title = await fetch('http://localhost:5000')
-      .then(res => res.json());
-    setTitle(title);
-  }
 
   const getWines = async () => {
     try {
@@ -29,13 +22,12 @@ function App() {
   }
 
   useEffect(() => {
-    getTitle();
     getWines();
   }, [updateOnPost]);
 
   return (
     <div className="App">
-      <h1 className="header">{title}</h1>
+      <h1 className="header">This is the wine we whine about</h1>
       <AddWine
         setCardArr={setCardArr}
         setDisplayForm={setDisplayForm}
