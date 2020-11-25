@@ -5,7 +5,7 @@ const Card = props => {
   const id = `${props.x}:${props.y}`;
 
   const handleRemove = e => {
-    fetch('http://localhost:5000/wines', {
+    fetch('https://localhost:5000/wines', {
       method: 'DELETE',
       mode: 'cors',
       headers: {  

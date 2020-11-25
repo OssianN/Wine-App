@@ -11,7 +11,7 @@ function App() {
 
   const getWines = async () => {
     try {
-      const response = await fetch('http://localhost:5000/wines', {
+      const response = await fetch('https://localhost:5000/wines', {
         headers: { 'Content-Type': 'application/json' },
       });
       const resData = await response.json();
