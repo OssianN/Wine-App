@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import WineGrid from './components/wineGrid/WineGrid';
 import AddWine from './components/addWine/AddWine';
+import axios from 'axios';
 
 function App() {
   const [cardArr, setCardArr] = useState();
@@ -11,11 +12,9 @@ function App() {
 
   const getWines = async () => {
     try {
-      const response = await fetch('https://localhost:5000/wines', {
-        headers: { 'Content-Type': 'application/json' },
-      });
-      const resData = await response.json();
-      setCardArr(resData);
+      const response = await axios.get('http://localhost:5000/wines');
+      const data = await response.data;
+      setCardArr(data);
     } catch (err) {
       console.error(err, 'getWines error')
     }

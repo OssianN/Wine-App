@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+
 const Card = props => {
   const [showRemove, setShowRemove] = useState({display: 'none'})
   const id = `${props.x}:${props.y}`;
 
-  const handleRemove = e => {
-    fetch('https://localhost:5000/wines', {
-      method: 'DELETE',
-      mode: 'cors',
-      headers: {  
-        'Accept': 'application/json',
-        'Content-Type': 'application/json' 
-      },
-      body: JSON.stringify({shelf: props.x, row: props.y})
-    }).then(() => {
+  const handleRemove = async () => {
+    try {
+      await axios.delete('http://localhost:5000/wines', {data: {shelf: props.x, row: props.y}});
       props.setUpdateOnPost(props.updateOnPost + 1);
-    }).catch(err => alert('A server error occured.', err));
+
+    } catch(err) {
+      alert('A server error occured.', err);
+    }
   };
 
   const handleShowRemove = () => {

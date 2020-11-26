@@ -1,14 +1,16 @@
 import React from 'react';
+import axios from 'axios';
 
 const AddWine = props => {
   const postData = async (data) => {
-    fetch('https://localhost:5000/wines', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    }).then(() => {
+    try {
+      await axios.post('http://localhost:5000/wines',
+        data
+      );
       props.setUpdateOnPost(props.updateOnPost + 1);
-    }).catch(err => alert('A server error occured.', err));
+    } catch(err) {
+      alert('A server error occured.', err);
+    };
   };
 
   const handleSubmit = e => {
