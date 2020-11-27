@@ -236,6 +236,10 @@ form button[type="submit"] {
   color: #ffffff9f;
 }
 
+.showForm .cardPosition {
+  color: #afafaf;
+}
+
 .removeButton {
   position: absolute;
   align-self: flex-end;

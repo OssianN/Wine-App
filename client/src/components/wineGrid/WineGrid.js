@@ -8,6 +8,7 @@ const WineGrid = props => {
         className="showForm"
         key={`${i}:${j}`}
         id={`${i}:${j}`} >
+        <p className='cardPosition'>{`${i + 1}:${j + 1}`}</p>
         <button 
           onClick={handleClick}>
           &#43;
