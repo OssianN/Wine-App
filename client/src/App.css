@@ -195,10 +195,23 @@ form button[type="submit"] {
   }
 }
 
+.showForm .cardPosition {
+  margin: 15px 10px;
+  color: #afafaf;
+}
+
+.cardPosition {
+  align-self: flex-start;
+  height: 100%;
+  margin: 5px 10px;
+  position: absolute;
+  color: #ffffff9f;
+}
+
 .card h1 {
   width: 100%;
   font-size: 25px;
-  margin: 20px 0 5px 0;
+  margin: 40px 0 5px 0;
   flex-wrap: wrap;
 }
 
@@ -228,18 +241,6 @@ form button[type="submit"] {
     font-size: 16px;
     margin: 5px 0;
   }
-}
-
-.cardPosition {
-  align-self: flex-start;
-  height: 100%;
-  margin: 15px 10px;
-  position: absolute;
-  color: #ffffff9f;
-}
-
-.showForm .cardPosition {
-  color: #afafaf;
 }
 
 .removeButton {
