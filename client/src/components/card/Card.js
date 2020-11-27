@@ -29,7 +29,7 @@ const Card = props => {
       <p className='cardPosition'>{`${props.x + 1}:${props.y + 1}`}</p>
       <h1>{props.title}</h1>
       <h4>{props.country}</h4>
-      <p>{props.year}</p>
+      <p className='wineYear'>{props.year}</p>
     </div>
   );
 };

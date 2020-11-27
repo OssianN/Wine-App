@@ -221,7 +221,7 @@ form button[type="submit"] {
   margin: 5px 0 5px 0;
 }
 
-.card p {
+.wineYear {
   font-size: 18px;
   margin: 5px 0;
 }
@@ -237,7 +237,7 @@ form button[type="submit"] {
     margin: 5px 0;
   }
   
-  .card p {
+  .wineYear {
     font-size: 16px;
     margin: 5px 0;
   }
