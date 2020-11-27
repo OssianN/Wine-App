@@ -160,15 +160,6 @@ form button[type="submit"] {
   background: linear-gradient(#dfdfdf, #d3d3d3);
 }
 
-.showForm button {
-  width: 90%;
-  height: 90%;
-  background-color: transparent;
-  border: none;
-  font-size: 50px;
-  color: #ffffff;
-}
-
 .card {
   position: relative;
   width: 10%;
@@ -201,7 +192,15 @@ form button[type="submit"] {
 
 .showForm .cardPosition {
   margin: 15px 10px;
-  color: #afafaf;
+  color: #707070;
+}
+
+.showForm button {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
 }
 
 .cardPosition {
@@ -244,6 +243,22 @@ form button[type="submit"] {
   .wineYear {
     font-size: 16px;
     margin: 5px 0;
+  }
+
+  .showForm button {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 405px) {
+  .showForm button {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 405px) {
+  .showForm button {
+    font-size: 30px;
   }
 }
 
