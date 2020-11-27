@@ -4,7 +4,7 @@ import axios from 'axios';
 const AddWine = props => {
   const postData = async (data) => {
     try {
-      await axios.post('http://localhost:5000/wines',
+      await axios.post('/wines',
         data
       );
       props.setUpdateOnPost(props.updateOnPost + 1);

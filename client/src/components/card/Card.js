@@ -7,7 +7,7 @@ const Card = props => {
 
   const handleRemove = async () => {
     try {
-      await axios.delete('http://localhost:5000/wines', {data: {shelf: props.x, row: props.y}});
+      await axios.delete('/wines', {data: {shelf: props.x, row: props.y}});
       props.setUpdateOnPost(props.updateOnPost + 1);
 
     } catch(err) {

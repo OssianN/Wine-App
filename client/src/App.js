@@ -12,7 +12,7 @@ function App() {
 
   const getWines = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/wines');
+      const response = await axios.get('/wines');
       const data = await response.data;
       setCardArr(data);
     } catch (err) {
