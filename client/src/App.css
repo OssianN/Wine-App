@@ -89,7 +89,8 @@ button {
   }
 }
 
-form input, button {
+form input,
+form button {
   width: 50%;
   border-radius: 20px;
   margin: 10px;
@@ -196,7 +197,6 @@ form button[type="submit"] {
 }
 
 .showForm button {
-  width: 100%;
   height: 100%;
   background-color: transparent;
   border: none;
