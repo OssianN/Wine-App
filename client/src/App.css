@@ -232,7 +232,9 @@ form button[type="submit"] {
 
 .cardPosition {
   align-self: flex-start;
-  padding: 0 0 0 10px;
+  height: 100%;
+  margin: 15px 10px;
+  position: absolute;
   color: #ffffff9f;
 }
 
