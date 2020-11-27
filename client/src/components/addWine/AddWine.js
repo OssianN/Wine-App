@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import axios from 'axios';
 
 const AddWine = props => {
+  const formFocus = useRef(null);
   const postData = async (data) => {
     try {
       await axios.post('/wines',
@@ -35,11 +36,19 @@ const AddWine = props => {
     props.setDisplayForm('hideWineForm');
   }
 
+  const focus = () => {
+    formFocus.current.focus();
+  }
+
+  useEffect(() => {
+    focus()
+  })
+
   return (
     <form onSubmit={handleSubmit} className={props.displayForm}>
       <button type='reset' onClick={cancel} className='cancelButton' >&#10005;</button>
       <label htmlFor='newWineName'>Wine Name</label>
-      <input type='text' id="newWineName" />
+      <input type='text' id="newWineName" ref={formFocus} />
       <label htmlFor='newWineCountry'>Country</label>
       <input type='text' id="newWineCountry" />
       <label htmlFor='newWineDesc'>Year</label>
