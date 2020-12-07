@@ -61,7 +61,7 @@ const WineGrid = props => {
   };
 
   const handleClick = e => {
-    props.setDisplayForm('addWineForm');
+    props.setShowModal({display: 'flex'});
     props.setPosition(breakOutXY(e.target.parentElement.id));
   };
 

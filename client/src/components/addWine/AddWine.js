@@ -29,11 +29,11 @@ const AddWine = props => {
       row: wineRow,
     }
     postData(data);
-    props.setDisplayForm('hideWineForm');
+    props.setShowModal({display: 'none'});
   }
 
   const cancel = () => {
-    props.setDisplayForm('hideWineForm');
+    props.setShowModal({display: 'none'});
   }
 
   const focus = () => {
@@ -45,18 +45,20 @@ const AddWine = props => {
   })
 
   return (
-    <form onSubmit={handleSubmit} className={props.displayForm}>
-      <button type='reset' onClick={cancel} className='cancelButton' >&#10005;</button>
-      <label htmlFor='newWineName'>Wine Name</label>
-      <input type='text' id="newWineName" ref={formFocus} />
-      <label htmlFor='newWineCountry'>Country</label>
-      <input type='text' id="newWineCountry" />
-      <label htmlFor='newWineDesc'>Year</label>
-      <input type='text' id="newWineDesc" />
-      <button type='submit' id="addNewWineButton">
-        Add Wine
-      </button>
-    </form>
+    <div className='addWineModal' style={props.showModal}>
+      <form onSubmit={handleSubmit} className={'addWineForm'}>
+        <button type='reset' onClick={cancel} className='cancelButton' >&#10005;</button>
+        <label htmlFor='newWineName'>Wine Name</label>
+        <input type='text' id="newWineName" ref={formFocus} />
+        <label htmlFor='newWineCountry'>Country</label>
+        <input type='text' id="newWineCountry" />
+        <label htmlFor='newWineDesc'>Year</label>
+        <input type='text' id="newWineDesc" />
+        <button type='submit' id="addNewWineButton">
+          Add Wine
+        </button>
+      </form>
+    </div>
   )
 }
 
