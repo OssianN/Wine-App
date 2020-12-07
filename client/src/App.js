@@ -6,9 +6,10 @@ import axios from 'axios';
 
 function App() {
   const [cardArr, setCardArr] = useState();
-  const [displayForm, setDisplayForm] = useState('doNotDisplay');
   const [position, setPosition] = useState(null);
   const [updateOnPost, setUpdateOnPost] = useState(0);
+  const [showModal, setShowModal] = useState({display: 'none'})
+
 
   const getWines = async () => {
     try {
@@ -29,20 +30,21 @@ function App() {
       <h1 className="header">This is the wine we whine about</h1>
       <AddWine
         setCardArr={setCardArr}
-        setDisplayForm={setDisplayForm}
-        displayForm={displayForm}
         position={position}
         updateOnPost={updateOnPost}
         setUpdateOnPost={setUpdateOnPost}
+        showModal={showModal}
+        setShowModal={setShowModal}
       />
       <WineGrid
         cardArr={cardArr}
         setCardArr={setCardArr}
-        setDisplayForm={setDisplayForm}
-        displayForm={displayForm}
         setPosition={setPosition}
         updateOnPost={updateOnPost}
         setUpdateOnPost={setUpdateOnPost}
+        showModal={showModal}
+        setShowModal={setShowModal}
+
       />
     </div>
   );

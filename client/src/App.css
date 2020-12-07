@@ -26,9 +26,20 @@ button {
   display: none;
 }
 
+.addWineModal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+  width: 100%;
+  min-width: 100%;
+  min-height: 100vh;
+  background-color: #00000075;
+  animation: addWineModal 1s;
+}
+
 .addWineForm {
-  position: relative;
-  margin: 3% 0;
   width: 50%;
   height: 350px;
   padding-bottom: 50px;
@@ -40,17 +51,16 @@ button {
   justify-content: center;
   border: solid 1px gray;
   border-radius: 20px;
+  z-index: 200;
+  background-color: #ffffff;
   overflow: hidden;
-  animation: addWineForm 1s;
 }
 
-@keyframes addWineForm {
+@keyframes addWineModal {
   from {
-    height: 1px;
     opacity: 0;
   }
   to {
-    height: 350px;
     opacity: 1;
   }
 }
