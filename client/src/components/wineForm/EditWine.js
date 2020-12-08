@@ -34,6 +34,14 @@ const EditWine = props => {
         position={props.position}
         pickedCard={props.pickedCard}
         handleRemove={handleRemove}
+        titleValue={props.titleValue}
+        setTitleValue={props.setTitleValue}
+        countryValue={props.countryValue}
+        setCountryValue={props.setCountryValue}
+        yearValue={props.yearValue}
+        setYearValue={props.setYearValue}
+        checkedValue={props.checkedValue}
+        setCheckedValue={props.setCheckedValue}
       />
     </div>
   )

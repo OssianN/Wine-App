@@ -21,6 +21,14 @@ const AddWine = props => {
         buttonName='Add Wine'
         show={props.setShowAddModal}
         position={props.position}
+        titleValue={props.titleValue}
+        setTitleValue={props.setTitleValue}
+        countryValue={props.countryValue}
+        setCountryValue={props.setCountryValue}
+        yearValue={props.yearValue}
+        setYearValue={props.setYearValue}
+        checkedValue={props.checkedValue}
+        setCheckedValue={props.setCheckedValue}
       />
     </div>
   )

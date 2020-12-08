@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 
 const WineForm = (props) => {
-  const [showDelete, setShowDelete] = useState('none')
+  const [showDelete, setShowDelete] = useState('none');
+
   const titleInput = useRef(null);
   const countryInput = useRef(null);
   const yearInput = useRef(null);
@@ -29,12 +30,18 @@ const WineForm = (props) => {
     return true;
   };
 
-  const clearForm = () => {
+  const saveOrClearForm = () => {
     if (!keepForm.current.checked) {
-      titleInput.current.value = '';
-      countryInput.current.value = '';
-      yearInput.current.value = '';
-    };
+      props.setTitleValue('');
+      props.setCountryValue('');
+      props.setYearValue('');
+      props.setCheckedValue(false);
+    } else {
+      props.setTitleValue(titleInput.current.value);
+      props.setCountryValue(countryInput.current.value);
+      props.setYearValue(yearInput.current.value);
+      props.setCheckedValue(keepForm.current.checked);
+    }
   };
 
   const handleSubmit = e => {
@@ -48,7 +55,7 @@ const WineForm = (props) => {
       data.row = props.position[1];
       props.method(data);
       props.show({display: 'none'});
-      clearForm();
+      saveOrClearForm();
     } else {
       alert('The year must be entered as a number.')
     };
@@ -64,8 +71,12 @@ const WineForm = (props) => {
 
   const cancel = () => {
     props.show({display: 'none'});
-    clearForm();
+    saveOrClearForm();
   };
+
+  const handleChecked = () => {
+    props.setCheckedValue(keepForm.current.checked);
+  }
 
   useEffect(() => {
     preFillForm();
@@ -77,16 +88,16 @@ const WineForm = (props) => {
     <form onSubmit={handleSubmit} className='wineForm'>
       <button type='button' onClick={cancel} className='cancelButton' >&#10005;</button>
       <label htmlFor='newWineName'>Wine Name</label>
-      <input type='text' id="newWineName" ref={titleInput} />
+      <input type='text' id="newWineName" ref={titleInput} defaultValue={props.titleValue} />
       <label htmlFor='newWineCountry'>Country</label>
-      <input type='text' id="newWineCountry" ref={countryInput} />
+      <input type='text' id="newWineCountry" ref={countryInput} defaultValue={props.countryValue} />
       <label htmlFor='newWineDesc'>Year</label>
-      <input type='text' id="newWineDesc" ref={yearInput} />
+      <input type='text' id="newWineDesc" ref={yearInput} defaultValue={props.yearValue} />
       <button type='submit' id="editWineButton">
         {props.buttonName}
       </button>
       <div className='saveFormContainer'>
-        <input ref={keepForm} type='checkbox' id='saveForm'></input>
+        <input ref={keepForm} checked={props.checkedValue} onChange={handleChecked} type='checkbox' id='saveForm'></input>
         <label htmlFor='saveForm'>Keep Info</label>
       </div>
       <button style={{display: showDelete}} className='removeButton' onClick={props.handleRemove}>Delete Wine</button>

@@ -13,6 +13,11 @@ function App() {
   const [showEditModal, setShowEditModal] = useState({display: 'none'});
   const [pickedCard, setPickedCard] = useState({});
 
+  const [titleValue, setTitleValue] = useState('');
+  const [countryValue, setCountryValue] = useState('');
+  const [yearValue, setYearValue] = useState('');
+  const [checkedValue, setCheckedValue] = useState(false);
+
   const getWines = async () => {
     try {
       const response = await axios.get('/wines');
@@ -37,6 +42,14 @@ function App() {
         setUpdateOnPost={setUpdateOnPost}
         showAddModal={showAddModal}
         setShowAddModal={setShowAddModal}
+        titleValue={titleValue}
+        setTitleValue={setTitleValue}
+        countryValue={countryValue}
+        setCountryValue={setCountryValue}
+        yearValue={yearValue}
+        setYearValue={setYearValue}
+        checkedValue={checkedValue}
+        setCheckedValue={setCheckedValue}
       />
       <EditWine
         showEditModal={showEditModal}
@@ -45,6 +58,14 @@ function App() {
         setUpdateOnPost={setUpdateOnPost}
         position={position}
         pickedCard={pickedCard}
+        titleValue={titleValue}
+        setTitleValue={setTitleValue}
+        countryValue={countryValue}
+        setCountryValue={setCountryValue}
+        yearValue={yearValue}
+        setYearValue={setYearValue}
+        checkedValue={checkedValue}
+        setCheckedValue={setCheckedValue}
       />
       <WineGrid
         cardArr={cardArr}
