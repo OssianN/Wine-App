@@ -6,7 +6,7 @@ const Card = props => {
 
   const handleRemove = async e => {
     e.stopPropagation();
-    if (window.confirm(`Do you want to delete ${props.titleRef.current.innerHTML}`)) {
+    if (window.confirm(`Do you want to delete ${props.title}`)) {
       try {
         await axios.delete('/wines', {data: {shelf: props.x, row: props.y}});
         props.setUpdateOnPost(props.updateOnPost + 1);
