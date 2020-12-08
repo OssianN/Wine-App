@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const { connection } = mongoose;
 
-mongoose.connect(process.env.SECRET_KEY, { useUnifiedTopology: true, useNewUrlParser: true } );
+mongoose.connect(process.env.SECRET_KEY, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false  } );
 connection
   .once('open', () => console.log('SUCCESS, connected to DB'))
   .on('error', err => console.log('Ooopsiwhoops, some sort of error', err));
