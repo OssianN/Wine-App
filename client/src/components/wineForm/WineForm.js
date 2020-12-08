@@ -5,10 +5,7 @@ const WineForm = (props) => {
   const titleInput = useRef(null);
   const countryInput = useRef(null);
   const yearInput = useRef(null);
-
-  const cancel = () => {
-    props.show({display: 'none'});
-  }
+  const keepForm = useRef(null);
 
   const focus = () => {
     titleInput.current.focus();
@@ -33,10 +30,12 @@ const WineForm = (props) => {
   };
 
   const clearForm = () => {
-    titleInput.current.value = '';
-    countryInput.current.value = '';
-    yearInput.current.value = '';
-  }
+    if (!keepForm.current.checked) {
+      titleInput.current.value = '';
+      countryInput.current.value = '';
+      yearInput.current.value = '';
+    };
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -63,6 +62,11 @@ const WineForm = (props) => {
     }
   };
 
+  const cancel = () => {
+    props.show({display: 'none'});
+    clearForm();
+  };
+
   useEffect(() => {
     preFillForm();
     handleShowDelete();
@@ -71,7 +75,7 @@ const WineForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit} className='wineForm'>
-      <button type='reset' onClick={cancel} className='cancelButton' >&#10005;</button>
+      <button type='button' onClick={cancel} className='cancelButton' >&#10005;</button>
       <label htmlFor='newWineName'>Wine Name</label>
       <input type='text' id="newWineName" ref={titleInput} />
       <label htmlFor='newWineCountry'>Country</label>
@@ -81,6 +85,10 @@ const WineForm = (props) => {
       <button type='submit' id="editWineButton">
         {props.buttonName}
       </button>
+      <div className='saveFormContainer'>
+        <input ref={keepForm} type='checkbox' id='saveForm'></input>
+        <label htmlFor='saveForm'>Keep Info</label>
+      </div>
       <button style={{display: showDelete}} className='removeButton' onClick={props.handleRemove}>Delete Wine</button>
     </form>
   )

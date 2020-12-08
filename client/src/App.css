@@ -46,7 +46,7 @@ input {
 .wineForm {
   width: 50%;
   height: 60%;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -68,6 +68,29 @@ input {
   to {
     transform: scale(1);
   }
+}
+
+.saveFormContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  width: 30%;
+  height: 30px;
+}
+
+.saveFormContainer input[type="checkbox"] {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border-radius: 50%;
+}
+
+.saveFormContainer input[type="checkbox"]:checked {
+  background-color: #00b386;
+  border-color: #00b386;
 }
 
 .hideWineForm {
@@ -138,6 +161,7 @@ form button[type="submit"]:hover {
   background-color: transparent;
   color: #550000;
   border: solid 1px grey;
+  border-radius: 50%;
 }
 
 .wineGrid {
