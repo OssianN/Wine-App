@@ -14,6 +14,11 @@ html, body, #root {
 
 button {
   outline: none;
+  cursor: pointer;
+}
+
+input {
+  outline: none;
 }
 
 .header {
@@ -26,7 +31,7 @@ button {
   display: none;
 }
 
-.addWineModal {
+.wineModal {
   position: fixed;
   display: flex;
   justify-content: center;
@@ -36,10 +41,9 @@ button {
   min-width: 100%;
   min-height: 100vh;
   background-color: #00000075;
-  animation: addWineModal 1s;
 }
 
-.addWineForm {
+.wineForm {
   width: 50%;
   height: 350px;
   padding-bottom: 50px;
@@ -54,14 +58,15 @@ button {
   z-index: 200;
   background-color: #ffffff;
   overflow: hidden;
+  animation: wineModal 1s;
 }
 
-@keyframes addWineModal {
+@keyframes wineModal {
   from {
-    opacity: 0;
+    transform: scale(.8);
   }
   to {
-    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -186,6 +191,7 @@ form button[type="submit"] {
   color: white;
   padding: .5%;
   background:linear-gradient(#7c0000, #550000);
+  cursor: pointer;
   animation-name: card;
   animation-duration: 1s;
   overflow-y: scroll;
@@ -208,6 +214,8 @@ form button[type="submit"] {
 
 .showForm button {
   height: 100%;
+  width: 100%;
+  z-index: 10;
   background-color: transparent;
   border: none;
   color: #ffffff;
@@ -273,6 +281,7 @@ form button[type="submit"] {
 }
 
 .removeButton {
+  z-index: 5;
   position: absolute;
   align-self: flex-end;
   justify-self: flex-start;

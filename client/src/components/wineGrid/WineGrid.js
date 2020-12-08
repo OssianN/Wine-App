@@ -26,8 +26,12 @@ const WineGrid = props => {
         year={card.year}
         x={card.shelf}
         y={card.row}
+        setPosition={props.setPosition}
         updateOnPost={props.updateOnPost}
         setUpdateOnPost={props.setUpdateOnPost}
+        setShowEditModal={props.setShowEditModal}
+        showEditModal={props.showEditModal}
+        setPickedCard={props.setPickedCard}
       />
     );
   };
@@ -61,7 +65,7 @@ const WineGrid = props => {
   };
 
   const handleClick = e => {
-    props.setShowModal({display: 'flex'});
+    props.setShowAddModal({display: 'flex'});
     props.setPosition(breakOutXY(e.target.parentElement.id));
   };
 

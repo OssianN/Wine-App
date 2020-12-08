@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import WineGrid from './components/wineGrid/WineGrid';
-import AddWine from './components/addWine/AddWine';
 import axios from 'axios';
+import WineGrid from './components/wineGrid/WineGrid';
+import AddWine from './components/wineForm/AddWine';
+import EditWine from './components/wineForm/EditWine';
 
 function App() {
   const [cardArr, setCardArr] = useState();
   const [position, setPosition] = useState(null);
   const [updateOnPost, setUpdateOnPost] = useState(0);
-  const [showModal, setShowModal] = useState({display: 'none'})
-
+  const [showAddModal, setShowAddModal] = useState({display: 'none'});
+  const [showEditModal, setShowEditModal] = useState({display: 'none'});
+  const [pickedCard, setPickedCard] = useState({});
 
   const getWines = async () => {
     try {
@@ -33,8 +35,16 @@ function App() {
         position={position}
         updateOnPost={updateOnPost}
         setUpdateOnPost={setUpdateOnPost}
-        showModal={showModal}
-        setShowModal={setShowModal}
+        showAddModal={showAddModal}
+        setShowAddModal={setShowAddModal}
+      />
+      <EditWine
+        showEditModal={showEditModal}
+        setShowEditModal={setShowEditModal}
+        updateOnPost={updateOnPost}
+        setUpdateOnPost={setUpdateOnPost}
+        position={position}
+        pickedCard={pickedCard}
       />
       <WineGrid
         cardArr={cardArr}
@@ -42,9 +52,11 @@ function App() {
         setPosition={setPosition}
         updateOnPost={updateOnPost}
         setUpdateOnPost={setUpdateOnPost}
-        showModal={showModal}
-        setShowModal={setShowModal}
-
+        showAddModal={showAddModal}
+        setShowAddModal={setShowAddModal}
+        showEditModal={showEditModal}
+        setShowEditModal={setShowEditModal}
+        setPickedCard={setPickedCard}
       />
     </div>
   );
