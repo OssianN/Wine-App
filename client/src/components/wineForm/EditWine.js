@@ -14,6 +14,17 @@ const EditWine = props => {
     };
   };
 
+  const handleRemove = async e => {
+    if (window.confirm(`Do you want to delete ${props.pickedCard.title}`)) {
+      try {
+        await axios.delete('/wines', {data: {shelf: props.position[0], row: props.position[1]}});
+        props.setUpdateOnPost(props.updateOnPost + 1);
+      } catch (err) {
+        alert('A server error occured.', err);
+      }
+    };
+  };
+
   return (
     <div className='wineModal' style={props.showEditModal}>
       <WineForm
@@ -22,6 +33,7 @@ const EditWine = props => {
         show={props.setShowEditModal}
         position={props.position}
         pickedCard={props.pickedCard}
+        handleRemove={handleRemove}
       />
     </div>
   )

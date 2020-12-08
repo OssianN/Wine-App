@@ -8,7 +8,9 @@ const WineGrid = props => {
         className="showForm"
         key={`${i}:${j}`}
         id={`${i}:${j}`} >
-        <p className='cardPosition'>{`${i + 1}:${j + 1}`}</p>
+        <div className='cardHeader'>
+          <p className='cardPosition'>{`${i + 1}:${j + 1}`}</p>
+        </div>
         <button 
           onClick={handleClick}>
           &#43;
@@ -67,6 +69,7 @@ const WineGrid = props => {
   const handleClick = e => {
     props.setShowAddModal({display: 'flex'});
     props.setPosition(breakOutXY(e.target.parentElement.id));
+    props.setPickedCard({});
   };
 
   return (

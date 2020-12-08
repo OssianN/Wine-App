@@ -1,6 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 const WineForm = (props) => {
+  const [showDelete, setShowDelete] = useState('none')
   const titleInput = useRef(null);
   const countryInput = useRef(null);
   const yearInput = useRef(null);
@@ -19,7 +20,9 @@ const WineForm = (props) => {
       titleInput.current.value = title || '';
       countryInput.current.value = country || '';
       yearInput.current.value = year || '';
-    };
+    } else {
+      return false;
+    }
   };
   
   const validate = () => {
@@ -49,11 +52,20 @@ const WineForm = (props) => {
       clearForm();
     } else {
       alert('The year must be entered as a number.')
+    };
+  };
+
+  const handleShowDelete = () => {
+    if (props.buttonName === 'Change Wine') {
+      setShowDelete('block');
+    } else {
+      setShowDelete('none');
     }
-  }
+  };
 
   useEffect(() => {
-    preFillForm()
+    preFillForm();
+    handleShowDelete();
     focus();
   });
 
@@ -69,6 +81,7 @@ const WineForm = (props) => {
       <button type='submit' id="editWineButton">
         {props.buttonName}
       </button>
+      <button style={{display: showDelete}} className='removeButton' onClick={props.handleRemove}>Delete Wine</button>
     </form>
   )
 }
