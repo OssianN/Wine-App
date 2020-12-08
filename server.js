@@ -4,7 +4,6 @@ const wine = require('./routes');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const db = process.env.MONGODB_URL;
 const { connection } = mongoose;
 
 mongoose.connect(process.env.SECRET_KEY, { useUnifiedTopology: true, useNewUrlParser: true } );
@@ -17,4 +16,4 @@ app.use(express.static('client/build'));
 app.use('/wines', wine);
 
 const port = 5000;
-app.listen(port, () => console.log(`test-api is running on port ${port}`));
+app.listen(process.env.PORT || port, () => console.log(`test-api is running on port ${process.env.PORT || port}`));
