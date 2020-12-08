@@ -4,6 +4,7 @@ const path = require('path');
 const { getData } = require('../mongoDB/getData');
 const { postNewWine } = require('../mongoDB/postNewWine');
 const { deleteWine } = require('../mongoDB/deleteWine');
+const { updateWine } = require('../mongoDB/updateWine');
 
 route.get('/', async (req, res) => {
   try {
@@ -22,6 +23,16 @@ route.post('/', (req, res) => {
   } catch (err) {
     console.error(err, 'IN POST /WINES');
     res.status(500).send(err, 'IN POST /WINES');
+  }
+});
+
+route.put('/', (req, res) => {
+  try {
+    updateWine(req.body);
+    res.status(204).send();
+  } catch (err) {
+    console.error(err, 'IN PUT /WINES');
+    res.status(500).send(err, 'IN PUT /WINES');
   }
 });
 

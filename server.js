@@ -16,5 +16,5 @@ app.use(express.json());
 app.use(express.static('client/build'));
 app.use('/wines', wine);
 
-const localPort = 5000;
-app.listen(process.env.PORT || localPort, () => console.log(`test-api is running on port ${localPort}`));
+const port = 5000;
+app.listen(port, () => console.log(`test-api is running on port ${port}`));
