@@ -35,12 +35,10 @@ const WineForm = (props) => {
       props.setTitleValue('');
       props.setCountryValue('');
       props.setYearValue('');
-      props.setCheckedValue(false);
     } else {
       props.setTitleValue(titleInput.current.value);
       props.setCountryValue(countryInput.current.value);
       props.setYearValue(yearInput.current.value);
-      props.setCheckedValue(keepForm.current.checked);
     }
   };
 
@@ -76,7 +74,7 @@ const WineForm = (props) => {
 
   const handleChecked = () => {
     props.setCheckedValue(keepForm.current.checked);
-  }
+  };
 
   useEffect(() => {
     preFillForm();
@@ -96,11 +94,11 @@ const WineForm = (props) => {
       <button type='submit' id="editWineButton">
         {props.buttonName}
       </button>
+      <button style={{display: showDelete}} className='removeButton' onClick={props.handleRemove}>Delete Wine</button>
       <div className='saveFormContainer'>
         <input ref={keepForm} checked={props.checkedValue} onChange={handleChecked} type='checkbox' id='saveForm'></input>
         <label htmlFor='saveForm'>Keep Info</label>
       </div>
-      <button style={{display: showDelete}} className='removeButton' onClick={props.handleRemove}>Delete Wine</button>
     </form>
   )
 }
