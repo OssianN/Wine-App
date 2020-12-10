@@ -8,16 +8,12 @@ const WineForm = (props) => {
   const yearInput = useRef(null);
   const keepForm = useRef(null);
 
-  const focus = () => {
-    titleInput.current.focus();
-  };
-
   const preFillForm = () => {
     const { title, country, year } = props.pickedCard || '';
     if (title || country || year) {
-      titleInput.current.value = title || '';
-      countryInput.current.value = country || '';
-      yearInput.current.value = year || '';
+      titleInput.current.value = title;
+      countryInput.current.value = country;
+      yearInput.current.value = year;
     } else {
       return false;
     }
@@ -30,15 +26,24 @@ const WineForm = (props) => {
     return true;
   };
 
+  const setValue = () => {
+    titleInput.current.value = props.titleValue;
+    countryInput.current.value = props.countryValue;
+    yearInput.current.value = props.yearValue;
+    keepForm.current.checked = props.checkedValue;
+  };
+
   const saveOrClearForm = () => {
     if (!keepForm.current.checked) {
       props.setTitleValue('');
       props.setCountryValue('');
       props.setYearValue('');
+      props.setCheckedValue(keepForm.current.checked);
     } else {
       props.setTitleValue(titleInput.current.value);
       props.setCountryValue(countryInput.current.value);
       props.setYearValue(yearInput.current.value);
+      props.setCheckedValue(keepForm.current.checked);
     }
   };
 
@@ -68,15 +73,16 @@ const WineForm = (props) => {
   };
 
   const cancel = () => {
-    props.show({display: 'none'});
     saveOrClearForm();
+    props.show({display: 'none'});
   };
 
-  const handleChecked = () => {
-    props.setCheckedValue(keepForm.current.checked);
+  const focus = () => {
+    titleInput.current.focus();
   };
 
   useEffect(() => {
+    setValue();
     preFillForm();
     handleShowDelete();
     focus();
@@ -86,17 +92,17 @@ const WineForm = (props) => {
     <form onSubmit={handleSubmit} className='wineForm'>
       <button type='button' onClick={cancel} className='cancelButton' >&#10005;</button>
       <label htmlFor='newWineName'>Wine Name</label>
-      <input type='text' id="newWineName" ref={titleInput} defaultValue={props.titleValue} />
+      <input type='text' id="newWineName" ref={titleInput} />
       <label htmlFor='newWineCountry'>Country</label>
-      <input type='text' id="newWineCountry" ref={countryInput} defaultValue={props.countryValue} />
+      <input type='text' id="newWineCountry" ref={countryInput} />
       <label htmlFor='newWineDesc'>Year</label>
-      <input type='text' id="newWineDesc" ref={yearInput} defaultValue={props.yearValue} />
+      <input type='text' id="newWineDesc" ref={yearInput} />
       <button type='submit' id="editWineButton">
         {props.buttonName}
       </button>
       <button style={{display: showDelete}} className='removeButton' onClick={props.handleRemove}>Delete Wine</button>
       <div className='saveFormContainer'>
-        <input ref={keepForm} checked={props.checkedValue} onChange={handleChecked} type='checkbox' id='saveForm'></input>
+        <input ref={keepForm} defaultChecked={props.checkedValue} type='checkbox' id='saveForm'></input>
         <label htmlFor='saveForm'>Keep Info</label>
       </div>
     </form>
