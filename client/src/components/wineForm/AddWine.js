@@ -5,9 +5,7 @@ import WineForm from './WineForm';
 const AddWine = props => {
   const postData = async (data) => {
     try {
-      await axios.post('/wines',
-        data
-      );
+      await axios.post('/wines', data);
       props.setUpdateOnPost(props.updateOnPost + 1);
     } catch(err) {
       alert('A server error occured.', err);

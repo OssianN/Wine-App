@@ -23,8 +23,15 @@ input {
 
 .header {
   font-family: 'Dancing Script', cursive;
-  font-size: 50px;
-  margin: 60px;
+  color: #550000;
+  padding: 2% 0;
+  padding-top: 80px;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 10;
+  background-color: #fff;
 }
 
 .doNotDisplay {
@@ -44,7 +51,6 @@ input {
 }
 
 .wineForm {
-  width: 50%;
   height: 60%;
   padding-bottom: 20px;
   display: flex;
@@ -76,7 +82,6 @@ input {
   justify-content: center;
   align-items: center;
   margin-top: 40px;
-  width: 30%;
   height: 30px;
 }
 
@@ -143,6 +148,7 @@ form input {
 form button[type="submit"] {
   margin-top: 40px;
   width: 30%;
+  min-width: 130px;
   height: 40px;
   background-color: #fff;
   border: none;
@@ -165,15 +171,18 @@ form button[type="submit"]:hover {
 }
 
 .wineGrid {
-  position: relative;
   width: 100%;
-  height: auto;
-  margin: 2%;
+  min-width: 1000px;
+  max-width: 1500px;
+  overflow-x: scroll;
+  margin: 5% auto;
+  margin-top: 250px;
   display: flex;
-  align-self: center;
   justify-self: center;
   justify-content: center;
   flex-wrap: wrap;
+  z-index: 20;
+  background-color: #fff;
 }
 
 .showForm {
@@ -301,21 +310,38 @@ form button[type="submit"]:hover {
   }
 }
 
-@media (min-width: 405px) {
+@media (min-width: 701px) {
   .showForm button {
     font-size: 50px;
   }
+
+  .wineForm {
+    min-width: 600px;
+  }
+
+  .wineApp .header {
+    font-size: 4em;
+  }
 }
 
-@media (max-width: 405px) {
+@media (max-width: 700px) {
   .showForm button {
     font-size: 30px;
+  }
+
+  .wineForm {
+    width: 90%;
+  }
+
+  .wineApp .header {
+    font-size: 2em;
   }
 
   .showForm .cardPosition {
     align-self: center;
   }
 }
+
 
 .removeButton {
   width: 30%;
