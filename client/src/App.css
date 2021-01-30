@@ -319,7 +319,7 @@ form button[type="submit"]:hover {
     min-width: 600px;
   }
 
-  .wineApp .header {
+    .header {
     font-size: 4em;
   }
 }
@@ -333,7 +333,7 @@ form button[type="submit"]:hover {
     width: 90%;
   }
 
-  .wineApp .header {
+  .header {
     font-size: 2em;
   }
 
