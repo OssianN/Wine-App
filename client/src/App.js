@@ -4,6 +4,7 @@ import axios from 'axios';
 import WineGrid from './components/wineGrid/WineGrid';
 import AddWine from './components/wineForm/AddWine';
 import EditWine from './components/wineForm/EditWine';
+import Search from './components/Search';
 
 function App() {
   const [cardArr, setCardArr] = useState();
@@ -12,11 +13,11 @@ function App() {
   const [showAddModal, setShowAddModal] = useState({display: 'none'});
   const [showEditModal, setShowEditModal] = useState({display: 'none'});
   const [pickedCard, setPickedCard] = useState({});
-
   const [titleValue, setTitleValue] = useState('');
   const [countryValue, setCountryValue] = useState('');
   const [yearValue, setYearValue] = useState('');
   const [checkedValue, setCheckedValue] = useState(false);
+  const [searchArr, setSearchArr] = useState([])
 
   const getWines = async () => {
     try {
@@ -35,6 +36,9 @@ function App() {
   return (
     <div className="App">
       <h1 className="header">This is the wine we whine about</h1>
+      <Search
+        setSearchArr={setSearchArr}
+        cardArr={cardArr} />
       <AddWine
         setCardArr={setCardArr}
         position={position}
@@ -78,6 +82,7 @@ function App() {
         showEditModal={showEditModal}
         setShowEditModal={setShowEditModal}
         setPickedCard={setPickedCard}
+        searchArr={searchArr}
       />
     </div>
   );

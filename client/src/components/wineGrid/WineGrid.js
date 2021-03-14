@@ -2,6 +2,8 @@ import React from 'react';
 import Card from '../card/Card.js';
 
 const WineGrid = props => {
+  const cardArr = props.searchArr.length > 0 ? props.searchArr : props.cardArr;
+
   const createButton = (i, j) => {
     return (
       <div 
@@ -40,18 +42,16 @@ const WineGrid = props => {
 
   const orderCards = (cardArr, target, i, j) => {
     let check = false;
-    cardArr?.map( card => {
+    cardArr?.forEach( card => {
       if(`${card.shelf}:${card.row}` === `${i}:${j}`) {
         check = true;
-        return target.push(createCard(card, i, j));
+        target.push(createCard(card, i, j));
       }
-      return null;
     });
     if (!check) return target.push(createButton(i, j));
   }
 
-  const renderCards = () => {
-    const cardArr = props.cardArr;
+  const renderCards = (cardArr) => {
     const renderedCards = [];
     for (let i = 0; i < 15; i ++) {
       for (let j = 0; j < 8; j++) {
@@ -74,7 +74,7 @@ const WineGrid = props => {
 
   return (
     <div className='wineGrid'>
-      {renderCards()}
+      {renderCards(cardArr)}
     </div>
   )
 }

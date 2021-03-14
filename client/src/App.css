@@ -175,8 +175,7 @@ form button[type="submit"]:hover {
   min-width: 1000px;
   max-width: 1500px;
   overflow-x: scroll;
-  margin: 5% auto;
-  margin-top: 250px;
+  margin: 0 auto;
   display: flex;
   justify-self: center;
   justify-content: center;
@@ -291,6 +290,27 @@ form button[type="submit"]:hover {
 .wineYear {
   font-size: 18px;
   margin: 5px 0;
+}
+
+.search-container {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  margin-top: 250px;
+  padding: 20px 0;
+}
+
+.search {
+  width: 60%;
+  padding: 0 20px;
+  max-width: 600px;
+  height: 35px;
+  border: none;
+  border-bottom: 1px solid #a7a7a7;
 }
 
 @media (max-width: 1260px) {
