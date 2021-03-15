@@ -7,7 +7,6 @@ const WineForm = (props) => {
   const countryInput = useRef(null);
   const yearInput = useRef(null);
   const keepForm = useRef(null);
-  const imgInput = useRef(null);
 
   const preFillForm = () => {
     const { title, country, year } = props.pickedCard || '';
