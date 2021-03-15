@@ -6,7 +6,8 @@ const wineSchema = new Schema({
   country: { type: String },
   year: { type: Number },
   shelf: { type: Number },
-  row: { type: Number}
+  row: { type: Number},
+  img: { type: String }
 })
 
 const WineDataBase = mongoose.model("wines", wineSchema);
