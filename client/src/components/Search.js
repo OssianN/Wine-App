@@ -1,28 +1,31 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 const Search = ({ cardArr, setSearchArr, searchValue, setSearchValue }) => {
 const handleChange = e => {
-    setSearchValue(e.target.value)
-  }
-
-  const handleSearch = (cardArr) => {
-    const newArr = [];
-    cardArr?.forEach(card => {
-      const objectArr = Object.values(card).join('').toLowerCase();
-      if (objectArr.match(searchValue.toString().toLowerCase())) {
-        newArr.push(card);
-      }
-    })
-    setSearchArr(newArr);
+    setSearchValue(e.target.value);
   }
 
   useEffect(() => {
-    handleSearch(cardArr);
-  }, [searchValue])
+    const handleSearch = () => {
+      const newArr = cardArr
+        ?.filter(card => Object.values(card)
+          .join('')
+          .toLowerCase()
+          .match(searchValue
+            .toLowerCase()));
+      setSearchArr(newArr);
+    };
+    handleSearch();
+  }, [searchValue, setSearchArr, cardArr]);
 
   return (
     <div className="search-container">
-      <input type="text" onChange={handleChange} value={searchValue} className="search" placeholder='Sök'>
+      <input
+        type="text"
+        onChange={handleChange}
+        value={searchValue}
+        className="search"
+        placeholder='Sök'>
       </input>
     </div>
   )
