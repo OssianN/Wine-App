@@ -17,7 +17,8 @@ function App() {
   const [countryValue, setCountryValue] = useState('');
   const [yearValue, setYearValue] = useState('');
   const [checkedValue, setCheckedValue] = useState(false);
-  const [searchArr, setSearchArr] = useState([])
+  const [searchArr, setSearchArr] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
 
   const getWines = async () => {
     try {
@@ -38,7 +39,9 @@ function App() {
       <h1 className="header">This is the wine we whine about</h1>
       <Search
         setSearchArr={setSearchArr}
-        cardArr={cardArr} />
+        cardArr={cardArr}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue} />
       <AddWine
         setCardArr={setCardArr}
         position={position}
@@ -83,6 +86,7 @@ function App() {
         setShowEditModal={setShowEditModal}
         setPickedCard={setPickedCard}
         searchArr={searchArr}
+        searchValue={searchValue}
       />
     </div>
   );

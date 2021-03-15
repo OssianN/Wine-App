@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../card/Card.js';
 
 const WineGrid = props => {
-  const cardArr = props.searchArr.length > 0 ? props.searchArr : props.cardArr;
+  const cardArr = props.searchValue ? props.searchArr : props.cardArr;
 
   const createButton = (i, j) => {
     return (

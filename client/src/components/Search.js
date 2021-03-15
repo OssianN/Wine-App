@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
-const Search = ({ cardArr, setSearchArr }) => {
-  const [searchValue, setSearchValue] = useState('');
-
-  const handleChange = e => {
+const Search = ({ cardArr, setSearchArr, searchValue, setSearchValue }) => {
+const handleChange = e => {
     setSearchValue(e.target.value)
   }
 
