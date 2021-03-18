@@ -29,11 +29,40 @@ const Register = props => {
 
   return (
     <form onSubmit={handleSubmit} className='auth-form'>
-      <input className='auth-form__input' onChange={handleChange} name='name' value={inputValue.name} placeholder='name'></input>
-      <input className='auth-form__input' onChange={handleChange} name='email' value={inputValue.email} placeholder='email'></input>
-      <input className='auth-form__input' onChange={handleChange} name='password' value={inputValue.password} placeholder='password' type='password'></input>
-      <input className='auth-form__input' onChange={handleChange} name='password2' value={inputValue.password2} placeholder='repeat password' type='password'></input>
-      <button className='auth-form__submit-button' type="submit"></button>
+      <input
+        className='auth-form__input'
+        onChange={handleChange}
+        name='name' value={inputValue.name}
+        placeholder='name'>
+      </input>
+      <input
+        className='auth-form__input'
+        onChange={handleChange}
+        name='email'
+        value={inputValue.email}
+        placeholder='email'>
+      </input>
+      <input
+        className='auth-form__input'
+        onChange={handleChange}
+        name='password'
+        value={inputValue.password}
+        placeholder='password'
+        type='password'>
+      </input>
+      <input
+        className='auth-form__input'
+        onChange={handleChange}
+        name='password2'
+        value={inputValue.password2}
+        placeholder='repeat password'
+        type='password'>
+      </input>
+      <button
+        className='auth-form__submit-button'
+        type="submit">
+          register
+      </button>
     </form>
   )
 }
