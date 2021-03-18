@@ -1,0 +1,13 @@
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 900px;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.auth-form__submit-button {
+  color: black;
+  width: 50px;
+}

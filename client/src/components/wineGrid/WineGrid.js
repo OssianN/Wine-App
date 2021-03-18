@@ -1,8 +1,10 @@
 import React from 'react';
 import Card from '../card/Card.js';
+import { useSelector } from 'react-redux';
 
 const WineGrid = props => {
-  const cardArr = props.searchValue ? props.searchArr : props.cardArr;
+  const wineArr = useSelector(state => state.wineArr);
+  const cardArr = props.searchValue ? props.searchValue : wineArr;
 
   const createButton = (i, j) => {
     return (
@@ -31,6 +33,7 @@ const WineGrid = props => {
         year={card.year}
         x={card.shelf}
         y={card.row}
+        _id={card._id}
         setPosition={props.setPosition}
         updateOnPost={props.updateOnPost}
         setUpdateOnPost={props.setUpdateOnPost}

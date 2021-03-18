@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux';
 
-const Search = ({ cardArr, setSearchArr, searchValue, setSearchValue }) => {
-const handleChange = e => {
+const Search = ({ setSearchArr, searchValue, setSearchValue }) => {
+  const wineArr = useSelector(state => state.wineArr);
+  
+  const handleChange = e => {
     setSearchValue(e.target.value);
   }
 
   useEffect(() => {
     const handleSearch = () => {
-      const newArr = cardArr
+      const newArr = wineArr
         ?.filter(card => Object.values(card)
           .join('')
           .toLowerCase()
@@ -16,7 +19,7 @@ const handleChange = e => {
       setSearchArr(newArr);
     };
     handleSearch();
-  }, [searchValue, setSearchArr, cardArr]);
+  }, [searchValue, setSearchArr, wineArr]);
 
   return (
     <div className="search-container">

@@ -5,7 +5,7 @@ html, body, #root {
   min-height: 100vh;
 }
 
-.App {
+.App, .dashboard {
   width: 100%;
   min-height: 100vh;
   text-align: center;
@@ -346,4 +346,45 @@ form button[type="submit"]:hover {
 
 .removeButton:hover {
   color: #fff;
+}
+
+.logout-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 70px;
+  height: 30px;
+  border-radius: 20px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-page-link-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 200px;
+}
+
+.landing-page__link {
+  width: 200px;
+  height: 35px;
+  padding-top: 15px;
+  border: 1px solid black;
+  border-radius: 100px;
+  margin-top: 40px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.landing-page__link--colored {
+  background-color: #7c0000;
+  border: 1px solid #7c0000;
+  color: white;
 }

@@ -1,4 +1,4 @@
-const WineDataBase = require('./schema');
+const WineDataBase = require('../mongoDB/wine-schema');
 const { getImage } = require('../scraping/cheerio');
 
 const postNewWine = async data => {
@@ -12,7 +12,8 @@ const postNewWine = async data => {
     row,
     img,
   })
-  wine.save();
+  const response = await wine.save();
+  return response;
 }
 
 module.exports.postNewWine = postNewWine;

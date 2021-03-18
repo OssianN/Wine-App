@@ -1,11 +1,20 @@
 const express = require('express');
 const app = express();
 const wine = require('./routes');
+const passport = require("passport");
+const users = require("./routes/users");
 const mongoose = require('mongoose');
+const bodyParser = require("body-parser");
 require('dotenv').config();
 
-const { connection } = mongoose;
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
+app.use(bodyParser.json());
 
+const { connection } = mongoose;
 mongoose.connect(process.env.SECRET_KEY, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false  } );
 connection
   .once('open', () => console.log('SUCCESS, connected to DB'))
@@ -15,5 +24,11 @@ app.use(express.json());
 app.use(express.static('client/build'));
 app.use('/wines', wine);
 
+app.use(passport.initialize());
+
+require("./config/passport")(passport);
+
+app.use("/users", users);
+
 const port = 5000;
-app.listen(process.env.PORT || port, () => console.log(`test-api is running on port ${process.env.PORT || port}`));
+app.listen(process.env.PORT || port, () => console.log(`server running on port ${process.env.PORT || port}`));

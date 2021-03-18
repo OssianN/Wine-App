@@ -1,95 +1,40 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import axios from 'axios';
-import WineGrid from './components/wineGrid/WineGrid';
-import AddWine from './components/wineForm/AddWine';
-import EditWine from './components/wineForm/EditWine';
-import Search from './components/Search';
+import React from 'react'
+import { BrowserRouter, Route } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import jwt_decode from "jwt-decode";
+import setAuthToken from "./utils/setAuthToken";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
+import Dashboard from "./components/dashboard/Dashboard";
+import Landing from "./components/Landing";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
 
-function App() {
-  const [cardArr, setCardArr] = useState();
-  const [position, setPosition] = useState(null);
-  const [updateOnPost, setUpdateOnPost] = useState(0);
-  const [showAddModal, setShowAddModal] = useState({display: 'none'});
-  const [showEditModal, setShowEditModal] = useState({display: 'none'});
-  const [pickedCard, setPickedCard] = useState({});
-  const [titleValue, setTitleValue] = useState('');
-  const [countryValue, setCountryValue] = useState('');
-  const [yearValue, setYearValue] = useState('');
-  const [checkedValue, setCheckedValue] = useState(false);
-  const [searchArr, setSearchArr] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
+const App = props => {
+  const dispatch = useDispatch();
 
-  const getWines = async () => {
-    try {
-      const response = await axios.get('/wines');
-      const data = await response.data;
-      setCardArr(data);
-    } catch (err) {
-      console.error(err, 'getWines error')
+  if (localStorage.jwtToken) {
+    const token = localStorage.jwtToken;
+    setAuthToken(token);
+    const decoded = jwt_decode(token);
+    dispatch(setCurrentUser(decoded));
+
+    const currentTime = Date.now() / 1000;
+    if (decoded.exp < currentTime) {
+      dispatch(logoutUser());
+      window.location.href = "./login";
     }
   }
 
-  useEffect(() => {
-    getWines();
-  }, [updateOnPost]);
-
   return (
-    <div className="App">
-      <h1 className="header">This is the wine we whine about</h1>
-      <Search
-        setSearchArr={setSearchArr}
-        cardArr={cardArr}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue} />
-      <AddWine
-        setCardArr={setCardArr}
-        position={position}
-        updateOnPost={updateOnPost}
-        setUpdateOnPost={setUpdateOnPost}
-        showAddModal={showAddModal}
-        setShowAddModal={setShowAddModal}
-        titleValue={titleValue}
-        setTitleValue={setTitleValue}
-        countryValue={countryValue}
-        setCountryValue={setCountryValue}
-        yearValue={yearValue}
-        setYearValue={setYearValue}
-        checkedValue={checkedValue}
-        setCheckedValue={setCheckedValue}
-      />
-      <EditWine
-        showEditModal={showEditModal}
-        setShowEditModal={setShowEditModal}
-        updateOnPost={updateOnPost}
-        setUpdateOnPost={setUpdateOnPost}
-        position={position}
-        pickedCard={pickedCard}
-        titleValue={titleValue}
-        setTitleValue={setTitleValue}
-        countryValue={countryValue}
-        setCountryValue={setCountryValue}
-        yearValue={yearValue}
-        setYearValue={setYearValue}
-        checkedValue={checkedValue}
-        setCheckedValue={setCheckedValue}
-      />
-      <WineGrid
-        cardArr={cardArr}
-        setCardArr={setCardArr}
-        setPosition={setPosition}
-        updateOnPost={updateOnPost}
-        setUpdateOnPost={setUpdateOnPost}
-        showAddModal={showAddModal}
-        setShowAddModal={setShowAddModal}
-        showEditModal={showEditModal}
-        setShowEditModal={setShowEditModal}
-        setPickedCard={setPickedCard}
-        searchArr={searchArr}
-        searchValue={searchValue}
-      />
-    </div>
-  );
+    <BrowserRouter>
+      <div className="App">
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/dashboard" component={Dashboard} />
+      </div>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App

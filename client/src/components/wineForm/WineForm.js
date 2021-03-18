@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 
 const WineForm = (props) => {
   const [showDelete, setShowDelete] = useState('none');
+  const { title, country, year, _id } = props.pickedCard || '';
 
   const titleInput = useRef(null);
   const countryInput = useRef(null);
@@ -9,7 +10,6 @@ const WineForm = (props) => {
   const keepForm = useRef(null);
 
   const preFillForm = () => {
-    const { title, country, year } = props.pickedCard || '';
     if (title || country || year) {
       titleInput.current.value = title;
       countryInput.current.value = country;
@@ -56,6 +56,7 @@ const WineForm = (props) => {
       data.year = e.target.children[6].value;
       data.shelf = props.position[0];
       data.row = props.position[1];
+      data._id = _id;
       props.method(data);
       props.show({display: 'none'});
       saveOrClearForm();
@@ -92,17 +93,17 @@ const WineForm = (props) => {
     <form onSubmit={handleSubmit} className='wineForm'>
       <button type='button' onClick={cancel} className='cancelButton' >&#10005;</button>
       <label htmlFor='newWineName'>Wine Name</label>
-      <input type='text' id="newWineName" ref={titleInput} />
+      <input type='text' className="newWineName" ref={titleInput} />
       <label htmlFor='newWineCountry'>Country</label>
-      <input type='text' id="newWineCountry" ref={countryInput} />
+      <input type='text' className="newWineCountry" ref={countryInput} />
       <label htmlFor='newWineDesc'>Year</label>
-      <input type='text' id="newWineDesc" ref={yearInput} />
-      <button type='submit' id="editWineButton">
+      <input type='text' className="newWineDesc" ref={yearInput} />
+      <button type='submit' className="editWineButton">
         {props.buttonName}
       </button>
-      <button style={{display: showDelete}} className='removeButton' onClick={props.handleRemove}>Delete Wine</button>
+      <button style={{display: showDelete}} type='button' className='removeButton' onClick={props.handleRemove}>Delete Wine</button>
       <div className='saveFormContainer'>
-        <input ref={keepForm} defaultChecked={props.checkedValue} type='checkbox' id='saveForm'></input>
+        <input ref={keepForm} defaultChecked={props.checkedValue} type='checkbox' className='saveForm'></input>
         <label htmlFor='saveForm'>Keep Info</label>
       </div>
     </form>

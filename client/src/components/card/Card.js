@@ -2,12 +2,12 @@ import React from 'react';
 import wineSVG from './wine4.png'
 
 const Card = props => {
-  const id = `${props.x}:${props.y}`;
+  const id = props._id;
   const img = props.img ? props.img : wineSVG;
 
   const handleEdit = async e => {
     props.setPosition([props.x, props.y]);
-    props.setPickedCard({title: props.title, country: props.country, year: props.year});
+    props.setPickedCard({title: props.title, country: props.country, year: props.year, _id: id});
     props.setShowEditModal({display: "flex"});
   };
 
