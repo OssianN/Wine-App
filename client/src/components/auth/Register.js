@@ -28,6 +28,8 @@ const Register = props => {
   }
 
   return (
+    <>
+    <h1 className="header">This is the wine we whine about</h1>
     <form onSubmit={handleSubmit} className='auth-form'>
       <input
         className='auth-form__input'
@@ -64,6 +66,7 @@ const Register = props => {
           register
       </button>
     </form>
+    </>
   )
 }
 

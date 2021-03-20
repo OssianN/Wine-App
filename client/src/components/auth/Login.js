@@ -42,6 +42,8 @@ const Login = props => {
   }
 
   return (
+    <>
+    <h1 className="header">This is the wine we whine about</h1>
     <form onSubmit={handleSubmit} className='auth-form'>
       {error.email ? <p>{ error.email }</p> : <p></p>}
       <input
@@ -60,6 +62,7 @@ const Login = props => {
         type="password"></input>
       <button className='auth-form__submit-button btn--enforced' type="submit">log in</button>
     </form>
+    </>
   )
 }
 

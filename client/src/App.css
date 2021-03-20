@@ -386,10 +386,10 @@ form input {
   margin-top: 40px;
   font-weight: bold;
   text-decoration: none;
+  color: black;
 }
 
 .landing-page__link--colored {
   background-color: #7c0000;
-  border: 1px solid #7c0000;
   color: white;
 }
