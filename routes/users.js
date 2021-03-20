@@ -57,7 +57,9 @@ router.post("/login", (req, res) => {
           id: user.id,
           name: user.name,
           email: user.email,
-          wineList: user.wineList
+          wineList: user.wineList,
+          columns: user.columns??null,
+          shelves: user.shelves??null,
         };
         jwt.sign(
           payload,
@@ -79,6 +81,35 @@ router.post("/login", (req, res) => {
       }
     });
   });
+});
+
+router.post('/addStorage', async (req, res) => {
+  try {
+    const { email, columns, shelves } = req.body;
+    const user = await UserDataBase.findOne({ email });
+    await user.updateOne({ columns, shelves });
+    const payload = {
+      ...user._doc,
+      columns,
+      shelves,
+    }
+    console.log(payload)
+    jwt.sign(
+      payload,
+      keys.secretOrKey,
+      {
+        expiresIn: 31556926, // 1 year in seconds
+      },
+      (err, token) => {
+        res.json({
+          success: true,
+          token: "Bearer " + token,
+        });
+      }
+    );
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 router.post('/addWine', async (req, res) => {

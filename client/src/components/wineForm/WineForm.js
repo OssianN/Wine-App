@@ -98,7 +98,7 @@ const WineForm = (props) => {
       <input type='text' className="newWineCountry" ref={countryInput} />
       <label htmlFor='newWineDesc'>Year</label>
       <input type='text' className="newWineDesc" ref={yearInput} />
-      <button type='submit' className="editWineButton">
+      <button type='submit' className="btn--enforced">
         {props.buttonName}
       </button>
       <button style={{display: showDelete}} type='button' className='removeButton' onClick={props.handleRemove}>Delete Wine</button>

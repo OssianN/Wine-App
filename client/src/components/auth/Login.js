@@ -48,8 +48,9 @@ const Login = props => {
         className='auth-form__input'
         onChange={handleChange} name='email'
         value={inputValue.email}
-        placeholder='email'></input>
-      {error.password ? <p>{ error.email }</p> : <p></p>}
+        placeholder='email'>
+      </input>
+      {error.password ? <p>{ error.password }</p> : <p></p>}
       <input
         className='auth-form__input'
         onChange={handleChange}
@@ -57,7 +58,7 @@ const Login = props => {
         value={inputValue.password}
         placeholder='password'
         type="password"></input>
-      <button className='auth-form__submit-button' type="submit">log in</button>
+      <button className='auth-form__submit-button btn--enforced' type="submit">log in</button>
     </form>
   )
 }

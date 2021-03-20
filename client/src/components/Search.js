@@ -28,7 +28,7 @@ const Search = ({ setSearchArr, searchValue, setSearchValue }) => {
         onChange={handleChange}
         value={searchValue}
         className="search"
-        placeholder='Sök'>
+        placeholder='search'>
       </input>
     </div>
   )

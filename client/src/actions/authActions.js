@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import {
   GET_ERRORS,
   SET_CURRENT_USER,
-  USER_LOADING
+  USER_LOADING,
 } from "./types";
 
 export const registerUser = (userData, history) => async dispatch => {
@@ -36,6 +36,13 @@ export const loginUser = userData => async dispatch => {
       })
     );
 };
+
+export const setUserStorage = token => dispatch => {
+  localStorage.setItem("jwtToken", token);
+  setAuthToken(token);
+  const decoded = jwt_decode(token);
+  dispatch(setCurrentUser(decoded));
+}
 
 export const setCurrentUser = decoded => {
   return {

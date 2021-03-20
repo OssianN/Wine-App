@@ -17,6 +17,12 @@ const UserSchema = new Schema({
   wineList: {
     type: Array,
   },
+  columns: {
+    type: Number,
+  },
+  shelves: {
+    type: Number,
+  },
   date: {
     type: Date,
     default: Date.now

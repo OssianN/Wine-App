@@ -8,6 +8,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { setWineArr } from '../../actions/wineActions'
 import LogOutButton from '../LogOutButton';
+import Settings from '../settings-page/Settings';
+import SettingsButton from '../settings-page/SettingsButton';
+import InitialSetup from '../settings-page/InitialSetup';
 import '../../App.css';
 
 const Dashboard = () => {
@@ -22,9 +25,9 @@ const Dashboard = () => {
   const [checkedValue, setCheckedValue] = useState(false);
   const [searchArr, setSearchArr] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [showSettings, setShowSettings] = useState(false);
 
   const { isAuthenticated, user } = useSelector(state => state.auth);
-
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -39,67 +42,73 @@ const Dashboard = () => {
       }
     }
     getWines();
-  }, [dispatch, user.wineList])
+  }, [dispatch, user.wineList]);
 
   useEffect(() => {
     if (!isAuthenticated) {
-      history.push('./login')
+      history.push('./login');
     }
-  })
+  });
 
-  return (
-    <div className="dashboard">
-      <h1 className="header">This is the wine we whine about</h1>
-      <Search
-        setSearchArr={setSearchArr}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue} />
-      <LogOutButton />
-      <AddWine
-        position={position}
-        updateOnPost={updateOnPost}
-        setUpdateOnPost={setUpdateOnPost}
-        showAddModal={showAddModal}
-        setShowAddModal={setShowAddModal}
-        titleValue={titleValue}
-        setTitleValue={setTitleValue}
-        countryValue={countryValue}
-        setCountryValue={setCountryValue}
-        yearValue={yearValue}
-        setYearValue={setYearValue}
-        checkedValue={checkedValue}
-        setCheckedValue={setCheckedValue}
-      />
-      <EditWine
-        showEditModal={showEditModal}
-        setShowEditModal={setShowEditModal}
-        updateOnPost={updateOnPost}
-        setUpdateOnPost={setUpdateOnPost}
-        position={position}
-        pickedCard={pickedCard}
-        titleValue={titleValue}
-        setTitleValue={setTitleValue}
-        countryValue={countryValue}
-        setCountryValue={setCountryValue}
-        yearValue={yearValue}
-        setYearValue={setYearValue}
-        checkedValue={checkedValue}
-        setCheckedValue={setCheckedValue}
-      />
-      <WineGrid
-        setPosition={setPosition}
-        updateOnPost={updateOnPost}
-        setUpdateOnPost={setUpdateOnPost}
-        showAddModal={showAddModal}
-        setShowAddModal={setShowAddModal}
-        showEditModal={showEditModal}
-        setShowEditModal={setShowEditModal}
-        setPickedCard={setPickedCard}
-        searchArr={searchArr}
-        searchValue={searchValue}
-      />
-    </div>
-  );
+  if (!user.columns || !user.shelves) {
+    return <InitialSetup />
+  } else {
+    return (
+      <div className="dashboard">
+        <h1 className="header">This is the wine we whine about</h1>
+        <Settings showSettings={showSettings} />
+        <SettingsButton showSettings={showSettings} setShowSettings={setShowSettings} />
+        <Search
+          setSearchArr={setSearchArr}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue} />
+        <LogOutButton />
+        <AddWine
+          position={position}
+          updateOnPost={updateOnPost}
+          setUpdateOnPost={setUpdateOnPost}
+          showAddModal={showAddModal}
+          setShowAddModal={setShowAddModal}
+          titleValue={titleValue}
+          setTitleValue={setTitleValue}
+          countryValue={countryValue}
+          setCountryValue={setCountryValue}
+          yearValue={yearValue}
+          setYearValue={setYearValue}
+          checkedValue={checkedValue}
+          setCheckedValue={setCheckedValue}
+        />
+        <EditWine
+          showEditModal={showEditModal}
+          setShowEditModal={setShowEditModal}
+          updateOnPost={updateOnPost}
+          setUpdateOnPost={setUpdateOnPost}
+          position={position}
+          pickedCard={pickedCard}
+          titleValue={titleValue}
+          setTitleValue={setTitleValue}
+          countryValue={countryValue}
+          setCountryValue={setCountryValue}
+          yearValue={yearValue}
+          setYearValue={setYearValue}
+          checkedValue={checkedValue}
+          setCheckedValue={setCheckedValue}
+        />
+        <WineGrid
+          setPosition={setPosition}
+          updateOnPost={updateOnPost}
+          setUpdateOnPost={setUpdateOnPost}
+          showAddModal={showAddModal}
+          setShowAddModal={setShowAddModal}
+          showEditModal={showEditModal}
+          setShowEditModal={setShowEditModal}
+          setPickedCard={setPickedCard}
+          searchArr={searchArr}
+          searchValue={searchValue}
+        />
+      </div>
+    );
+  }
 }
 
 export default Dashboard;

@@ -4,14 +4,17 @@ import { useSelector } from 'react-redux';
 
 const WineGrid = props => {
   const wineArr = useSelector(state => state.wineArr);
-  const cardArr = props.searchValue ? props.searchValue : wineArr;
+  const { user } = useSelector(state => state.auth);
+  const cardArr = props.searchValue ? props.searchArr : wineArr;
+  const cardWidth = (100 / user.columns);
 
   const createButton = (i, j) => {
     return (
       <div 
-        className="add-wine__div"
         key={`${i}:${j}`}
-        id={`${i}:${j}`} >
+        className="add-wine__div"
+        id={`${i}:${j}`}
+        style={{width: `calc(${cardWidth}% - 10px)`}}>
         <div className='card-header card-header--left-margin'>
           <p className='card-header__position--dark'>{`${i + 1}:${j + 1}`}</p>
         </div>
@@ -34,6 +37,7 @@ const WineGrid = props => {
         x={card.shelf}
         y={card.row}
         _id={card._id}
+        cardWidth={cardWidth}
         setPosition={props.setPosition}
         updateOnPost={props.updateOnPost}
         setUpdateOnPost={props.setUpdateOnPost}
@@ -57,8 +61,8 @@ const WineGrid = props => {
 
   const renderCards = (cardArr) => {
     const renderedCards = [];
-    for (let i = 0; i < 15; i ++) {
-      for (let j = 0; j < 8; j++) {
+    for (let i = 0; i < user.shelves; i ++) {
+      for (let j = 0; j < user.columns; j++) {
         orderCards(cardArr, renderedCards, i, j);
       }
     }

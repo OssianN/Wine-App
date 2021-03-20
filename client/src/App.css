@@ -12,23 +12,25 @@ html, body, #root {
   font-family: Montserrat, serif;
 }
 
-button {
-  outline: none;
-  cursor: pointer;
-}
-
 input {
   outline: none;
 }
 
+.flat-button--border {
+  outline: none;
+  cursor: pointer;
+  border: 1px solid black;
+  background: white;
+  border-radius: 100px;
+}
+
 .header {
   font-family: 'Dancing Script', cursive;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #550000;
   padding: 2% 0;
   padding-top: 80px;
   margin: 0;
-  position: fixed;
   top: 0;
   width: 100vw;
   background-color: #fff;
@@ -148,18 +150,14 @@ form input {
   border: solid 1px grey;
 }
 
-form button[type="submit"] {
-  margin-top: 40px;
-  width: 30%;
-  min-width: 130px;
-  height: 40px;
-  background-color: #fff;
+.btn--enforced {
+  background-color: black;
   border: none;
-  font-size: 14px;
-  box-shadow: 0 0 7px #cccccc;
+  font-size: 1rem;
+  color: white;
 }
 
-form button[type="submit"]:hover {
+.btn--enforced:hover {
   box-shadow: 0 0 4px #cccccc;
 }
 
@@ -190,15 +188,12 @@ form button[type="submit"]:hover {
 
 .add-wine__div {
   position: relative;
-  width: 10%;
-  max-width: 10%;
   min-height: 200px;
-  margin: .25%;
+  margin: 5px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 10px 40px 10px;
   cursor: pointer;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -222,9 +217,7 @@ form button[type="submit"]:hover {
 
 .card {
   position: relative;
-  width: 10%;
-  max-width: 10%;
-  margin: .25%;
+  margin: 5px;
   border-radius: 8px;
   word-wrap: break-word;
   display: flex;
@@ -251,7 +244,6 @@ form button[type="submit"]:hover {
 
 .card__img {
   height: 200px;
-  min-width: 100%;
 }
 
 .add-wine__div button {
@@ -316,8 +308,8 @@ form button[type="submit"]:hover {
   display: flex;
   justify-content: center;
   z-index: 100;
-  margin-top: 150px;
-  padding: 20px 0;
+  margin: 60px 0;
+  padding: 40px 0;
 }
 
 .search {
@@ -348,15 +340,28 @@ form button[type="submit"]:hover {
   color: #fff;
 }
 
-.logout-button {
-  position: absolute;
+.logout-container {
+  position: fixed;
+  display: flex;
+  align-items: center;
   top: 20px;
-  right: 20px;
+  left: 20px;
+  z-index: 200;
+}
+
+.logout-button {
   width: 70px;
   height: 30px;
   border-radius: 20px;
   background-color: white;
   border: 1px solid black;
+}
+
+.account-name-header {
+  color: black;
+  font-weight: bold;
+  margin: 0;
+  margin-left: 10px;
 }
 
 .landing-page {

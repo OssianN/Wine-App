@@ -12,9 +12,9 @@ const getImage = async title => {
   const html = cheerio.load(body);
 
   const element = html('.wine-card__image');
-  const img = element ? element[0] : null;
-  const attribute = img ? img.attribs.style : null;
-  const imgURL = attribute ? attribute.match(/\/\/.*(?=\))/) : null;
+  const img = element?.[0];
+  const attribute = img?.attribs?.style;
+  const imgURL = attribute?.match(/\/\/.*(?=\))/);
 
   return imgURL ? imgURL[0] : 'no image';
 }

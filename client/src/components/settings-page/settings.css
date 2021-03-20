@@ -1,0 +1,62 @@
+.initial-setup-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.initial-setup__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  width: 300px;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.settings-container {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 250px;
+  padding: 40px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 200;
+  transition: .5s;
+  box-shadow: 0 0 5px #afafaf;
+}
+
+.settings-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding-top: 200px;
+}
+
+.settings__button--confirm {
+  width: 150px;
+  height: 40px;
+  margin-top: 20px;
+}
+.settings-form__input  {
+  width: 130px;
+  height: 40px;
+  padding: 0 10px;
+}
+
+.toggle-setting {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  width: 70px;
+  height: 30px;
+  z-index: 250;
+}

@@ -59,7 +59,7 @@ const Register = props => {
         type='password'>
       </input>
       <button
-        className='auth-form__submit-button'
+        className='auth-form__submit-button btn--enforced'
         type="submit">
           register
       </button>
