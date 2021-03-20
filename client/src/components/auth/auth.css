@@ -10,10 +10,12 @@
 
 .auth-form__input {
   margin: 20px 0;
+  font-weight: bold;
 }
 
 .auth-form__submit-button {
   width: 150px;
   height: 40px;
   margin-top: 50px;
+  font-weight: bold;
 }
