@@ -7,11 +7,10 @@ import Search from '../Search';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { setWineArr } from '../../actions/wineActions'
-import LogOutButton from '../LogOutButton';
 import Settings from '../settings-page/Settings';
-import SettingsButton from '../settings-page/SettingsButton';
 import InitialSetup from '../settings-page/InitialSetup';
 import '../../App.css';
+import Hamburger from '../settings-page/Hamburger';
 
 const Dashboard = () => {
   const [position, setPosition] = useState(null);
@@ -56,13 +55,12 @@ const Dashboard = () => {
     return (
       <div className="dashboard">
         <h1 className="header">This is the wine we whine about</h1>
+        <Hamburger showSettings={showSettings} setShowSettings={setShowSettings} />
         <Settings showSettings={showSettings} />
-        <SettingsButton showSettings={showSettings} setShowSettings={setShowSettings} />
         <Search
           setSearchArr={setSearchArr}
           searchValue={searchValue}
           setSearchValue={setSearchValue} />
-        <LogOutButton />
         <AddWine
           position={position}
           updateOnPost={updateOnPost}

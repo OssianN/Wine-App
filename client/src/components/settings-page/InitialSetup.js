@@ -26,9 +26,13 @@ const InitialSetup = () => {
       setError(true)
     } else {
       setError(false)
-      const updatedUser = await axios.post('/users/addStorage', { columns: inputValue.columns, shelves: inputValue.shelves, email: user.email })
+      const updatedUser = await axios.post('/users/addStorage',
+      {
+        columns: inputValue.columns,
+        shelves: inputValue.shelves,
+        email: user.email
+      })
       const { token } = updatedUser.data;
-      console.log(token)
       dispatch(setUserStorage(token))
     }
   }
@@ -42,7 +46,7 @@ const InitialSetup = () => {
           name='columns'
           className='settings-form__input'
           type='number'
-          placeholder={user.shelves}
+          placeholder={user.columns}
           value={ inputValue.column }
           onChange={handleChange}>
         </input>

@@ -1,9 +1,9 @@
 const WineDataBase = require('../mongoDB/wine-schema');
-const { getImage } = require('../scraping/cheerio');
+const { getVivinoData } = require('../scraping/cheerio');
 
 const postNewWine = async data => {
   const { title, country, year, shelf, row } = data;
-  const img = await getImage(title);
+  const [img, rating] = await getVivinoData(title);
   const wine = new WineDataBase({
     title,
     country,
@@ -11,6 +11,7 @@ const postNewWine = async data => {
     shelf,
     row,
     img,
+    rating,
   })
   const response = await wine.save();
   return response;

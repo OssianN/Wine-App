@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
 
-const getImage = async title => {
+const getVivinoData = async title => {
   if (!title) return 'no image';
 
   const searchTitle = title.split(' ').join('+');
@@ -11,12 +11,15 @@ const getImage = async title => {
   const body = await vivinoSite.text();
   const html = cheerio.load(body);
 
-  const element = html('.wine-card__image');
-  const img = element?.[0];
-  const attribute = img?.attribs?.style;
+  const imgElement = html('.wine-card__image');
+  const firstImg = imgElement?.[0];
+  const attribute = firstImg?.attribs?.style;
   const imgURL = attribute?.match(/\/\/.*(?=\))/);
 
-  return imgURL ? imgURL[0] : 'no image';
+  const ratingElement = html('.average__number');
+  const rating = ratingElement?.[0]?.children?.[0]?.data;
+
+  return imgURL || rating ? [imgURL?.[0], rating] : 'no image';
 }
 
-module.exports.getImage = getImage;
+module.exports.getVivinoData = getVivinoData;

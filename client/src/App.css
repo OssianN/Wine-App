@@ -16,6 +16,62 @@ input {
   outline: none;
 }
 
+.card {
+  position: relative;
+  border-radius: 8px;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 10px 40px 10px;
+  margin: 5px;
+  min-width: 100px;
+  color: #550000;
+  cursor: pointer;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  animation-name: card;
+  animation-duration: 1s;
+  background: linear-gradient(#fafafa, #f5f5f5);
+}
+
+.add-wine__div {
+  position: relative;
+  min-height: 200px;
+  min-width: 120px;
+  margin: 5px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: linear-gradient(#f7f6f6, #f1f1f1);
+  animation-name: add-wine__div;
+  animation-duration: 1s;
+}
+
+.wineGrid {
+  position: absolute;
+  width: 100vw;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  z-index: 20;
+  background-color: #fff;
+  overflow: scroll;
+}
+
+.wine-row {
+  display: flex;
+  padding: 0 30px;
+  min-width: 1000px;
+}
+
 .flat-button--border {
   outline: none;
   cursor: pointer;
@@ -30,9 +86,9 @@ input {
   color: #550000;
   padding: 2% 0;
   padding-top: 80px;
-  margin: 0;
+  margin: 0 auto;
   top: 0;
-  width: 100vw;
+  width: 90vw;
   background-color: #fff;
 }
 
@@ -153,12 +209,27 @@ form input {
 .btn--enforced {
   background-color: black;
   border: none;
+  border-radius: 100px;
   font-size: 1rem;
   color: white;
 }
 
 .btn--enforced:hover {
   box-shadow: 0 0 4px #cccccc;
+}
+
+.btn--form-submit {
+  margin-top: 40px;
+  width: 150px;
+  height: 50px;
+}
+
+.btn--form-delete {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  width: 150px;
+  height: 50px;
 }
 
 .cancelButton {
@@ -169,37 +240,6 @@ form input {
   color: #550000;
   border: solid 1px grey;
   border-radius: 50%;
-}
-
-.wineGrid {
-  position: relative;
-  width: calc(100% - 80px);
-  padding: 40px;
-  min-width: 1000px;
-  max-width: 1500px;
-  overflow-x: scroll;
-  display: flex;
-  align-self: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  z-index: 20;
-  background-color: #fff;
-}
-
-.add-wine__div {
-  position: relative;
-  min-height: 200px;
-  margin: 5px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  background: linear-gradient(#f7f6f6, #f1f1f1);
-  animation-name: add-wine__div;
-  animation-duration: 1s;
 }
 
 @keyframes add-wine__div {
@@ -213,24 +253,6 @@ form input {
 
 .add-wine__div:hover {
   background: linear-gradient(#dfdfdf, #d3d3d3);
-}
-
-.card {
-  position: relative;
-  margin: 5px;
-  border-radius: 8px;
-  word-wrap: break-word;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #550000;
-  padding: 30px 10px 40px 10px;
-  background: linear-gradient(#fafafa, #f5f5f5);
-  cursor: pointer;
-  animation-name: card;
-  animation-duration: 1s;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 @keyframes card {
@@ -327,21 +349,11 @@ form input {
   }
 }
 
-.removeButton {
-  width: 30%;
-  height: 40px;
-  border: none;
-  background-color: #7c0000;
-  color: #ffffffd5;
-  font-size: 14px;
-}
-
 .removeButton:hover {
   color: #fff;
 }
 
 .logout-container {
-  position: fixed;
   display: flex;
   align-items: center;
   top: 20px;
@@ -350,8 +362,8 @@ form input {
 }
 
 .logout-button {
-  width: 70px;
-  height: 30px;
+  width: 80px;
+  height: 40px;
   border-radius: 20px;
   background-color: white;
   border: 1px solid black;
@@ -378,13 +390,13 @@ form input {
 }
 
 .landing-page__link {
-  width: 200px;
-  height: 35px;
-  padding-top: 15px;
+  width: 250px;
+  height: 40px;
+  padding-top: 20px;
   border: 1px solid black;
   border-radius: 100px;
   margin-top: 40px;
-  font-weight: bold;
+  font-weight: 900;
   text-decoration: none;
   color: black;
 }

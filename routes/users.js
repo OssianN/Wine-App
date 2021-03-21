@@ -93,7 +93,6 @@ router.post('/addStorage', async (req, res) => {
       columns,
       shelves,
     }
-    console.log(payload)
     jwt.sign(
       payload,
       keys.secretOrKey,
@@ -129,6 +128,15 @@ router.post('/addWine', async (req, res) => {
       .status(500)
       .json({ err })
   }
-})
+});
+
+router.delete('/deleteWine', async (req, res) => {
+  const { _id, email } = req.body;
+  const user = await UserDataBase.findOne({ email });
+  const wineList = user.wineList;
+  const newList = wineList.filter(wine => wine !== _id);
+  await user.updateOne({ wineList: newList });
+  res.status(200).send();
+});
 
 module.exports = router;

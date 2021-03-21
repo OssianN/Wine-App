@@ -26,6 +26,7 @@ const EditWine = props => {
         dispatch(deleteWine(_id));
         props.setShowEditModal({ display: 'none' });
         await axios.delete('/wines', {data: { _id }});
+        await axios.delete('/users/deleteWine', {data: { email: user.email, _id }});
       } catch (err) {
         alert('A server error occured.', err);
         console.error(err)

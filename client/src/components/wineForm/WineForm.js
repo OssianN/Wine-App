@@ -98,10 +98,10 @@ const WineForm = (props) => {
       <input type='text' className="newWineCountry" ref={countryInput} />
       <label htmlFor='newWineDesc'>Year</label>
       <input type='text' className="newWineDesc" ref={yearInput} />
-      <button type='submit' className="btn--enforced">
+      <button type='submit' className="btn--enforced btn--form-submit">
         {props.buttonName}
       </button>
-      <button style={{display: showDelete}} type='button' className='removeButton' onClick={props.handleRemove}>Delete Wine</button>
+      <button style={{display: showDelete}} type='button' className='btn--enforced btn--form-delete' onClick={props.handleRemove}>Delete Wine</button>
       <div className='saveFormContainer'>
         <input ref={keepForm} defaultChecked={props.checkedValue} type='checkbox' className='saveForm'></input>
         <label htmlFor='saveForm'>Keep Info</label>

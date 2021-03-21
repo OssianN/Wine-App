@@ -11,8 +11,6 @@ const Card = props => {
     props.setShowEditModal({display: "flex"});
   };
 
-  console.log(props.cardWidth)
-
   return (
     <figure className='card' id={id} onClick={handleEdit} style={{width: `calc(${props.cardWidth}% - 30px)`}}>
       <header className='card-header'>
@@ -21,6 +19,7 @@ const Card = props => {
       <img className='card__img' alt='wine bottle' src={img}></img>
       <h1 className='card__title'>{props.title}</h1>
       <h4 className='card__country'>{props.country}</h4>
+      <p>{props.rating}</p>
       <footer className='card__year'>{props.year}</footer>
     </figure>
   );

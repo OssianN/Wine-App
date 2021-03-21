@@ -31,6 +31,7 @@ const WineGrid = props => {
       <Card
         key={`${i}:${j}`}
         img={card.img}
+        rating={card.rating}
         title={card.title}
         country={card.country}
         year={card.year}
@@ -60,13 +61,21 @@ const WineGrid = props => {
   }
 
   const renderCards = (cardArr) => {
-    const renderedCards = [];
+    const shelves = [];
     for (let i = 0; i < user.shelves; i ++) {
+      const columns = []
       for (let j = 0; j < user.columns; j++) {
-        orderCards(cardArr, renderedCards, i, j);
+        orderCards(cardArr, columns, i, j)
       }
+      shelves.push(columns)
     }
-    return renderedCards;
+    return shelves.map((shelf, i) => {
+      return (
+        <div className='wine-row' key={i}>
+          {shelf}
+        </div>
+      )
+    });
   }
 
   const breakOutXY = string => {
