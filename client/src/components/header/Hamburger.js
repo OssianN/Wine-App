@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../../hamburger.css';
 
 const Hamburger = ({ showSettings, setShowSettings }) => {
-  const [isOpen, setIsOpen] = useState('hamburger--closed')
+  const [isOpen, setIsOpen] = useState('hamburger--closed');
 
   const toggleSettings = () => {
     setShowSettings(!showSettings);
