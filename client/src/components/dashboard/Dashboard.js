@@ -3,14 +3,14 @@ import axios from 'axios';
 import WineGrid from '../wineGrid/WineGrid';
 import AddWine from '../wineForm/AddWine';
 import EditWine from '../wineForm/EditWine';
-import Search from '../Search';
+import MainHeader from '../header/MainHeader';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { setWineArr } from '../../actions/wineActions'
-import Settings from '../settings-page/Settings';
-import InitialSetup from '../settings-page/InitialSetup';
+import Settings from '../header/Settings';
+import InitialSetup from '../header/InitialSetup';
+import Hamburger from '../header/Hamburger';
 import '../../App.css';
-import Hamburger from '../settings-page/Hamburger';
 
 const Dashboard = () => {
   const [position, setPosition] = useState(null);
@@ -54,13 +54,13 @@ const Dashboard = () => {
   } else {
     return (
       <div className="dashboard">
-        <h1 className="header">This is the wine we whine about</h1>
         <Hamburger showSettings={showSettings} setShowSettings={setShowSettings} />
         <Settings showSettings={showSettings} />
-        <Search
+        <MainHeader
           setSearchArr={setSearchArr}
           searchValue={searchValue}
           setSearchValue={setSearchValue} />
+        <h1 className="header">This is the wine we whine about</h1>
         <AddWine
           position={position}
           updateOnPost={updateOnPost}

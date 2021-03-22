@@ -61,7 +61,6 @@ input {
   align-self: center;
   justify-content: center;
   flex-wrap: wrap;
-  z-index: 20;
   background-color: #fff;
   overflow: scroll;
 }
@@ -84,9 +83,9 @@ input {
   font-family: 'Dancing Script', cursive;
   font-size: 2.5rem;
   color: #550000;
-  padding: 2% 0;
-  padding-top: 80px;
+  padding: 80px 0;
   margin: 0 auto;
+  margin-top: 80px;
   top: 0;
   width: 90vw;
   background-color: #fff;
@@ -322,27 +321,6 @@ form input {
   bottom: 10px;
 }
 
-.search-container {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  z-index: 100;
-  margin: 60px 0;
-  padding: 40px 0;
-}
-
-.search {
-  width: 60%;
-  padding: 0 20px;
-  max-width: 600px;
-  height: 35px;
-  border: none;
-  border-bottom: 1px solid #a7a7a7;
-}
-
 @media (max-width: 700px) {
   .add-wine__div .cardPosition {
     align-self: center;
@@ -358,7 +336,6 @@ form input {
   align-items: center;
   top: 20px;
   left: 20px;
-  z-index: 200;
 }
 
 .logout-button {

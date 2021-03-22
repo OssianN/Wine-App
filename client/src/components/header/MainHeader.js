@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 
-const Search = ({ setSearchArr, searchValue, setSearchValue }) => {
+const Search = ({ setSearchArr, searchValue, setSearchValue, showSettings, setShowSettings }) => {
   const wineArr = useSelector(state => state.wineArr);
   
   const handleChange = e => {
@@ -22,7 +22,7 @@ const Search = ({ setSearchArr, searchValue, setSearchValue }) => {
   }, [searchValue, setSearchArr, wineArr]);
 
   return (
-    <div className="search-container">
+    <div className="main-header">
       <input
         type="text"
         onChange={handleChange}
