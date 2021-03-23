@@ -8,7 +8,7 @@ const Landing = () => {
 
   useEffect(() => {
     if(auth) {
-      history.push('/dashboard')
+      history.push('/dashboard');
     }
   });
 
