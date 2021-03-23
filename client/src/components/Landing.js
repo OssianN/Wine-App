@@ -1,7 +1,17 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Link, useHistory } from "react-router-dom";
 
 const Landing = () => {
+  const auth = useSelector(state => state.auth.isAuthenticated)
+  const history = useHistory();
+
+  useEffect(() => {
+    if(auth) {
+      history.push('/dashboard')
+    }
+  });
+
   return (
     <div className='landing-page'>
       <h1 className="header">This is the wine we whine about</h1>

@@ -9,7 +9,7 @@ html, body, #root {
   width: 100%;
   min-height: 100vh;
   text-align: center;
-  font-family: Montserrat, serif;
+  font-family: Montserrat, sans-serif;
 }
 
 input {
@@ -110,8 +110,10 @@ input {
 
 .wineForm {
   height: 60%;
+  max-height: 545px;
   width: 90vw;
   max-width: 600px;
+  min-width: 320px;
   padding-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -231,14 +233,44 @@ form input {
   height: 50px;
 }
 
+.delete-button-container {
+  width: 50%;
+  grid-template-areas:  "a a"
+                        "b c";
+  justify-content: center;
+}
+
+.confirm-delete__p {
+  justify-self: center;
+  grid-area: a;
+  height: 50px;
+  margin-bottom: 10px;
+  margin-top: 40px;
+}
+
+.btn-delete--yes {
+  justify-self: flex-end;
+  height: 50px;
+  width: 100px;
+  grid-area: b;
+}
+
+.btn-delete--no {
+  height: 50px;
+  width: 100px;
+  justify-self: flex-start;
+  grid-area: c;
+  font-size: 1rem;
+}
+
 .cancelButton {
   width: 30px;
   height: 30px;
   align-self: flex-end;
   background-color: transparent;
   color: #550000;
-  border: solid 1px grey;
-  border-radius: 50%;
+  font-size: 1.5rem;
+  border: none;
 }
 
 @keyframes add-wine__div {

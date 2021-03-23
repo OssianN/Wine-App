@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
+import DeleteButton from './DeleteButton';
 
 const WineForm = (props) => {
-  const [showDelete, setShowDelete] = useState('none');
+  const [areYouSure, setAreYouSure] = useState(false);
   const { title, country, year, _id } = props.pickedCard || '';
 
   const titleInput = useRef(null);
@@ -59,22 +60,16 @@ const WineForm = (props) => {
       data._id = _id;
       props.method(data);
       props.show({display: 'none'});
+      setAreYouSure(false);
       saveOrClearForm();
     } else {
       alert('The year must be entered as a number.')
     };
   };
 
-  const handleShowDelete = () => {
-    if (props.buttonName === 'Change Wine') {
-      setShowDelete('block');
-    } else {
-      setShowDelete('none');
-    }
-  };
-
   const cancel = () => {
     saveOrClearForm();
+    setAreYouSure(false);
     props.show({display: 'none'});
   };
 
@@ -85,7 +80,6 @@ const WineForm = (props) => {
   useEffect(() => {
     setValue();
     preFillForm();
-    handleShowDelete();
     focus();
   });
 
@@ -98,10 +92,15 @@ const WineForm = (props) => {
       <input type='text' className="newWineCountry" ref={countryInput} />
       <label htmlFor='newWineDesc'>Year</label>
       <input type='text' className="newWineDesc" ref={yearInput} />
-      <button type='submit' className="btn--enforced btn--form-submit">
+      <button type='submit' className="btn--enforced btn--form-submit" style={{display: areYouSure ? 'none' : 'block'}}>
         {props.buttonName}
       </button>
-      <button style={{display: showDelete}} type='button' className='btn--enforced btn--form-delete' onClick={props.handleRemove}>Delete Wine</button>
+      <DeleteButton
+        buttonName={props.buttonName}
+        areYouSure={areYouSure}
+        setAreYouSure={setAreYouSure}
+        setShowEditModal={props.setShowEditModal}
+        pickedCard={props.pickedCard} />
       <div className='saveFormContainer'>
         <input ref={keepForm} defaultChecked={props.checkedValue} type='checkbox' className='saveForm'></input>
         <label htmlFor='saveForm'>Keep Info</label>

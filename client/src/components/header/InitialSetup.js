@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { setUserStorage } from '../../actions/authActions';
 
-const InitialSetup = () => {
+const InitialSetup = ({ setShowSettings }) => {
   const { user } = useSelector(state => state.auth);
   const [inputValue, setInputValue] = useState({
     columns: user.columns,
@@ -26,6 +26,7 @@ const InitialSetup = () => {
       setError(true)
     } else {
       setError(false)
+      setShowSettings(false);
       const updatedUser = await axios.post('/users/addStorage',
       {
         columns: inputValue.columns,

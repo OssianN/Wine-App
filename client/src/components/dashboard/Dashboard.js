@@ -55,7 +55,7 @@ const Dashboard = () => {
     return (
       <div className="dashboard">
         <Hamburger showSettings={showSettings} setShowSettings={setShowSettings} />
-        <Settings showSettings={showSettings} />
+        <Settings showSettings={showSettings} setShowSettings={setShowSettings} />
         <MainHeader
           setSearchArr={setSearchArr}
           searchValue={searchValue}

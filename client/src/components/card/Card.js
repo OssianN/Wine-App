@@ -2,17 +2,17 @@ import React from 'react';
 import wineSVG from './wine4.png'
 
 const Card = props => {
-  const id = props._id;
+  const _id = props._id;
   const img = props.img ? props.img : wineSVG;
 
   const handleEdit = async e => {
     props.setPosition([props.x, props.y]);
-    props.setPickedCard({title: props.title, country: props.country, year: props.year, _id: id});
+    props.setPickedCard({title: props.title, country: props.country, year: props.year, _id});
     props.setShowEditModal({display: "flex"});
   };
 
   return (
-    <figure className='card' id={id} onClick={handleEdit} style={{width: `calc(${props.cardWidth}% - 30px)`}}>
+    <figure className='card' id={_id} onClick={handleEdit} style={{width: `calc(${props.cardWidth}% - 30px)`}}>
       <header className='card-header'>
         <p className='card-header__position'>{`${props.x + 1}:${props.y + 1}`}</p>
       </header>

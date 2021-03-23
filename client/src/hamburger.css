@@ -1,8 +1,8 @@
 .hamburger {
-  right: 0;
-  top: 0;
+  right: 7px;
+  top: 4px;
   position: fixed;
-  z-index: 250;
+  z-index: 200;
   background: transparent;
   border: none;
   height: 70px;

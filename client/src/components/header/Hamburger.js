@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../hamburger.css';
 
 const Hamburger = ({ showSettings, setShowSettings }) => {
@@ -6,12 +6,13 @@ const Hamburger = ({ showSettings, setShowSettings }) => {
 
   const toggleSettings = () => {
     setShowSettings(!showSettings);
-
-    isOpen === 'hamburger--closed'
-      ? setIsOpen('hamburger--open')
-      : setIsOpen('hamburger--closed')
   }
 
+  useEffect(() => {
+    showSettings
+    ? setIsOpen('hamburger--open')
+    : setIsOpen('hamburger--closed');
+  }, [showSettings])
 
   return (
     <>

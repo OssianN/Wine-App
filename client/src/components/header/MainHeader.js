@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 
-const Search = ({ setSearchArr, searchValue, setSearchValue, showSettings, setShowSettings }) => {
+const MainHeader = ({ setSearchArr, searchValue, setSearchValue }) => {
   const wineArr = useSelector(state => state.wineArr);
   
   const handleChange = e => {
@@ -34,4 +34,4 @@ const Search = ({ setSearchArr, searchValue, setSearchValue, showSettings, setSh
   )
 }
 
-export default Search
+export default MainHeader

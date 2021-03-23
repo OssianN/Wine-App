@@ -57,7 +57,7 @@ const WineGrid = props => {
         target.push(createCard(card, i, j));
       }
     });
-    if (!check) return target.push(createButton(i, j));
+    if (!check && !props.searchValue) return target.push(createButton(i, j));
   }
 
   const renderCards = (cardArr) => {
