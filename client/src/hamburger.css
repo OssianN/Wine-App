@@ -1,6 +1,6 @@
 .hamburger {
   right: 0;
-  top: 4px;
+  top: 0;
   position: fixed;
   z-index: 200;
   background: transparent;
