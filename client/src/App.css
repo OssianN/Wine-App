@@ -304,6 +304,7 @@ form input {
   background: transparent;
   border: none;
   margin: 0;
+  padding: 2px;
   font-size: 1.3rem;
   transform: rotate(90deg);
 }
