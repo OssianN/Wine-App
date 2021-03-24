@@ -31,9 +31,7 @@ const App = props => {
         <Route exact path="/" component={Landing} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
-        <Route path="/#/dashboard" >
-          <Dashboard />
-        </Route>
+        <Route path="/#/dashboard" component={Dashboard} />
       </div>
     </BrowserRouter>
   )
