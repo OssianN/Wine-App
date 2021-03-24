@@ -6,6 +6,7 @@ const users = require("./routes/users");
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 require('dotenv').config();
+require("./config/passport")(passport);
 
 app.use(
   bodyParser.urlencoded({
@@ -22,12 +23,15 @@ connection
 
 app.use(express.json());
 app.use(express.static('client/build'));
-app.use('/wines', wine);
-
 app.use(passport.initialize());
-
-require("./config/passport")(passport);
-
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build'), (err) => {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+app.use('/wines', wine);
 app.use("/users", users);
 
 const port = 5000;

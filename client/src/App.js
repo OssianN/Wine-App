@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
@@ -11,6 +11,7 @@ import Login from "./components/auth/Login";
 
 const App = props => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   if (localStorage.jwtToken) {
     const token = localStorage.jwtToken;
@@ -21,7 +22,7 @@ const App = props => {
     const currentTime = Date.now() / 1000;
     if (decoded.exp < currentTime) {
       dispatch(logoutUser());
-      window.location.href = "./login";
+      history.push("/login");
     }
   }
 
