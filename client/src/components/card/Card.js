@@ -12,7 +12,7 @@ const Card = props => {
   };
 
   return (
-    <figure className='card' id={_id} style={{width: `calc(${props.cardWidth}% - 30px)`}}>
+    <figure className='card' id={_id} style={{width: `calc(${props.cardWidth}% - 20px)`}}>
       <header className='card-header'>
         <p className='card-header__position'>{`${props.x + 1}:${props.y + 1}`}</p>
         <button className='edit-card__button' onClick={handleEdit}>&#8942;</button>

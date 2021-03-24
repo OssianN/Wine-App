@@ -25,7 +25,7 @@ input, button {
   padding: 10px;
   padding-top: 5px;
   margin: 5px;
-  min-width: 170px;
+  min-width: 100px;
   color: #550000;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -37,7 +37,7 @@ input, button {
 .add-wine__div {
   position: relative;
   min-height: 200px;
-  min-width: 170px;
+  min-width: 100px;
   margin: 5px;
   padding: 10px;
   padding-top: 5px;
@@ -222,7 +222,7 @@ form input {
 
 .btn--form-submit {
   margin-top: 40px;
-  width: 150px;
+  width: 155px;
   height: 50px;
 }
 
@@ -230,7 +230,7 @@ form input {
   background-color: white;
   border: 1px solid black;
   color: black;
-  width: 150px;
+  width: 155px;
   height: 50px;
 }
 
@@ -297,7 +297,7 @@ form input {
 }
 
 .card__img {
-  width: 170px;
+  height: 200px;
 }
 
 .edit-card__button {

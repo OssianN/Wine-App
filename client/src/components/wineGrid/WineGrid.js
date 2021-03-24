@@ -14,7 +14,7 @@ const WineGrid = props => {
         key={`${i}:${j}`}
         className="add-wine__div"
         id={`${i}:${j}`}
-        style={{width: `calc(${cardWidth}% - 10px)`}}>
+        style={{width: `calc(${cardWidth}% - 20px)`}}>
         <div className='card-header'>
           <p className='card-header__position--dark'>{`${i + 1}:${j + 1}`}</p>
         </div>
