@@ -20,9 +20,9 @@ const Card = props => {
       <img className='card__img' alt='wine bottle' src={img}></img>
       <a target="_blank" rel="noreferrer" href={props.vivinoUrl} className='card__vivino-url'>
         <h1 className='card__title'>{props.title}</h1>
-        <p className='card__info-paragraph'>country: {props.country}</p>
-        <p className='card__info-paragraph'>year: {props.year}</p>
-        <p className='card__info-paragraph'>average rating: {props.rating}</p>
+        <p className='card__info-paragraph'>Country: <br />{props.country}</p>
+        <p className='card__info-paragraph'>Year: <br />{props.year}</p>
+        <p className='card__info-paragraph'>Average rating: <br />{props.rating}</p>
       </a>
     </figure>
   );
