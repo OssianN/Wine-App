@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { registerUser } from "../../actions/authActions";
 
@@ -10,6 +10,7 @@ const Register = props => {
     password: '',
     password2: '',
   });
+  const auth = useSelector(state => state.auth.isAuthenticated)
   const history = useHistory();
 
   const handleChange = e => {
@@ -26,6 +27,12 @@ const Register = props => {
     e.preventDefault();
     dispatch(registerUser(inputValue, history))
   }
+
+  useEffect(() => {
+    if(auth) {
+      history.push('/dashboard')
+    }
+  });
 
   return (
     <>

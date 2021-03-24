@@ -45,7 +45,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      history.push('./login');
+      history.push('/login');
     }
   });
 
