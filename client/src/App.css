@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
-
 html, body, #root {
   margin: 0;
   min-height: 100vh;
@@ -12,8 +10,10 @@ html, body, #root {
   font-family: Montserrat, sans-serif;
 }
 
-input {
+input, button {
   outline: none;
+  font-family: Montserrat, sans-serif;
+  font-weight: bold;
 }
 
 .card {
@@ -22,12 +22,11 @@ input {
   word-wrap: break-word;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 30px 10px 40px 10px;
+  padding: 10px;
+  padding-top: 5px;
   margin: 5px;
-  min-width: 100px;
+  min-width: 170px;
   color: #550000;
-  cursor: pointer;
   overflow-y: scroll;
   overflow-x: hidden;
   animation-name: card;
@@ -38,8 +37,10 @@ input {
 .add-wine__div {
   position: relative;
   min-height: 200px;
-  min-width: 120px;
+  min-width: 170px;
   margin: 5px;
+  padding: 10px;
+  padding-top: 5px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -296,7 +297,15 @@ form input {
 }
 
 .card__img {
-  height: 200px;
+  width: 170px;
+}
+
+.edit-card__button {
+  background: transparent;
+  border: none;
+  margin: 0;
+  font-size: 1.3rem;
+  transform: rotate(90deg);
 }
 
 .add-wine__div button {
@@ -310,7 +319,6 @@ form input {
 }
 
 .card-header {
-  position: absolute;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -320,8 +328,12 @@ form input {
   top: 0;
 }
 
-.card-header--left-margin {
-  padding-left: 20px;
+.card__vivino-url {
+  padding: 0 10px;
+  word-wrap: break-word;
+  text-align: left;
+  text-decoration: none;
+  color: black;
 }
 
 .card-header__position--dark {
@@ -330,7 +342,6 @@ form input {
 
 .card-header__position {
   color: #707070;
-  margin-left: 10px;
 }
 
 .card__title {
@@ -340,17 +351,8 @@ form input {
   word-wrap: break-word;
 }
 
-.card__country {
-  width: 100%;
-  font-size: 1rem;
-  margin: 5px 0 5px 0;
-}
-
-.card__year {
-  font-size: 18px;
-  margin: 5px 0;
-  position: absolute;
-  bottom: 10px;
+.card__info-paragraph {
+  font-weight: bold;
 }
 
 @media (max-width: 700px) {
@@ -395,7 +397,7 @@ form input {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  margin-top: 200px;
+  margin-top: 50px;
 }
 
 .landing-page__link {
@@ -405,8 +407,8 @@ form input {
   border: 1px solid black;
   border-radius: 100px;
   margin-top: 40px;
-  font-weight: 900;
   text-decoration: none;
+  font-weight: bold;
   color: black;
 }
 

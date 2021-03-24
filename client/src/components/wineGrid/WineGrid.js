@@ -15,7 +15,7 @@ const WineGrid = props => {
         className="add-wine__div"
         id={`${i}:${j}`}
         style={{width: `calc(${cardWidth}% - 10px)`}}>
-        <div className='card-header card-header--left-margin'>
+        <div className='card-header'>
           <p className='card-header__position--dark'>{`${i + 1}:${j + 1}`}</p>
         </div>
         <button 
@@ -30,11 +30,12 @@ const WineGrid = props => {
     return (
       <Card
         key={`${i}:${j}`}
-        img={card.img}
-        rating={card.rating}
         title={card.title}
         country={card.country}
         year={card.year}
+        img={card.img}
+        rating={card.rating}
+        vivinoUrl={card.vivinoUrl}
         x={card.shelf}
         y={card.row}
         _id={card._id}

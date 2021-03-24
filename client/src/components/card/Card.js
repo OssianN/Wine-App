@@ -12,15 +12,18 @@ const Card = props => {
   };
 
   return (
-    <figure className='card' id={_id} onClick={handleEdit} style={{width: `calc(${props.cardWidth}% - 30px)`}}>
+    <figure className='card' id={_id} style={{width: `calc(${props.cardWidth}% - 30px)`}}>
       <header className='card-header'>
         <p className='card-header__position'>{`${props.x + 1}:${props.y + 1}`}</p>
+        <button className='edit-card__button' onClick={handleEdit}>&#8942;</button>
       </header>
       <img className='card__img' alt='wine bottle' src={img}></img>
-      <h1 className='card__title'>{props.title}</h1>
-      <h4 className='card__country'>{props.country}</h4>
-      <p>{props.rating}</p>
-      <footer className='card__year'>{props.year}</footer>
+      <a target="_blank" rel="noreferrer" href={props.vivinoUrl} className='card__vivino-url'>
+        <h1 className='card__title'>{props.title}</h1>
+        <p className='card__info-paragraph'>country: {props.country}</p>
+        <p className='card__info-paragraph'>year: {props.year}</p>
+        <p className='card__info-paragraph'>average rating: {props.rating}</p>
+      </a>
     </figure>
   );
 };

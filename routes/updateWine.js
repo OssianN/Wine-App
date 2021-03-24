@@ -3,13 +3,13 @@ const { getVivinoData } = require('../scraping/cheerio');
 
 const updateWine = async data => {
   const { title, country, year, _id } = data;
-  const [img, rating] = await getVivinoData(title);
+  const [img, rating, vivinoUrl] = await getVivinoData(title);
   const response = await WineDataBase.findOneAndUpdate(
     {
       _id,
     },
     {
-      title, country, year, img, rating,
+      title, country, year, img, rating, vivinoUrl,
     },
     {
       new: true,

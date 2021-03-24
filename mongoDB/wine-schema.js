@@ -9,6 +9,7 @@ const wineSchema = new Schema({
   row: { type: Number},
   img: { type: String },
   rating: {type: String },
+  vivinoUrl: {type: String },
 })
 
 const WineDataBase = mongoose.model("wines", wineSchema);

@@ -8,10 +8,20 @@ const MainHeader = ({ setSearchArr, searchValue, setSearchValue }) => {
     setSearchValue(e.target.value);
   }
 
+  const searchableValues = arr => (
+    arr[0] === 'title' ||
+    arr[0] === 'year' ||
+    arr[0] === 'country' ||
+    arr[0] === 'rating'
+    ? arr[1]
+    : ''
+  );
+
   useEffect(() => {
     const handleSearch = () => {
       const newArr = wineArr
-        ?.filter(card => Object.values(card)
+        ?.filter(card => Object.entries(card)
+          .map(searchableValues) 
           .join('')
           .toLowerCase()
           .match(searchValue
