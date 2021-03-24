@@ -19,7 +19,7 @@ const Login = props => {
     if (authError) {
       return setError(authError)
     }
-  }, [authError])
+  }, [authError]);
 
   useEffect(() => {
     if(auth) {
