@@ -3,6 +3,7 @@ const app = express();
 const wine = require('./routes');
 const passport = require("passport");
 const users = require("./routes/users");
+const path = require('path')
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 require('dotenv').config();
@@ -24,12 +25,8 @@ connection
 app.use(express.json());
 app.use(express.static('client/build'));
 app.use(passport.initialize());
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build'), (err) => {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
 })
 app.use('/wines', wine);
 app.use("/users", users);
