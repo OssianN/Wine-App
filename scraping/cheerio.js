@@ -8,7 +8,10 @@ const getPuppeteerPage = ( title, year ) => {
   puppeteer.use(StealthPlugin())
   return new Promise( ( resolve, reject ) => {
     puppeteer
-    .launch({ headless: true })
+    .launch({
+      headless: true,
+      args: ['--no-sandbox']
+    })
     .then((browser) => browser.newPage())
     .then((page) => page.goto(url)
       .then(() => page.content()))
