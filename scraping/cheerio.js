@@ -10,7 +10,12 @@ const getPuppeteerPage = ( title, year ) => {
     puppeteer
     .launch({
       headless: true,
-      args: ['--no-sandbox']
+      args: [
+        "--incognito",
+        "--no-sandbox",
+        "--single-process",
+        "--no-zygote"
+      ],
     })
     .then((browser) => browser.newPage())
     .then((page) => page.goto(url)
