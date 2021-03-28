@@ -48,7 +48,7 @@ const WineGrid = props => {
       }
     });
     if (!check && !props.searchValue) return target.push(createButton(i, j));
-  }
+  };
 
   const renderCards = (cardArr) => {
     const shelves = [];
