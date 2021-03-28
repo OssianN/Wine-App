@@ -7,6 +7,7 @@ const Card = ({ card, setShowEditModal, cardWidth }) => {
   const dispatch = useDispatch();
 
   const img = card.img ? card.img : wineSVG;
+  const priceToNumber = isNaN(card.price) ? false : Math.floor(parseInt(card.price));
 
   const handleEdit = async () => {
     dispatch(setPickedWine(card));
@@ -24,7 +25,7 @@ const Card = ({ card, setShowEditModal, cardWidth }) => {
         <h1 className='card__title'>{card.title}</h1>
         {card.country ? <p className='card__info-paragraph'>{card.country}</p> : ''}
         {card.year ? <p className='card__info-paragraph'>{card.year}</p> : ''}
-        {card.price ? <p className='card__info-paragraph'>Price: <br />{Math.floor(parseInt(card.price))}kr</p> : ''}
+        {priceToNumber ? <p className='card__info-paragraph'>Price: <br />{priceToNumber}kr</p> : ''}
         {card.rating ? <p className='card__info-paragraph'>Rating: <br />{card.rating}</p> : ''}
       </a>
     </figure>
