@@ -12,7 +12,7 @@ const Hamburger = ({ showSettings, setShowSettings }) => {
     showSettings
     ? setIsOpen('hamburger--open')
     : setIsOpen('hamburger--closed');
-  }, [showSettings])
+  }, [showSettings]);
 
   return (
     <>
