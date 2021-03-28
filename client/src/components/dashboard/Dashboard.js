@@ -31,7 +31,7 @@ const Dashboard = () => {
         const data = response.data;
         dispatch(setWineArr(data));
       } catch (err) {
-        console.error(err, 'getWines error')
+        console.error(err, 'getWines error');
       }
     }
     getWines();
