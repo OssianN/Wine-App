@@ -9,11 +9,9 @@ const { updateWine } = require('./updateWine');
 route.post('/getUserWines', async (req, res) => {
   const { wineList } = req.body;
   try {
-    if (wineList) {
-      const data = await getData(wineList);
-      return res.status(200).send(JSON.stringify(data));
-    }
-    res.status(200).json([]);
+    if (!wineList) return res.status(200).json([]);
+    const data = await getData(wineList);
+    return res.status(200).send(JSON.stringify(data));
   } catch (err) {
     console.error(err, 'IN GET /WINES');
     res.status(500).send('IN GET /WINES');

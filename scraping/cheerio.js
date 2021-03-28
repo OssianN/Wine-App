@@ -1,18 +1,50 @@
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
+const puppeteer = require('puppeteer-extra')
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 
-const getHtmlFromTitle = (title) => {
+const getPuppeteerPage = ( title, year ) => {
+  const url = `https://www.vivino.com/search/wines?q=${title}+${year}`;
+  puppeteer.use(StealthPlugin())
+  return new Promise( ( resolve, reject ) => {
+    puppeteer
+    .launch({ headless: true })
+    .then((browser) => browser.newPage())
+    .then((page) => page.goto(url)
+      .then(() => page.content()))
+    .then((html) => {
+      return resolve(html);
+    })
+    .catch((err) => {
+      console.error(err);
+      return reject(err);
+    });
+  });
+}
+
+const getHtmlFromTitle = (title, year) => {
   return new Promise(async ( resolve, reject ) => {
     try {
       const searchTitle = title.split(' ').join('+');
       const cleanSearchTitle = searchTitle.normalize('NFD').replace(/[\u0300-\u036f’]/g, "");
-      const vivinoSite = await fetch(`https://www.vivino.com/search/wines?q=${cleanSearchTitle}`);
-      const body = await vivinoSite.text();
-      resolve(cheerio.load(body));
+      const vivinoSite = await getPuppeteerPage(cleanSearchTitle, year);
+      resolve(cheerio.load(vivinoSite));
     } catch (err) {
       reject(err);
     }
   })
+}
+
+const getWineCountry = html => {
+  try {
+    const countryElement = html('.wine-card__region');
+    const firstCountry = countryElement[0];
+    const region = firstCountry.children[3].children[0].data;
+    const country = firstCountry.children[5].children[0].data;
+    return `${region}, ${country}`;
+  } catch (err) {
+    return null;
+  }
 }
 
 const getWineImg = html => {
@@ -20,7 +52,7 @@ const getWineImg = html => {
     const imgElement = html('.wine-card__image');
     const firstImg = imgElement[0];
     const attribute = firstImg.attribs.style;
-    return attribute?.match(/\/\/.*(?=\))/);
+    return attribute.match(/\/\/.*(?=\))/);
   } catch (err) {
     return null;
   }
@@ -35,6 +67,15 @@ const getWineRating = html => {
   }
 }
 
+const getWinePrice = async (html) => {
+  try {
+    const priceElement = html('.wine-price');
+    return priceElement[0].children[3].children[0].data;
+  } catch (err) {
+    return 'no rating found'
+  }
+}
+
 const getWinePage = async html => {
   const winePage = html('.wine-card__image-wrapper')[0].children[0].next.attribs.href;
   const vivinoLinkSite = await fetch(`https://www.vivino.com${winePage}`);
@@ -43,14 +84,16 @@ const getWinePage = async html => {
   return wineHtml('link')[32].attribs.href;
 }
 
-const getVivinoData = async title => {
+const getVivinoData = async ( title, year ) => {
   try {
-    const html = await getHtmlFromTitle(title);
-    const imgURL = getWineImg(html);
-    const rating = getWineRating(html);
+    const html = await getHtmlFromTitle(title, year);
+    const imgURL = await getWineImg(html);
+    const rating = await getWineRating(html);
+    const country = await getWineCountry(html);
+    const vivinoPrice = await getWinePrice(html)
     const vivinoUrl = await getWinePage(html);
   
-    return [imgURL[0], rating, vivinoUrl];
+    return [imgURL[0], rating, country, vivinoPrice, vivinoUrl];
   } catch (err) {
     return 'no data found';
   }

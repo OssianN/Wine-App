@@ -13,15 +13,9 @@ import Hamburger from '../header/Hamburger';
 import '../../App.css';
 
 const Dashboard = () => {
-  const [position, setPosition] = useState(null);
   const [updateOnPost, setUpdateOnPost] = useState(0);
   const [showAddModal, setShowAddModal] = useState({display: 'none'});
   const [showEditModal, setShowEditModal] = useState({display: 'none'});
-  const [pickedCard, setPickedCard] = useState({});
-  const [titleValue, setTitleValue] = useState('');
-  const [countryValue, setCountryValue] = useState('');
-  const [yearValue, setYearValue] = useState('');
-  const [checkedValue, setCheckedValue] = useState(false);
   const [searchArr, setSearchArr] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [showSettings, setShowSettings] = useState(false);
@@ -62,45 +56,24 @@ const Dashboard = () => {
           setSearchValue={setSearchValue} />
         <h1 className="header">This is the wine we whine about</h1>
         <AddWine
-          position={position}
           updateOnPost={updateOnPost}
           setUpdateOnPost={setUpdateOnPost}
           showAddModal={showAddModal}
           setShowAddModal={setShowAddModal}
-          titleValue={titleValue}
-          setTitleValue={setTitleValue}
-          countryValue={countryValue}
-          setCountryValue={setCountryValue}
-          yearValue={yearValue}
-          setYearValue={setYearValue}
-          checkedValue={checkedValue}
-          setCheckedValue={setCheckedValue}
         />
         <EditWine
           showEditModal={showEditModal}
           setShowEditModal={setShowEditModal}
           updateOnPost={updateOnPost}
           setUpdateOnPost={setUpdateOnPost}
-          position={position}
-          pickedCard={pickedCard}
-          titleValue={titleValue}
-          setTitleValue={setTitleValue}
-          countryValue={countryValue}
-          setCountryValue={setCountryValue}
-          yearValue={yearValue}
-          setYearValue={setYearValue}
-          checkedValue={checkedValue}
-          setCheckedValue={setCheckedValue}
         />
         <WineGrid
-          setPosition={setPosition}
           updateOnPost={updateOnPost}
           setUpdateOnPost={setUpdateOnPost}
           showAddModal={showAddModal}
           setShowAddModal={setShowAddModal}
           showEditModal={showEditModal}
           setShowEditModal={setShowEditModal}
-          setPickedCard={setPickedCard}
           searchArr={searchArr}
           searchValue={searchValue}
         />

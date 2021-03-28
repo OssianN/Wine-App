@@ -25,16 +25,6 @@ const EditWine = props => {
         method={editData}
         buttonName='Change Wine'
         show={props.setShowEditModal}
-        position={props.position}
-        pickedCard={props.pickedCard}
-        titleValue={props.titleValue}
-        setTitleValue={props.setTitleValue}
-        countryValue={props.countryValue}
-        setCountryValue={props.setCountryValue}
-        yearValue={props.yearValue}
-        setYearValue={props.setYearValue}
-        checkedValue={props.checkedValue}
-        setCheckedValue={props.setCheckedValue}
         setShowEditModal={props.setShowEditModal}
       />
     </div>

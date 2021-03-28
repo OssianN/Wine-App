@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteWine } from '../../actions/wineActions';
 import axios from 'axios';
 
-const DeleteButton = ({ buttonName, areYouSure, setAreYouSure, pickedCard, setShowEditModal }) => {
+const DeleteButton = ({ buttonName, areYouSure, setAreYouSure, setShowEditModal, saveOrClearForm }) => {
   const [showDelete, setShowDelete] = useState('none');
 
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.auth);
-  const _id = pickedCard?._id;
+  const { _id } = useSelector(state => state.pickedWine);
 
   const handleShowDelete = () => {
     if (buttonName === 'Change Wine') {
@@ -25,6 +25,7 @@ const DeleteButton = ({ buttonName, areYouSure, setAreYouSure, pickedCard, setSh
       handleAreYouSure();
       await axios.delete('/wines', {data: { _id }});
       await axios.delete('/users/deleteWine', {data: { email: user.email, _id }});
+      saveOrClearForm();
     } catch (err) {
       alert('A server error occured.', err);
       console.error(err)

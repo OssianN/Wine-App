@@ -1,71 +1,62 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import DeleteButton from './DeleteButton';
+import { setPickedWine } from '../../actions/setPickedWine';
+import { setKeepForm } from '../../actions/setKeepForm';
 
 const WineForm = (props) => {
-  const [areYouSure, setAreYouSure] = useState(false);
-  const { title, country, year, _id } = props.pickedCard || '';
-
+  const dispatch = useDispatch();
   const titleInput = useRef(null);
-  const countryInput = useRef(null);
   const yearInput = useRef(null);
-  const keepForm = useRef(null);
+  const [areYouSure, setAreYouSure] = useState(false);
+  const pickedWine = useSelector(state => state.pickedWine)
+  const keepForm = useSelector(state => state.keepForm);
+  const [inputValue, setInputValue] = useState({ ...pickedWine })
 
-  const preFillForm = () => {
-    if (title || country || year) {
-      titleInput.current.value = title;
-      countryInput.current.value = country;
-      yearInput.current.value = year;
-    } else {
-      return false;
+  const isValidateInput = () => {
+    if(!inputValue.title) {
+      return { isValid: false, input: titleInput };
     }
-  };
-  
-  const validate = () => {
-    if (isNaN(yearInput.current.value)) {
-      return false;
+    if (isNaN(inputValue.year)) {
+      return { isValid: false, input: yearInput };
     };
-    return true;
-  };
-
-  const setValue = () => {
-    titleInput.current.value = props.titleValue;
-    countryInput.current.value = props.countryValue;
-    yearInput.current.value = props.yearValue;
-    keepForm.current.checked = props.checkedValue;
+    return { isValid: true };
   };
 
   const saveOrClearForm = () => {
-    if (!keepForm.current.checked) {
-      props.setTitleValue('');
-      props.setCountryValue('');
-      props.setYearValue('');
-      props.setCheckedValue(keepForm.current.checked);
-    } else {
-      props.setTitleValue(titleInput.current.value);
-      props.setCountryValue(countryInput.current.value);
-      props.setYearValue(yearInput.current.value);
-      props.setCheckedValue(keepForm.current.checked);
+    if (!keepForm) {
+      const initialState = { title: '', year: '', price: '' }
+      setInputValue(initialState);
+      dispatch(setPickedWine(initialState))
     }
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (validate()) {
-      const data = {};
-      data.title = e.target.children[2].value;
-      data.country = e.target.children[4].value;
-      data.year = e.target.children[6].value;
-      data.shelf = props.position[0];
-      data.row = props.position[1];
-      data._id = _id;
-      props.method(data);
-      props.show({display: 'none'});
-      setAreYouSure(false);
-      saveOrClearForm();
-    } else {
-      alert('The year must be entered as a number.')
-    };
+    const { isValid, input } = isValidateInput();
+    if (!isValid) {
+      return input.current.focus();
+    }
+    props.method({
+      ...pickedWine,
+      ...inputValue
+    });
+    props.show({display: 'none'});
+    setAreYouSure(false);
+    saveOrClearForm();
   };
+
+  const handleInputValueChange = e => {
+    const name = e.target.name;
+    setInputValue({
+      ...inputValue,
+      [name]: e.target.value,
+    })
+  }
+
+  const handleCheckedKeepForm = () => {
+    dispatch(setKeepForm(!keepForm));
+  }
 
   const cancel = () => {
     saveOrClearForm();
@@ -77,21 +68,21 @@ const WineForm = (props) => {
     titleInput.current.focus();
   };
 
+  useEffect(() => setInputValue({ ...pickedWine }), [pickedWine])
+
   useEffect(() => {
-    setValue();
-    preFillForm();
     focus();
-  });
+  }, []);
 
   return (
     <form onSubmit={handleSubmit} className='wineForm'>
       <button type='button' onClick={cancel} className='cancelButton' >&#10005;</button>
-      <label htmlFor='newWineName'>Wine Name</label>
-      <input type='text' className="newWineName" ref={titleInput} />
-      <label htmlFor='newWineCountry'>Country</label>
-      <input type='text' className="newWineCountry" ref={countryInput} />
+      <label htmlFor='newWineName'>Name</label>
+      <input ref={titleInput} value={inputValue.title} onChange={handleInputValueChange} name='title' type='text' />
       <label htmlFor='newWineDesc'>Year</label>
-      <input type='text' className="newWineDesc" ref={yearInput} />
+      <input ref={yearInput} value={inputValue.year} onChange={handleInputValueChange} name='year' type='text' />
+      <label htmlFor='newWineCountry'>Price</label>
+      <input value={inputValue.price} onChange={handleInputValueChange} name='price' type='text' />
       <button type='submit' className="btn--enforced btn--form-submit" style={{display: areYouSure ? 'none' : 'block'}}>
         {props.buttonName}
       </button>
@@ -100,10 +91,10 @@ const WineForm = (props) => {
         areYouSure={areYouSure}
         setAreYouSure={setAreYouSure}
         setShowEditModal={props.setShowEditModal}
-        pickedCard={props.pickedCard} />
-      <div className='saveFormContainer'>
-        <input ref={keepForm} defaultChecked={props.checkedValue} type='checkbox' className='saveForm'></input>
-        <label htmlFor='saveForm'>Keep Info</label>
+        saveOrClearForm={saveOrClearForm} />
+      <div className='save-form'>
+        <input value={keepForm} onChange={handleCheckedKeepForm} type='checkbox' className={`save-form__checkbox ${keepForm}`}></input>
+        <label htmlFor='saveForm'>keep form info</label>
       </div>
     </form>
   )

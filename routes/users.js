@@ -116,27 +116,59 @@ router.post('/addWine', async (req, res) => {
     const { email, _id } = req.body;
     const user = await UserDataBase.findOne({ email });
     const wineList = await user.wineList;
-    if (!wineList.some(wine => wine === _id)) {
-      wineList.push(_id);
-      await user.updateOne({ wineList });
+    if (wineList.some(wine => wine === _id)) return res.status(200).send();
+
+    wineList.push(_id);
+    await user.updateOne({ wineList });
+    const payload = {
+      ...user._doc,
+      wineList
     }
-    res
-      .status(203)
-      .json(_id);
+    jwt.sign(
+      payload,
+      keys.secretOrKey,
+      {
+        expiresIn: 31556926, // 1 year in seconds
+      },
+      (err, token) => {
+        res.json({
+          success: true,
+          token: "Bearer " + token,
+        });
+      }
+    );
   } catch (err) {
-    res
-      .status(500)
-      .json({ err })
+    res.status(500).send(err);
   }
 });
 
 router.delete('/deleteWine', async (req, res) => {
-  const { _id, email } = req.body;
-  const user = await UserDataBase.findOne({ email });
-  const wineList = user.wineList;
-  const newList = wineList.filter(wine => wine !== _id);
-  await user.updateOne({ wineList: newList });
-  res.status(200).send();
+  try {
+    const { _id, email } = req.body;
+    const user = await UserDataBase.findOne({ email });
+    const wineList = await user.wineList;
+    const newList = wineList.filter(wine => wine !== _id);
+    await user.updateOne({ wineList: newList });
+    const payload = {
+      ...user._doc,
+      wineList: newList,
+    }
+    jwt.sign(
+      payload,
+      keys.secretOrKey,
+      {
+        expiresIn: 31556926, // 1 year in seconds
+      },
+      (err, token) => {
+        res.json({
+          success: true,
+          token: "Bearer " + token,
+        });
+      }
+    );
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 module.exports = router;

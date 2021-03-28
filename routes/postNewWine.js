@@ -2,16 +2,18 @@ const WineDataBase = require('../mongoDB/wine-schema');
 const { getVivinoData } = require('../scraping/cheerio');
 
 const postNewWine = async data => {
-  const { title, country, year, shelf, row } = data;
-  const [img, rating, vivinoUrl] = await getVivinoData(title);
+  const { title, year, shelf, column } = data;
+  const [img, rating, country, vivinoPrice, vivinoUrl] = await getVivinoData(title, year);
+  const usePrice = data.price || vivinoPrice;
   const wine = new WineDataBase({
     title,
     country,
     year,
     shelf,
-    row,
+    column,
     img,
     rating,
+    price: usePrice,
     vivinoUrl,
   })
   const response = await wine.save();

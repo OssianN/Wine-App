@@ -2,14 +2,15 @@ const WineDataBase = require('../mongoDB/wine-schema');
 const { getVivinoData } = require('../scraping/cheerio');
 
 const updateWine = async data => {
-  const { title, country, year, _id } = data;
-  const [img, rating, vivinoUrl] = await getVivinoData(title);
+  const { title, year, _id } = data;
+  const [img, rating, country, vivinoPrice, vivinoUrl] = await getVivinoData(title, year);
+  const usePrice = data.price ?? vivinoPrice ?? '-';
   const response = await WineDataBase.findOneAndUpdate(
     {
       _id,
     },
     {
-      title, country, year, img, rating, vivinoUrl,
+      title, country, year, price: usePrice, img, rating, vivinoUrl,
     },
     {
       new: true,

@@ -1,7 +1,7 @@
 import {
   SET_WINE_ARR,
   UPDATE_WINE,
-  DELETE_WINE
+  DELETE_WINE,
 } from "../actions/types";
 
 export const setWineArr = cardArr => ({ type: SET_WINE_ARR, payload: cardArr })

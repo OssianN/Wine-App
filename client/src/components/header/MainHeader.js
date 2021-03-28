@@ -12,10 +12,13 @@ const MainHeader = ({ setSearchArr, searchValue, setSearchValue }) => {
     arr[0] === 'title' ||
     arr[0] === 'year' ||
     arr[0] === 'country' ||
+    arr[0] === 'price' ||
     arr[0] === 'rating'
     ? arr[1]
     : ''
   );
+
+  const searchNumber = string => parseInt(string.match(/[0-9]+/)?.[0]);
 
   useEffect(() => {
     const handleSearch = () => {
@@ -30,6 +33,26 @@ const MainHeader = ({ setSearchArr, searchValue, setSearchValue }) => {
     };
     handleSearch();
   }, [searchValue, setSearchArr, wineArr]);
+
+  useEffect(() => {
+    const filterRating = () => {
+      if(searchValue?.match(/rating/i)) {
+        const ratingMatch = wineArr?.filter(wine => parseInt(wine.rating) >= searchNumber(searchValue))
+        setSearchArr(ratingMatch)
+      }
+    }
+    filterRating();
+  }, [searchValue, setSearchArr, wineArr])
+
+  useEffect(() => {
+    const filterPrice = () => {
+      if(searchValue?.match(/kr/)) {
+        const numberMatch = wineArr?.filter(wine => parseInt(wine.price) <= searchNumber(searchValue))
+        setSearchArr(numberMatch)
+      }
+    }
+    filterPrice();
+  }, [searchValue, setSearchArr, wineArr])
 
   return (
     <div className="main-header">

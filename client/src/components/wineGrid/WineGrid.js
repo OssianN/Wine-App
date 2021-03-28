@@ -1,8 +1,10 @@
 import React from 'react';
 import Card from '../card/Card.js';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPickedWine } from '../../actions/setPickedWine';
 
 const WineGrid = props => {
+  const dispatch = useDispatch();
   const wineArr = useSelector(state => state.wineArr);
   const { user } = useSelector(state => state.auth);
   const cardArr = props.searchValue ? props.searchArr : wineArr;
@@ -26,26 +28,13 @@ const WineGrid = props => {
     );
   };
 
-  const createCard = (card, i, j) => {
+  const createCard = (card) => {
     return (
       <Card
-        key={`${i}:${j}`}
-        title={card.title}
-        country={card.country}
-        year={card.year}
-        img={card.img}
-        rating={card.rating}
-        vivinoUrl={card.vivinoUrl}
-        x={card.shelf}
-        y={card.row}
-        _id={card._id}
+        key={card._id}
+        card={card}
         cardWidth={cardWidth}
-        setPosition={props.setPosition}
-        updateOnPost={props.updateOnPost}
-        setUpdateOnPost={props.setUpdateOnPost}
         setShowEditModal={props.setShowEditModal}
-        showEditModal={props.showEditModal}
-        setPickedCard={props.setPickedCard}
       />
     );
   };
@@ -53,9 +42,9 @@ const WineGrid = props => {
   const orderCards = (cardArr, target, i, j) => {
     let check = false;
     cardArr?.forEach( card => {
-      if(`${card.shelf}:${card.row}` === `${i}:${j}`) {
+      if(`${card.shelf}:${card.column}` === `${i}:${j}`) {
         check = true;
-        target.push(createCard(card, i, j));
+        target.push(createCard(card));
       }
     });
     if (!check && !props.searchValue) return target.push(createButton(i, j));
@@ -81,13 +70,15 @@ const WineGrid = props => {
 
   const breakOutXY = string => {
     const arr = string.split(':');
-    return arr;
+    return {
+      shelf: arr[0],
+      column: arr[1],
+    };
   };
 
   const handleClick = e => {
     props.setShowAddModal({display: 'flex'});
-    props.setPosition(breakOutXY(e.target.parentElement.id));
-    props.setPickedCard({});
+    dispatch(setPickedWine(breakOutXY(e.target.parentElement.id)));
   };
 
   return (
