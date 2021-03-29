@@ -7,7 +7,7 @@ const Card = ({ card, setShowEditModal, cardWidth }) => {
   const dispatch = useDispatch();
 
   const img = card.img ? card.img : wineSVG;
-  const priceToNumber = isNaN(card.price) ? card.price : `${Math.floor(parseInt(card.price))}`;
+  const priceToNumber = isNaN(card.price) ? card.price : `${Math.floor(parseInt(card.price))}kr`;
 
   const handleEdit = async () => {
     dispatch(setPickedWine(card));
