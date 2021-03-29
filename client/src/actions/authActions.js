@@ -11,6 +11,10 @@ export const registerUser = (userData, history) => async dispatch => {
   try {
     await axios.post('/users/register', userData);
     history.push('/login');
+    dispatch({
+      type: GET_ERRORS,
+      payload: {}
+    })
   } catch (err) {
     dispatch({
       type: GET_ERRORS,

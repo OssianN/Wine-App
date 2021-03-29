@@ -33,7 +33,7 @@ const Register = props => {
       history.push('/dashboard')
     }
   });
-  console.log(authError)
+
   return (
     <>
     <h1 className="header">This is the wine we whine about</h1>
