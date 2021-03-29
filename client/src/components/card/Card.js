@@ -15,7 +15,7 @@ const Card = ({ card, setShowEditModal, cardWidth }) => {
   };
 
   return (
-    <figure className='card' id={card._id} style={{width: `calc(${cardWidth}% - 20px)`}}>
+    <figure className='card' id={card._id}>
       <header className='card-header'>
         <p className='card-header__position'>{`${card.shelf + 1}:${card.column + 1}`}</p>
         <button className='edit-card__button' onClick={handleEdit}>&#8942;</button>
