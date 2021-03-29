@@ -38,14 +38,14 @@ const Login = props => {
     <>
     <h1 className="header">This is the wine we whine about</h1>
     <form onSubmit={handleSubmit} className='auth-form'>
-      {authError.email ? <p>{ authError.email }</p> : <p></p>}
+      {authError.email ? <p className='form__error-p'>{ authError.email }</p> : <p></p>}
       <input
         className='auth-form__input'
         onChange={handleChange} name='email'
         value={inputValue.email}
         placeholder='email'>
       </input>
-      {authError.password ? <p>{ authError.password }</p> : <p></p>}
+      {authError.password ? <p className='form__error-p'>{ authError.password }</p> : <p></p>}
       <input
         className='auth-form__input'
         onChange={handleChange}

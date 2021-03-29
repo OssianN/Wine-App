@@ -44,7 +44,7 @@ const Register = props => {
         name='name' value={inputValue.name}
         placeholder='name'>
       </input>
-      {authError.email ? <p>{ authError.email }</p> : ''}
+      {authError.email ? <p className='form__error-p'>{ authError.email }</p> : ''}
       <input
         className='auth-form__input'
         onChange={handleChange}
@@ -52,7 +52,7 @@ const Register = props => {
         value={inputValue.email}
         placeholder='email'>
       </input>
-      {authError.password ? <p>{ authError.password }</p> : ''}
+      {authError.password ? <p className='form__error-p'>{ authError.password }</p> : ''}
       <input
         className='auth-form__input'
         onChange={handleChange}
@@ -61,7 +61,7 @@ const Register = props => {
         placeholder='password'
         type='password'>
       </input>
-      {authError.password2 ? <p>{ authError.password2 }</p> : ''}
+      {authError.password2 ? <p className='form__error-p'>{ authError.password2 }</p> : ''}
       <input
         className='auth-form__input'
         onChange={handleChange}
