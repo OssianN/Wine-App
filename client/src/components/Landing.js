@@ -20,7 +20,7 @@ const Landing = () => {
         <Link to='/login' className='landing-page__link'>Log in</Link>
       </div>
     </div>
-  )
+  );
 }
 
 export default Landing;
