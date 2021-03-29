@@ -6,6 +6,7 @@ import { setPickedWine } from '../../actions/setPickedWine';
 const WineGrid = props => {
   const dispatch = useDispatch();
   const wineArr = useSelector(state => state.wineArr);
+  const pickedWine = useSelector(state => state.pickedWine);
   const { user } = useSelector(state => state.auth);
   const cardArr = props.searchValue ? props.searchArr : wineArr;
   const cardWidth = (100 / user.columns);
@@ -71,14 +72,14 @@ const WineGrid = props => {
   const breakOutXY = string => {
     const arr = string.split(':');
     return {
-      shelf: arr[0],
-      column: arr[1],
+      shelf: parseInt(arr[0]),
+      column: parseInt(arr[1]),
     };
   };
 
   const handleClick = e => {
     props.setShowAddModal({display: 'flex'});
-    dispatch(setPickedWine(breakOutXY(e.target.parentElement.id)));
+    dispatch(setPickedWine({...pickedWine, ...breakOutXY(e.target.parentElement.id)}));
   };
 
   return (

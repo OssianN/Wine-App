@@ -10,8 +10,12 @@ const WineForm = (props) => {
   const yearInput = useRef(null);
   const [areYouSure, setAreYouSure] = useState(false);
   const pickedWine = useSelector(state => state.pickedWine)
+  const { column, shelf } = pickedWine;
   const keepForm = useSelector(state => state.keepForm);
-  const [inputValue, setInputValue] = useState({ ...pickedWine })
+  const initialState = { title: '', year: '', price: '' }
+  const [inputValue, setInputValue] = useState(initialState)
+
+  pickedWine.price = isNaN(pickedWine.price) ? '' : pickedWine.price;
 
   const isValidateInput = () => {
     if(!inputValue.title) {
@@ -25,7 +29,6 @@ const WineForm = (props) => {
 
   const saveOrClearForm = () => {
     if (!keepForm) {
-      const initialState = { title: '', year: '', price: '' }
       setInputValue(initialState);
       dispatch(setPickedWine(initialState))
     }
@@ -39,7 +42,9 @@ const WineForm = (props) => {
     }
     props.method({
       ...pickedWine,
-      ...inputValue
+      ...inputValue,
+      column,
+      shelf,
     });
     props.show({display: 'none'});
     setAreYouSure(false);
@@ -78,11 +83,11 @@ const WineForm = (props) => {
     <form onSubmit={handleSubmit} className='wineForm'>
       <button type='button' onClick={cancel} className='cancelButton' >&#10005;</button>
       <label htmlFor='newWineName'>Name</label>
-      <input ref={titleInput} value={inputValue.title} onChange={handleInputValueChange} name='title' type='text' />
+      <input ref={titleInput} value={inputValue.title || ''} onChange={handleInputValueChange} name='title' type='text' />
       <label htmlFor='newWineDesc'>Year</label>
-      <input ref={yearInput} value={inputValue.year} onChange={handleInputValueChange} name='year' type='text' />
+      <input ref={yearInput} value={inputValue.year || ''} onChange={handleInputValueChange} name='year' type='text' />
       <label htmlFor='newWineCountry'>Price</label>
-      <input value={inputValue.price} onChange={handleInputValueChange} name='price' type='text' />
+      <input value={inputValue.price || ''} onChange={handleInputValueChange} name='price' type='text' />
       <button type='submit' className="btn--enforced btn--form-submit" style={{display: areYouSure ? 'none' : 'block'}}>
         {props.buttonName}
       </button>

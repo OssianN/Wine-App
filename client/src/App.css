@@ -25,7 +25,9 @@ input, button {
   padding: 10px;
   padding-top: 5px;
   margin: 5px;
+  max-width: 150px;
   min-width: 100px;
+  flex-grow: 1;
   color: #550000;
   animation-name: card;
   animation-duration: 1s;
