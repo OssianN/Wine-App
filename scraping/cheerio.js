@@ -79,9 +79,10 @@ const getWinePrice = async (html) => {
   try {
     const priceElement = html('.wine-price');
     const price = priceElement[0].children[3].children[0].data;
-    return (parseInt(price) * 12).toString(); //convert to SEK
+    const SEK = !isNaN(price) ? (parseInt(price) * 12).toString() : '-'; //convert to SEK if number
+    return SEK;
   } catch (err) {
-    return 'no rating found'
+    return 'no price found';
   }
 }
 
