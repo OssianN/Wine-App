@@ -9,3 +9,7 @@ button {
   outline: none;
   cursor: pointer;
 }
+
+input {
+  background-clip: padding-box !important
+}
