@@ -78,7 +78,7 @@ const Dashboard = () => {
           searchValue={searchValue}
         />
       </div>
-    );
+    )
   }
 }
 
