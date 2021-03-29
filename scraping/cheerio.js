@@ -78,7 +78,8 @@ const getWineRating = html => {
 const getWinePrice = async (html) => {
   try {
     const priceElement = html('.wine-price');
-    return priceElement[0].children[3].children[0].data;
+    const price = priceElement[0].children[3].children[0].data;
+    return (parseInt(price) * 11.5).toString(); //convert to SEK
   } catch (err) {
     return 'no rating found'
   }
