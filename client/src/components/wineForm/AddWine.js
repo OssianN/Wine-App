@@ -14,7 +14,6 @@ const AddWine = props => {
 
   const postData = async (data) => {
     try {
-      console.log(data)
       dispatch(setWineArr([...wineArr, { shelf, column, country: 'loading...'}]));
       const newWine = await axios.post('/wines', data);
       dispatch(setWineArr([...wineArr, newWine.data]));
