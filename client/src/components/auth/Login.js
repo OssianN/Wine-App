@@ -9,17 +9,10 @@ const Login = props => {
     email: '',
     password: '',
   });
-  const [error, setError ] = useState(false)
   const history = useHistory();
   const auth = useSelector(state => state.auth.isAuthenticated)
   const authError = useSelector(state => state.errorState);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (authError) {
-      return setError(authError);
-    }
-  }, [authError]);
 
   useEffect(() => {
     if(auth) {
@@ -45,14 +38,14 @@ const Login = props => {
     <>
     <h1 className="header">This is the wine we whine about</h1>
     <form onSubmit={handleSubmit} className='auth-form'>
-      {error.email ? <p>{ error.email }</p> : <p></p>}
+      {authError.email ? <p>{ authError.email }</p> : <p></p>}
       <input
         className='auth-form__input'
         onChange={handleChange} name='email'
         value={inputValue.email}
         placeholder='email'>
       </input>
-      {error.password ? <p>{ error.password }</p> : <p></p>}
+      {authError.password ? <p>{ authError.password }</p> : <p></p>}
       <input
         className='auth-form__input'
         onChange={handleChange}

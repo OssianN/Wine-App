@@ -44,7 +44,7 @@ const Dashboard = () => {
   });
 
   if (!user.columns || !user.shelves) {
-    return <InitialSetup />
+    return <InitialSetup setShowSettings={setShowSettings} />
   } else {
     return (
       <div className="dashboard">

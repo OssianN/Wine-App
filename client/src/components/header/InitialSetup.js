@@ -26,7 +26,6 @@ const InitialSetup = ({ setShowSettings }) => {
       setError(true)
     } else {
       setError(false)
-      setShowSettings(false);
       const updatedUser = await axios.post('/users/addStorage',
       {
         columns: inputValue.columns,
@@ -34,6 +33,7 @@ const InitialSetup = ({ setShowSettings }) => {
         email: user.email
       })
       const { token } = updatedUser.data;
+      setShowSettings(false);
       dispatch(setUserStorage(token))
     }
   }

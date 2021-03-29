@@ -11,7 +11,9 @@ const Register = props => {
     password2: '',
   });
   const auth = useSelector(state => state.auth.isAuthenticated)
+  const authError = useSelector(state => state.errorState);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleChange = e => {
     const name = e.target.name;
@@ -20,8 +22,6 @@ const Register = props => {
       [name]: e.target.value,
     })
   }
-
-  const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -33,7 +33,7 @@ const Register = props => {
       history.push('/dashboard')
     }
   });
-
+  console.log(authError)
   return (
     <>
     <h1 className="header">This is the wine we whine about</h1>
@@ -44,6 +44,7 @@ const Register = props => {
         name='name' value={inputValue.name}
         placeholder='name'>
       </input>
+      {authError.email ? <p>{ authError.email }</p> : ''}
       <input
         className='auth-form__input'
         onChange={handleChange}
@@ -51,6 +52,7 @@ const Register = props => {
         value={inputValue.email}
         placeholder='email'>
       </input>
+      {authError.password ? <p>{ authError.password }</p> : ''}
       <input
         className='auth-form__input'
         onChange={handleChange}
@@ -59,6 +61,7 @@ const Register = props => {
         placeholder='password'
         type='password'>
       </input>
+      {authError.password2 ? <p>{ authError.password2 }</p> : ''}
       <input
         className='auth-form__input'
         onChange={handleChange}
