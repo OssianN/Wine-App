@@ -5,29 +5,29 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 
 const getPuppeteerPage = ( title, year ) => {
   const url = `https://www.vivino.com/search/wines?q=${title}+${year}`;
-  puppeteer.use(StealthPlugin())
-  return new Promise( ( resolve, reject ) => {
-    puppeteer
-    .launch({
-      headless: true,
-      args: [
-        "--incognito",
-        "--no-sandbox",
-        "--single-process",
-        "--no-zygote"
-      ],
-    })
-    .then((browser) => browser.newPage())
-    .then((page) => page.goto(url)
-      .then(() => page.content()))
-    .then((html) => {
+  puppeteer.use(StealthPlugin());
+  return new Promise( async ( resolve, reject ) => {
+    try {
+      const launch =  await puppeteer
+      .launch({
+        headless: true,
+        args: [
+          "--incognito",
+          "--no-sandbox",
+          "--single-process",
+          "--no-zygote"
+        ],
+      })
+      const browser = await launch.newPage();
+      await browser.goto(url);
+      const html = await browser.content();
+      await browser.close();
       return resolve(html);
-    })
-    .catch((err) => {
+    } catch (err) {
       console.error(err);
       return reject(err);
-    });
-  });
+    }
+  })
 }
 
 const getHtmlFromTitle = (title, year) => {
@@ -79,7 +79,7 @@ const getWinePrice = async (html) => {
   try {
     const priceElement = html('.wine-price');
     const price = priceElement[0].children[3].children[0].data;
-    const SEK = !isNaN(price) ? (parseInt(price) * 12).toString() : '-'; //convert to SEK if number
+    const SEK = isNaN(parseInt(price)) ? 'no price found' : (parseInt(price) * 12).toString(); //convert to SEK if number
     return SEK;
   } catch (err) {
     return 'no price found';
