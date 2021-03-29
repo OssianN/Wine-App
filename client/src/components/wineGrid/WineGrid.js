@@ -16,7 +16,8 @@ const WineGrid = props => {
       <div 
         key={`${i}:${j}`}
         className="add-wine__div"
-        id={`${i}:${j}`} >
+        id={`${i}:${j}`}
+        style={{width: `calc(${cardWidth}% - 20px)`}} >
         <div className='card-header'>
           <p className='card-header__position--dark'>{`${i + 1}:${j + 1}`}</p>
         </div>
@@ -33,6 +34,7 @@ const WineGrid = props => {
       <Card
         key={card._id}
         card={card}
+        cardWidth={cardWidth}
         setShowEditModal={props.setShowEditModal}
       />
     );
