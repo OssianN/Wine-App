@@ -2,19 +2,21 @@ html, body, #root {
   margin: 0;
   min-height: 100vh;
   background-color: #fcfcfc;
+  font-weight: 100;
 }
 
 .App, .dashboard {
   width: 100%;
   min-height: 100vh;
   text-align: center;
-  font-family: Montserrat, sans-serif;
+  font-family: Raleway, sans-serif;
 }
 
 input, button {
   outline: none;
   font-family: Montserrat, sans-serif;
   font-weight: bold;
+  text-transform: capitalize;
 }
 
 .card,
@@ -40,6 +42,15 @@ input, button {
   min-height: 200px;
   align-items: center;
   cursor: pointer;
+}
+
+.card__separaion-span {
+  display: block;
+  height: 1px;
+  border-radius: 10px;
+  width: 70%;
+  margin: 0 auto;
+  background-color: grey;
 }
 
 .wineGrid {
@@ -201,6 +212,7 @@ form input {
   border: none;
   border-radius: 100px;
   font-size: 1rem;
+  text-transform: capitalize;
   color: white;
 }
 
@@ -212,6 +224,7 @@ form input {
   margin-top: 40px;
   width: 155px;
   height: 50px;
+  text-transform: capitalize;
 }
 
 .btn--form-delete {
@@ -220,6 +233,7 @@ form input {
   color: black;
   width: 155px;
   height: 50px;
+  text-transform: capitalize;
 }
 
 .delete-button-container {
@@ -242,6 +256,7 @@ form input {
   height: 50px;
   width: 100px;
   grid-area: b;
+  text-transform: capitalize;
 }
 
 .btn-delete--no {
@@ -250,6 +265,7 @@ form input {
   justify-self: flex-start;
   grid-area: c;
   font-size: 1rem;
+  text-transform: capitalize;
 }
 
 .cancelButton {
@@ -300,7 +316,7 @@ form input {
 }
 
 .card-header {
-  font-weight: 700;
+  font-weight: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -310,12 +326,27 @@ form input {
   top: 0;
 }
 
+.card__text-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
 .card__vivino-url {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 0 10px;
+  height: 100%;
   word-wrap: break-word;
-  text-align: left;
+  text-align: center;
   text-decoration: none;
-  color: black;
+  color: #414141;
+}
+
+.card__info-container {
+  margin-top: 20px;
 }
 
 .card-header__position--dark {
@@ -328,13 +359,25 @@ form input {
 
 .card__title {
   width: 100%;
+  margin-top: 40px;
   font-size: 1.2rem;
+  line-height: 1.2rem;
   flex-wrap: wrap;
   word-wrap: break-word;
+  color: #6f6f6f;
+}
+
+.card__country-paragraph {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin: 5px;
+  font-style: italic;
 }
 
 .card__info-paragraph {
-  margin: 10px 0;
+  margin: 20px 10px;
+  font-size: .9rem;
+  font-weight: 400;
 }
 
 .removeButton:hover {
@@ -354,6 +397,7 @@ form input {
   border-radius: 20px;
   background-color: white;
   border: 1px solid black;
+  text-transform: capitalize;
 }
 
 .account-name-header {

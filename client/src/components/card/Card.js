@@ -7,7 +7,7 @@ const Card = ({ card, setShowEditModal, cardWidth }) => {
   const dispatch = useDispatch();
 
   const img = card.img ? card.img : wineSVG;
-  const priceToNumber = !card.price || isNaN(card.price) ? '-' : `${Math.floor(parseInt(card.price))}kr`;
+  const priceToNumber = !card.price || isNaN(card.price) ? '-' : `${Math.floor(parseInt(card.price))} kr`;
 
   const handleEdit = async () => {
     dispatch(setPickedWine(card));
@@ -21,13 +21,18 @@ const Card = ({ card, setShowEditModal, cardWidth }) => {
         <button className='edit-card__button' onClick={handleEdit}>&#8942;</button>
       </header>
       <img className='card__img' alt='wine bottle' src={img}></img>
-      <a target="_blank" rel="noreferrer" href={card.vivinoUrl} className='card__vivino-url'>
-        <h1 className='card__title'>{card.title}</h1>
-        {card.country ? <p className='card__info-paragraph'>{card.country}</p> : ''}
-        {card.year ? <p className='card__info-paragraph'>{card.year}</p> : ''}
-        {priceToNumber ? <p className='card__info-paragraph'>Price: <br />{priceToNumber}</p> : ''}
-        {card.rating ? <p className='card__info-paragraph'>Rating: <br />{card.rating}</p> : ''}
-      </a>
+      <div className='card__text-container'>
+        <a target="_blank" rel="noreferrer" href={card.vivinoUrl} className='card__vivino-url'>
+          <h1 className='card__title'>{card.title}</h1>
+          {card.country ? <p className='card__country-paragraph'>{card.country}</p> : ''}
+        </a>
+        <div className='card__info-container'>
+          <span className='card__separaion-span'></span>
+          {card.year ? <p className='card__info-paragraph'>{card.year}</p> : ''}
+          {priceToNumber ? <p className='card__info-paragraph'>{priceToNumber}</p> : ''}
+          {card.rating ? <p className='card__info-paragraph'>{card.rating}&#9733;</p> : ''}
+        </div>
+      </div>
     </figure>
   );
 };
