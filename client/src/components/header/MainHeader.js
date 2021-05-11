@@ -46,7 +46,7 @@ const MainHeader = ({ setSearchArr, searchValue, setSearchValue }) => {
 
   useEffect(() => {
     const filterPrice = () => {
-      if(searchValue?.match(/kr/)) {
+      if(searchValue?.match(/kr/i)) {
         const numberMatch = wineArr?.filter(wine => parseInt(wine.price) <= searchNumber(searchValue))
         setSearchArr(numberMatch)
       }

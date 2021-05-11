@@ -1,42 +1,44 @@
 const cheerio = require('cheerio');
 const fetch = require('node-fetch');
-const puppeteer = require('puppeteer-extra')
+// const puppeteer = require('puppeteer-extra')
 const StealthPlugin = require('puppeteer-extra-plugin-stealth')
 
-const getPuppeteerPage = ( title, year ) => {
-  const url = `https://www.vivino.com/search/wines?q=${title}+${year}`;
-  puppeteer.use(StealthPlugin());
-  return new Promise( async ( resolve, reject ) => {
-    try {
-      const launch =  await puppeteer
-      .launch({
-        headless: true,
-        args: [
-          "--incognito",
-          "--no-sandbox",
-          "--single-process",
-          "--no-zygote"
-        ],
-      })
-      const browser = await launch.newPage();
-      await browser.goto(url);
-      const html = await browser.content();
-      await browser.close();
-      return resolve(html);
-    } catch (err) {
-      console.error(err);
-      return reject(err);
-    }
-  })
-}
+// const getPuppeteerPage = ( title, year ) => {
+//   const url = `https://www.vivino.com/search/wines?q=${title}+${year}`;
+//   puppeteer.use(StealthPlugin());
+//   return new Promise( async ( resolve, reject ) => {
+//     try {
+//       const launch =  await puppeteer
+//       .launch({
+//         headless: true,
+//         args: [
+//           "--incognito",
+//           "--no-sandbox",
+//           "--single-process",
+//           "--no-zygote"
+//         ],
+//       })
+//       const browser = await launch.newPage();
+//       await browser.goto(url);
+//       const html = await browser.content();
+//       await browser.close();
+//       return resolve(html);
+//     } catch (err) {
+//       console.error(err);
+//       return reject(err);
+//     }
+//   })
+// }
 
 const getHtmlFromTitle = (title, year) => {
   return new Promise(async ( resolve, reject ) => {
     try {
       const searchTitle = title.split(' ').join('+');
       const cleanSearchTitle = searchTitle.normalize('NFD').replace(/[\u0300-\u036f’]/g, "");
-      const vivinoSite = await getPuppeteerPage(cleanSearchTitle, year);
-      resolve(cheerio.load(vivinoSite));
+      // const vivinoSite = await getPuppeteerPage(cleanSearchTitle, year);
+      const vivinoSite = await fetch(`https://www.vivino.com/search/wines?q=${cleanSearchTitle}+${year}`)
+      const body = await vivinoSite.text();
+      resolve(cheerio.load(body));
     } catch (err) {
       reject(err);
     }
@@ -75,16 +77,16 @@ const getWineRating = html => {
   }
 }
 
-const getWinePrice = async (html) => {
-  try {
-    const priceElement = html('.wine-price');
-    const price = priceElement[0].children[3].children[0].data;
-    const SEK = isNaN(parseInt(price)) ? 'no price found' : (parseInt(price) * 12).toString(); //convert to SEK if number
-    return SEK;
-  } catch (err) {
-    return 'no price found';
-  }
-}
+// const getWinePrice = async (html) => {
+//   try {
+//     const priceElement = html('.wine-price');
+//     const price = priceElement[0].children[3].children[0].data;
+//     const SEK = isNaN(parseInt(price)) ? 'no price found' : (parseInt(price) * 12).toString(); //convert to SEK if number
+//     return SEK;
+//   } catch (err) {
+//     return 'no price found';
+//   }
+// }
 
 const getWinePage = async html => {
   const winePage = html('.wine-card__image-wrapper')[0].children[0].next.attribs.href;
@@ -100,11 +102,12 @@ const getVivinoData = async ( title, year ) => {
     const imgURL = await getWineImg(html);
     const rating = await getWineRating(html);
     const country = await getWineCountry(html);
-    const vivinoPrice = await getWinePrice(html)
+    const vivinoPrice = null; // await getWinePrice(html)
     const vivinoUrl = await getWinePage(html);
   
     return [imgURL[0], rating, country, vivinoPrice, vivinoUrl];
   } catch (err) {
+    console.error(err)
     return 'no data found';
   }
 }

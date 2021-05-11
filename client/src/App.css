@@ -336,7 +336,7 @@ form input {
 .card__vivino-url {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 0 10px;
   height: 100%;
   word-wrap: break-word;
@@ -359,7 +359,6 @@ form input {
 
 .card__title {
   width: 100%;
-  margin-top: 40px;
   font-size: 1.2rem;
   line-height: 1.2rem;
   flex-wrap: wrap;

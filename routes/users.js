@@ -58,8 +58,8 @@ router.post("/login", (req, res) => {
           name: user.name,
           email: user.email,
           wineList: user.wineList,
-          columns: user.columns??null,
-          shelves: user.shelves??null,
+          columns: user.columns || null,
+          shelves: user.shelves || null,
         };
         jwt.sign(
           payload,
