@@ -12,8 +12,8 @@ const WineForm = (props) => {
   const pickedWine = useSelector(state => state.pickedWine)
   const { column, shelf } = pickedWine;
   const keepForm = useSelector(state => state.keepForm);
-  const initialState = { title: '', year: '', price: '' }
-  const [inputValue, setInputValue] = useState(initialState)
+  const initialState = { title: '', year: '', price: '' };
+  const [inputValue, setInputValue] = useState(initialState);
 
   pickedWine.price = isNaN(pickedWine.price) ? '' : pickedWine.price;
 
