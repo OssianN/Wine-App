@@ -86,7 +86,7 @@ const WineForm = (props) => {
       <input ref={titleInput} value={inputValue.title || ''} onChange={handleInputValueChange} name='title' type='text' />
       <label htmlFor='newWineDesc'>Year</label>
       <input ref={yearInput} value={inputValue.year || ''} onChange={handleInputValueChange} name='year' type='text' />
-      <label htmlFor='newWineCountry'>Price</label>
+      <label htmlFor='newWineCountry'>What did you pay?</label>
       <input value={inputValue.price || ''} onChange={handleInputValueChange} name='price' type='text' />
       <button type='submit' className="btn--enforced btn--form-submit" style={{display: areYouSure ? 'none' : 'block'}}>
         {props.buttonName}
