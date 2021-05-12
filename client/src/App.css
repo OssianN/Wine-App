@@ -15,7 +15,7 @@ html, body, #root {
 input, button {
   outline: none;
   font-family: Montserrat, sans-serif;
-  font-weight: bold;
+  font-weight: 700;
   text-transform: capitalize;
 }
 
@@ -427,7 +427,7 @@ form input {
   border-radius: 100px;
   margin-top: 40px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 400;
   color: black;
 }
 
