@@ -39,13 +39,13 @@ const InitialSetup = ({ setShowSettings }) => {
   }
 
   return (
-    <div className='initial-setup-container'>
+    <div className='initial-setup__container'>
       <form className='initial-setup__form' onSubmit={handleSubmit}>
         {error ? <p>columns and shelves need to be grater than zero</p> : ''}
         <label>How many columns do you have?</label>
         <input
           name='columns'
-          className='settings-form__input'
+          className='initial-setup__input'
           type='number'
           placeholder={user.columns}
           value={ inputValue.column }
@@ -54,14 +54,14 @@ const InitialSetup = ({ setShowSettings }) => {
         <label>How many shelves do you have?</label>
         <input
           name='shelves'
-          className='settings-form__input'
+          className='initial-setup__input'
           type='number'
           placeholder={user.shelves}
           value={ inputValue.shelf }
           onChange={handleChange}>
         </input>
-        <button type='submit' className='settings__button--confirm btn--enforced'>confirm</button>
-        <p>You can change this whenever you want.</p>
+        <p className='initial-setup__p'>You can change this whenever you want.</p>
+        <button type='submit' className='initial-setup__button--confirm btn--enforced'>confirm</button>
       </form>
     </div>
   )

@@ -385,18 +385,19 @@ form input {
 
 .logout-container {
   display: flex;
-  align-items: center;
+  align-items: right;
   top: 20px;
   left: 20px;
+  height: 70px;
+  position: absolute;
+  top: 0;
+  left: 15px;
 }
 
 .logout-button {
-  width: 80px;
-  height: 40px;
-  border-radius: 20px;
-  background-color: white;
-  border: 1px solid black;
-  text-transform: capitalize;
+  border: none;
+  background-color: transparent;
+  color: #535353;
 }
 
 .account-name-header {
