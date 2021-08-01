@@ -9,12 +9,16 @@ const { updateWine } = require('./updateWine');
 route.post('/getUserWines', async (req, res) => {
   const { wineList } = req.body;
   try {
-    if (!wineList) return res.status(200).json([]);
+    if (!wineList) {
+      res.status(200).json([]);
+      return 
+    }
+
     const data = await getData(wineList);
-    return res.status(200).send(JSON.stringify(data));
+    res.status(200).send(JSON.stringify(data));
   } catch (err) {
     console.error(err, 'IN GET /WINES');
-    res.status(500).send('IN GET /WINES');
+    res.status(500).send(err);
   }
 });
 
@@ -24,7 +28,7 @@ route.post('/', async (req, res) => {
     res.status(203).send(JSON.stringify(data));
   } catch (err) {
     console.error(err, 'IN POST /WINES');
-    res.status(500).send(err, 'IN POST /WINES');
+    res.status(500).send(err);
   }
 });
 

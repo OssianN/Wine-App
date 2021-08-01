@@ -105,7 +105,7 @@ const getVivinoData = async ( title, year ) => {
     const vivinoPrice = null; // await getWinePrice(html)
     const vivinoUrl = await getWinePage(html);
   
-    return [imgURL[0], rating, country, vivinoPrice, vivinoUrl];
+    return [imgURL[0], rating, country, vivinoUrl];
   } catch (err) {
     console.error(err)
     return 'no data found';

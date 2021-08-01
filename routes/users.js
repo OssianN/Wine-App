@@ -1,174 +1,149 @@
-const express = require("express");
-const router = express.Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const keys = require("../config/keys");
-const validateRegisterInput = require("../validation/register");
-const validateLoginInput = require("../validation/login");
-const UserDataBase = require('../mongoDB/user-schema');
+const express = require('express')
+const router = express.Router()
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const keys = require('../config/keys')
+const validateRegisterInput = require('../validation/register')
+const validateLoginInput = require('../validation/login')
+const UserDataBase = require('../mongoDB/user-schema')
 
-router.post("/register", (req, res) => {
-  const { name, email, password } = req.body;
+const updateJwt = (res, payload) => {
+  jwt.sign(
+    payload,
+    keys.secretOrKey,
+    {
+      expiresIn: 31556926, // 1 year in seconds
+    },
+    (err, token) => {
+      res.json({
+        success: true,
+        token: 'Bearer ' + token,
+      })
+    }
+  )
+}
 
-  const { errors, isValid } = validateRegisterInput(req.body);
+router.post('/register', (req, res) => {
+  const { name, email, password } = req.body
+  const { errors, isValid } = validateRegisterInput(req.body)
 
   if (!isValid) {
-    return res.status(400).json(errors);
+    res.status(400).json(errors)
+    return
   }
 
   UserDataBase.findOne({ email }).then(user => {
     if (user) {
-      return res.status(400).json({ email: "Email already exists" });
-    } else {
-      const newUser = new UserDataBase({
-        name,
-        email,
-        password,
-        wineList: [],
-      });
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) throw err;
-          newUser.password = hash;
-          newUser
-            .save()
-            .then(user => res.json(user))
-            .catch(err => console.error(err));
-        });
-      });
+      res.status(400).json({ email: 'Email already exists' })
+      return
     }
-  });
-});
 
-router.post("/login", (req, res) => {
-  const { email, password } = req.body;
-  const { errors, isValid } = validateLoginInput(req.body);
+    const newUser = new UserDataBase({
+      name,
+      email,
+      password,
+      wineList: [],
+    })
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(newUser.password, salt, (err, hash) => {
+        if (err) throw err
+        newUser.password = hash
+        newUser
+          .save()
+          .then(user => res.json(user))
+          .catch(err => console.error(err))
+      })
+    })
+  })
+})
+
+router.post('/login', (req, res) => {
+  const { email, password } = req.body
+  const { errors, isValid } = validateLoginInput(req.body)
   if (!isValid) {
-    return res.status(400).json(errors);
+    res.status(400).json(errors)
+    return
   }
 
   UserDataBase.findOne({ email }).then(user => {
     if (!user) {
-      return res.status(404).json({ emailnotfound: "Email not found" });
+      res.status(404).json({ emailnotfound: 'Email not found' })
+      return
     }
     bcrypt.compare(password, user.password).then(isMatch => {
-      if (isMatch) {
-        const payload = {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          wineList: user.wineList,
-          columns: user.columns || null,
-          shelves: user.shelves || null,
-        };
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          {
-            expiresIn: 31556926 // 1 year in seconds
-          },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token,
-            });
-          }
-        );
-      } else {
-        return res
-          .status(400)
-          .json({ passwordincorrect: "Password incorrect" });
+      if (!isMatch) {
+        res.status(400).json({ passwordincorrect: 'Password incorrect' })
+        return
       }
-    });
-  });
-});
+
+      const payload = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        wineList: user.wineList,
+        columns: user.columns || null,
+        shelves: user.shelves || null,
+      }
+      updateJwt(res, payload)
+      return
+    })
+  })
+})
 
 router.post('/addStorage', async (req, res) => {
   try {
-    const { email, columns, shelves } = req.body;
-    const user = await UserDataBase.findOne({ email });
-    await user.updateOne({ columns, shelves });
+    const { email, columns, shelves } = req.body
+    const user = await UserDataBase.findOne({ email })
+    await user.updateOne({ columns, shelves })
     const payload = {
       ...user._doc,
       columns,
       shelves,
     }
-    jwt.sign(
-      payload,
-      keys.secretOrKey,
-      {
-        expiresIn: 31556926, // 1 year in seconds
-      },
-      (err, token) => {
-        res.json({
-          success: true,
-          token: "Bearer " + token,
-        });
-      }
-    );
+    updateJwt(res, payload)
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send(err)
   }
-});
+})
 
 router.post('/addWine', async (req, res) => {
   try {
-    const { email, _id } = req.body;
-    const user = await UserDataBase.findOne({ email });
-    const wineList = await user.wineList;
-    if (wineList.some(wine => wine === _id)) return res.status(200).send();
+    const { email, _id } = req.body
+    const user = await UserDataBase.findOne({ email })
+    const wineList = await user.wineList
 
-    wineList.push(_id);
-    await user.updateOne({ wineList });
+    if (wineList.some(wine => wine === _id)) {
+      res.status(200).send()
+      return 
+    }
+
+    wineList.push(_id)
+    await user.updateOne({ wineList })
     const payload = {
       ...user._doc,
-      wineList
+      wineList,
     }
-    jwt.sign(
-      payload,
-      keys.secretOrKey,
-      {
-        expiresIn: 31556926, // 1 year in seconds
-      },
-      (err, token) => {
-        res.json({
-          success: true,
-          token: "Bearer " + token,
-        });
-      }
-    );
+    updateJwt(res, payload)
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send(err)
   }
-});
+})
 
 router.delete('/deleteWine', async (req, res) => {
   try {
-    const { _id, email } = req.body;
-    const user = await UserDataBase.findOne({ email });
-    const wineList = await user.wineList;
-    const newList = wineList.filter(wine => wine !== _id);
-    await user.updateOne({ wineList: newList });
+    const { _id, email } = req.body
+    const user = await UserDataBase.findOne({ email })
+    const wineList = await user.wineList
+    const newList = wineList.filter(wine => wine !== _id)
+    await user.updateOne({ wineList: newList })
     const payload = {
       ...user._doc,
       wineList: newList,
     }
-    jwt.sign(
-      payload,
-      keys.secretOrKey,
-      {
-        expiresIn: 31556926, // 1 year in seconds
-      },
-      (err, token) => {
-        res.json({
-          success: true,
-          token: "Bearer " + token,
-        });
-      }
-    );
+    updateJwt(res, payload)
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send(err)
   }
-});
+})
 
-module.exports = router;
+module.exports = router
