@@ -9,7 +9,7 @@ import Landing from "./components/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 
-const App = props => {
+const App = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
