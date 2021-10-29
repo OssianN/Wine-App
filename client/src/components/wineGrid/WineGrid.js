@@ -1,35 +1,32 @@
-import React from 'react';
-import Card from '../card/Card.js';
-import { useDispatch, useSelector } from 'react-redux';
-import { setPickedWine } from '../../actions/setPickedWine';
+import React, { useEffect } from 'react'
+import Card from '../card/Card.js'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPickedWine } from '../../actions/setPickedWine'
 
 const WineGrid = props => {
-  const dispatch = useDispatch();
-  const wineArr = useSelector(state => state.wineArr);
-  const pickedWine = useSelector(state => state.pickedWine);
-  const { user } = useSelector(state => state.auth);
-  const cardArr = props.searchValue ? props.searchArr : wineArr;
-  const cardWidth = (100 / user.columns);
+  const dispatch = useDispatch()
+  const wineArr = useSelector(state => state.wineArr.wines)
+  const pickedWine = useSelector(state => state.pickedWine)
+  const { user } = useSelector(state => state.auth)
+  const cardArr = props.searchValue ? props.searchArr : wineArr
+  const cardWidth = 100 / user.columns
 
   const createButton = (i, j) => {
     return (
-      <div 
+      <div
         key={`${i}:${j}`}
-        className="add-wine__div"
+        className='add-wine__div'
         id={`${i}:${j}`}
-        style={{width: `calc(${cardWidth}% - 20px)`}} >
+        style={{ width: `calc(${cardWidth}% - 20px)` }}>
         <div className='card-header'>
           <p className='card-header__position--dark'>{`${i + 1}:${j + 1}`}</p>
         </div>
-        <button 
-          onClick={handleClick}>
-          &#43;
-        </button>
+        <button onClick={handleClick}>&#43;</button>
       </div>
-    );
-  };
+    )
+  }
 
-  const createCard = (card) => {
+  const createCard = card => {
     return (
       <Card
         key={card._id}
@@ -37,23 +34,23 @@ const WineGrid = props => {
         cardWidth={cardWidth}
         setShowEditModal={props.setShowEditModal}
       />
-    );
-  };
+    )
+  }
 
   const orderCards = (cardArr, target, i, j) => {
-    let check = false;
-    cardArr?.forEach( card => {
-      if(`${card.shelf}:${card.column}` === `${i}:${j}`) {
-        check = true;
-        target.push(createCard(card));
+    let check = false
+    cardArr?.forEach(card => {
+      if (`${card.shelf}:${card.column}` === `${i}:${j}`) {
+        check = true
+        target.push(createCard(card))
       }
-    });
-    if (!check && !props.searchValue) return target.push(createButton(i, j));
-  };
+    })
+    if (!check && !props.searchValue) return target.push(createButton(i, j))
+  }
 
-  const renderCards = (cardArr) => {
-    const shelves = [];
-    for (let i = 0; i < user.shelves; i ++) {
+  const renderCards = cardArr => {
+    const shelves = []
+    for (let i = 0; i < user.shelves; i++) {
       const columns = []
       for (let j = 0; j < user.columns; j++) {
         orderCards(cardArr, columns, i, j)
@@ -66,27 +63,25 @@ const WineGrid = props => {
           {shelf}
         </div>
       )
-    });
+    })
   }
 
   const breakOutXY = string => {
-    const arr = string.split(':');
+    const arr = string.split(':')
     return {
       shelf: parseInt(arr[0]),
       column: parseInt(arr[1]),
-    };
-  };
+    }
+  }
 
   const handleClick = e => {
-    props.setShowAddModal({display: 'flex'});
-    dispatch(setPickedWine({...pickedWine, ...breakOutXY(e.target.parentElement.id)}));
-  };
+    props.setShowAddModal({ display: 'flex' })
+    dispatch(
+      setPickedWine({ ...pickedWine, ...breakOutXY(e.target.parentElement.id) })
+    )
+  }
 
-  return (
-    <div className='wineGrid'>
-      {renderCards(cardArr)}
-    </div>
-  )
+  return <div className='wineGrid'>{renderCards(cardArr)}</div>
 }
 
-export default WineGrid;
+export default WineGrid

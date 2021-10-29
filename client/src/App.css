@@ -243,7 +243,7 @@ form textarea {
   border: 1px solid black;
 }
 
-.btn--form-delete {
+.btn--form-archive {
   background-color: white;
   border: 1px solid black;
   color: black;
@@ -252,7 +252,7 @@ form textarea {
   text-transform: capitalize;
 }
 
-.delete-button-container {
+.archive-button-container {
   width: 50%;
   grid-template-areas:
     'a a'
@@ -260,7 +260,7 @@ form textarea {
   justify-content: center;
 }
 
-.confirm-delete__p {
+.confirm-archive__p {
   justify-self: center;
   grid-area: a;
   height: 50px;
@@ -268,7 +268,7 @@ form textarea {
   margin-top: 40px;
 }
 
-.btn-delete--yes {
+.btn-archive--yes {
   justify-self: flex-end;
   height: 50px;
   width: 100px;
@@ -276,7 +276,7 @@ form textarea {
   text-transform: capitalize;
 }
 
-.btn-delete--no {
+.btn-archive--no {
   height: 50px;
   width: 100px;
   justify-self: flex-start;
@@ -465,7 +465,7 @@ form textarea {
     min-height: 50px;
   }
 
-  .btn--form-delete {
+  .btn--form-archive {
     min-height: 50px;
   }
 }

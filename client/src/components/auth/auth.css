@@ -10,6 +10,7 @@
 
 .auth-form__input {
   margin: 20px 0;
+  text-transform: lowercase;
 }
 
 .auth-form__submit-button {
@@ -21,6 +22,6 @@
 
 .form__error-p {
   color: #920000;
-  font-size: .9rem;
+  font-size: 0.9rem;
   margin: 5px;
 }

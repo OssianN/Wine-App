@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import DeleteButton from './DeleteButton'
+import ArchiveButton from './ArchiveButton'
 import { setPickedWine } from '../../actions/setPickedWine'
 import { setKeepForm } from '../../actions/setKeepForm'
 
@@ -14,8 +14,6 @@ const WineForm = props => {
   const keepForm = useSelector(state => state.keepForm)
   const initialState = { title: '', year: '', price: '', comment: '' }
   const [inputValue, setInputValue] = useState(initialState)
-
-  // pickedWine.price = isNaN(pickedWine.price) ? '' : pickedWine.price;
 
   const isValidateInput = () => {
     if (!inputValue.title) {
@@ -118,7 +116,7 @@ const WineForm = props => {
         style={{ display: areYouSure ? 'none' : 'block' }}>
         {props.buttonName}
       </button>
-      <DeleteButton
+      <ArchiveButton
         buttonName={props.buttonName}
         areYouSure={areYouSure}
         setAreYouSure={setAreYouSure}
