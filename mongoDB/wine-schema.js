@@ -8,6 +8,7 @@ const wineSchema = new Schema({
   comment: { type: String },
   shelf: { type: Number },
   column: { type: Number },
+  archived: { type: Boolean },
   img: { type: String },
   rating: { type: String },
   price: { type: String },

@@ -1,28 +1,21 @@
-import React from 'react';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux'
-import { updateWine } from '../../actions/wineActions';
-import WineForm from './WineForm';
+import React from 'react'
+import { updateDatabase } from './utils'
+import WineForm from './WineForm'
+import { updateWine } from '../../actions/wineActions'
+import { useDispatch } from 'react-redux'
 
 const EditWine = props => {
-  const dispatch = useDispatch();
-  const { user } = useSelector(state => state.auth)
+  const dispatch = useDispatch()
 
-  const editData = async (data) => {
-    try {
-      const newWine = await axios.put('/wines', data);
-      dispatch(updateWine(newWine.data))
-      await axios.post('/users/addWine', { _id: newWine.data._id, email: user.email });
-    } catch(err) {
-      alert('A server error occured.', err);
-      console.error(err)
-    };
-  };
+  const handleEdit = async (data) => {
+    const newWine = await updateDatabase(data)
+    dispatch(updateWine(newWine.data))
+  }
 
   return (
     <div className='wineModal' style={props.showEditModal}>
       <WineForm
-        method={editData}
+        method={handleEdit}
         buttonName='Change Wine'
         show={props.setShowEditModal}
         setShowEditModal={props.setShowEditModal}
@@ -31,4 +24,4 @@ const EditWine = props => {
   )
 }
 
-export default EditWine;
+export default EditWine

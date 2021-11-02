@@ -1,30 +1,61 @@
 import {
   SET_WINE_ARR,
   UPDATE_WINE,
+  ARCHIVE_WINE,
   DELETE_WINE,
-} from "../actions/types";
+} from '../actions/types'
 
-const findAndUpdateTargetWine = (cardArr, newWine) => (
-  cardArr.map(card => card._id !== newWine._id
-    ? card
-    : newWine)
-);
+const setWines = data => data.filter(wine => !wine.archived)
+const setArchivedWines = data => data.filter(wine => wine.archived)
 
-const deleteWine = (state, deleteCardId) => state.filter(card => card._id !== deleteCardId);
+const findAndUpdateTargetWine = (cardArr, newWine) =>
+  cardArr.map(card => (card._id !== newWine._id ? card : newWine))
 
-const initialState = [];
+const archiveWine = (cardArr, wine) =>
+  cardArr.map(card => {
+    if (card._id === wine._id) {
+      return {
+        ...card,
+        archived: true,
+      }
+    }
+    return card
+  })
+
+const deleteWine = (state, deleteCardId) =>
+  state.filter(card => card._id !== deleteCardId)
+
+const initialState = {
+  wines: [],
+  archived: [{ name: 'test' }],
+}
 
 const wineReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_WINE_ARR:
-      return action.payload;
+      return {
+        wines: setWines(action.payload),
+        archived: setArchivedWines(action.payload),
+      }
     case UPDATE_WINE:
-      return findAndUpdateTargetWine(state, action.payload);
+      return {
+        ...state,
+        wines: findAndUpdateTargetWine(state.wines, action.payload),
+      }
+    case ARCHIVE_WINE:
+      const newState = archiveWine(state.wines, action.payload)
+      return {
+        ...state,
+        wines: setWines(newState),
+      }
     case DELETE_WINE:
-      return deleteWine(state, action.payload);
+      return {
+        ...state,
+        wines: deleteWine(state.wines, action.payload),
+      }
     default:
-      return state;
+      return state
   }
 }
 
-export default wineReducer;
+export default wineReducer

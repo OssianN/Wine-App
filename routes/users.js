@@ -114,7 +114,7 @@ router.post('/addWine', async (req, res) => {
 
     if (wineList.some(wine => wine === _id)) {
       res.status(200).send()
-      return 
+      return
     }
 
     wineList.push(_id)

@@ -7,7 +7,7 @@ import { setUserStorage } from '../../actions/authActions';
 
 const AddWine = props => {
   const dispatch = useDispatch();
-  const wineArr = useSelector(state => state.wineArr);
+  const wineArr = useSelector(state => state.wineArr.wines);
   const pickedWine = useSelector(state => state.pickedWine)
   const { shelf, column } = pickedWine;
   const { user } = useSelector(state => state.auth);

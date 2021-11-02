@@ -65,7 +65,7 @@ const Card = ({ card, setShowEditModal, cardWidth }) => {
         <p className='card__country-paragraph'>{conditionalRender(country)}</p>
         <p className='card__comment'>{limitTextLength(comment)}</p>
         <footer className='card__footer'>
-        <span className='card__separaion-span'></span>
+          <span className='card__separaion-span'></span>
           <p className='card__info-paragraph'>{conditionalRender(year)}</p>
           <p className='card__info-paragraph'>{conditionalRender(price)} kr</p>
           <p className='card__info-paragraph'>
