@@ -99,7 +99,7 @@ const getWinePage = async html => {
     return null
   }
 }
-
+ 
 const getVivinoData = async ( title, year ) => {
   try {
     const html = await getHtmlFromTitle(title, year);
