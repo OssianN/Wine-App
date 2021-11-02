@@ -1,6 +1,10 @@
 import React from 'react'
 
-const ArchiveButton = ({ areYouSure, handleAreYouSure }) => {
+const ArchiveButton = ({
+  areYouSure,
+  pickedWine,
+  handleArchive,
+}) => {
   if (areYouSure) {
     return null
   }
@@ -8,10 +12,10 @@ const ArchiveButton = ({ areYouSure, handleAreYouSure }) => {
   return (
     <button
       type='button'
-      onClick={handleAreYouSure}
+      onClick={handleArchive}
       className='btn--enforced btn--form-archive'
       style={{ display: areYouSure ? 'none' : 'block' }}>
-      Archive
+      {pickedWine.archived ? 'Unarchive' : 'Archive'}
     </button>
   )
 }

@@ -24,7 +24,6 @@ const FormButtonsModule = ({
       updateDatabase(update)
       dispatch(archiveWine(update))
       setShowEditModal({ display: 'none' })
-      handleAreYouSure()
       saveOrClearForm()
     } catch (err) {
       alert('A server error occured.', err)
@@ -58,19 +57,34 @@ const FormButtonsModule = ({
 
   return (
     <>
-      <button
-        type='submit'
-        className='btn--enforced btn--form-submit'
-        style={{ display: areYouSure ? 'none' : 'block' }}>
-        {submitButtonName}
-      </button>
       {pickedWine.archived ? (
-        <DeleteButton
-          areYouSure={areYouSure}
-          handleAreYouSure={handleAreYouSure}
-        />
+        <>
+          <DeleteButton
+            areYouSure={areYouSure}
+            handleAreYouSure={handleAreYouSure}
+          />
+          <ArchiveButton
+            pickedWine={pickedWine}
+            handleArchive={handleArchive}
+            areYouSure={areYouSure}
+            handleAreYouSure={handleAreYouSure}
+          />
+        </>
       ) : (
-        <ArchiveButton areYouSure={areYouSure} handleAreYouSure={handleAreYouSure} />
+        <>
+          <button
+            type='submit'
+            className='btn--enforced btn--form-submit'
+            style={{ display: areYouSure ? 'none' : 'block' }}>
+            {submitButtonName}
+          </button>
+          <ArchiveButton
+            pickedWine={pickedWine}
+            handleArchive={handleArchive}
+            areYouSure={areYouSure}
+            handleAreYouSure={handleAreYouSure}
+          />
+        </>
       )}
       <AreYouSureButtons
         pickedWine={pickedWine}
