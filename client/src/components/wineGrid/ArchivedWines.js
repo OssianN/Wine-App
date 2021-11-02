@@ -4,8 +4,8 @@ import Card from '../card/Card'
 import '../../styles/grid.css'
 
 const ArchivedWines = ({ setShowEditModal, searchValue, searchArr }) => {
-  const wines = useSelector(state => state.wineArr.archived)
-  const wineArr = searchValue ? searchArr : wines
+  const wines = useSelector(state => state.wineArr)
+  const wineArr = searchValue ? searchArr : wines.filter(wine => wine.archived)
 
   const sortById = (a, b) => {
     if (a._id < b._id) return 1

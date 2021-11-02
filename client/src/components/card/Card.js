@@ -50,6 +50,7 @@ const Card = ({ card, setShowEditModal, cardWidth }) => {
 
   return (
     <figure
+      key={_id}
       className='card'
       id={_id}
       style={{ width: `calc(${cardWidth}% - 20px)` }}>

@@ -89,11 +89,15 @@ const getWineRating = html => {
 // }
 
 const getWinePage = async html => {
-  const winePage = html('.wine-card__image-wrapper')[0].children[0].next.attribs.href;
-  const vivinoLinkSite = await fetch(`https://www.vivino.com${winePage}`);
-  const body = await vivinoLinkSite.text();
-  const wineHtml = cheerio.load(body);
-  return wineHtml('link')[32].attribs.href;
+  try {
+    const winePage = html('.wine-card__image-wrapper')[0].children[0].next.attribs.href;
+    const vivinoLinkSite = await fetch(`https://www.vivino.com${winePage}`);
+    const body = await vivinoLinkSite.text();
+    const wineHtml = cheerio.load(body);
+    return wineHtml('link')[32].attribs.href;
+  } catch (err) {
+    return null
+  }
 }
 
 const getVivinoData = async ( title, year ) => {
@@ -102,7 +106,7 @@ const getVivinoData = async ( title, year ) => {
     const imgURL = await getWineImg(html);
     const rating = await getWineRating(html);
     const country = await getWineCountry(html);
-    const vivinoPrice = null; // await getWinePrice(html)
+    // const vivinoPrice = null; // await getWinePrice(html)
     const vivinoUrl = await getWinePage(html);
   
     return [imgURL[0], rating, country, vivinoUrl];
