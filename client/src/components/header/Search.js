@@ -28,19 +28,19 @@ const Search = ({
 
   const searchNumber = string => parseInt(string.match(/[0-9]+/)?.[0])
 
-  // useEffect(() => {
-  //   const handleSearch = () => {
-  //     const newArr = wineArr?.filter(card =>
-  //       Object.entries(card)
-  //         .map(searchableValues)
-  //         .join('')
-  //         .toLowerCase()
-  //         .match(searchValue.toLowerCase())
-  //     )
-  //     setSearchArr(newArr)
-  //   }
-  //   handleSearch()
-  // }, [searchValue, setSearchArr, wineArr])
+  useEffect(() => {
+    const handleSearch = () => {
+      const newArr = wineArr?.filter(card =>
+        Object.entries(card)
+          .map(searchableValues)
+          .join('')
+          .toLowerCase()
+          .match(searchValue.toLowerCase())
+      )
+      setSearchArr(newArr)
+    }
+    handleSearch()
+  }, [searchValue, setSearchArr, wines])
 
   useEffect(() => {
     const filterRating = () => {
@@ -52,7 +52,7 @@ const Search = ({
       }
     }
     filterRating()
-  }, [searchValue, setSearchArr, wineArr])
+  }, [searchValue, setSearchArr, wines])
 
   useEffect(() => {
     const filterPrice = () => {
@@ -64,7 +64,7 @@ const Search = ({
       }
     }
     filterPrice()
-  }, [searchValue, setSearchArr, wineArr])
+  }, [searchValue, setSearchArr, wines])
 
   return (
     <>
