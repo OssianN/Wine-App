@@ -7,10 +7,11 @@ const Search = ({
   setSearchValue,
   showArchived,
 }) => {
-  const wines = useSelector(state => state.wineArr.wines)
-  const archived = useSelector(state => state.wineArr.archived)
+  const wines = useSelector(state => state.wineArr)
 
-  const wineArr = showArchived ? archived : wines
+  const wineArr = showArchived
+    ? wines.filter(wine => wine.archived)
+    : wines.filter(wine => !wine.archived)
 
   const handleChange = e => {
     setSearchValue(e.target.value)
@@ -27,21 +28,19 @@ const Search = ({
 
   const searchNumber = string => parseInt(string.match(/[0-9]+/)?.[0])
 
-  useEffect(() => {
-    if (!wineArr) return
-
-    const handleSearch = () => {
-      const newArr = wineArr?.filter(card =>
-        Object.entries(card)
-          .map(searchableValues)
-          .join('')
-          .toLowerCase()
-          .match(searchValue.toLowerCase())
-      )
-      setSearchArr(newArr)
-    }
-    handleSearch()
-  }, [searchValue, setSearchArr, wineArr])
+  // useEffect(() => {
+  //   const handleSearch = () => {
+  //     const newArr = wineArr?.filter(card =>
+  //       Object.entries(card)
+  //         .map(searchableValues)
+  //         .join('')
+  //         .toLowerCase()
+  //         .match(searchValue.toLowerCase())
+  //     )
+  //     setSearchArr(newArr)
+  //   }
+  //   handleSearch()
+  // }, [searchValue, setSearchArr, wineArr])
 
   useEffect(() => {
     const filterRating = () => {

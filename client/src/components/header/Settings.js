@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 
 const Settings = ({ showSettings, setShowSettings, setShowArchived }) => {
   const [totalPrice, setTotalPrice] = useState(0)
-  const wineArr = useSelector(state => state.wineArr.wines)
+  const wineArr = useSelector(state => state.wineArr)
   const { user } = useSelector(state => state.auth)
   const leftMargin = showSettings ? null : '-400px'
 

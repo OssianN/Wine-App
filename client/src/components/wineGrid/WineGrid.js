@@ -5,7 +5,8 @@ import { setPickedWine } from '../../actions/setPickedWine'
 
 const WineGrid = props => {
   const dispatch = useDispatch()
-  const wineArr = useSelector(state => state.wineArr.wines)
+  const wines = useSelector(state => state.wineArr)
+  const wineArr = wines.filter(wine => !wine.archived)
   const pickedWine = useSelector(state => state.pickedWine)
   const { user } = useSelector(state => state.auth)
   const cardArr = props.searchValue ? props.searchArr : wineArr

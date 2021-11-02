@@ -122,7 +122,7 @@
 }
 
 .archive__button--archived::after {
-  transform: translateX(98%);
+  transform: translateX(99%);
 }
 
 .archive__button-img {

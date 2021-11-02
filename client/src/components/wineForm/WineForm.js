@@ -1,17 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import ArchiveButton from './ArchiveButton'
 import { setPickedWine } from '../../actions/setPickedWine'
 import { setKeepForm } from '../../actions/setKeepForm'
+import FormButtonsModule from './FormButtonsModule'
 
 const WineForm = props => {
   const dispatch = useDispatch()
   const titleInput = useRef(null)
   const yearInput = useRef(null)
-  const [areYouSure, setAreYouSure] = useState(false)
   const pickedWine = useSelector(state => state.pickedWine)
-  const { column, shelf } = pickedWine
   const keepForm = useSelector(state => state.keepForm)
+  const { column, shelf } = pickedWine
+  const [areYouSure, setAreYouSure] = useState(false)
   const initialState = { title: '', year: '', price: '', comment: '' }
   const [inputValue, setInputValue] = useState(initialState)
 
@@ -110,14 +110,8 @@ const WineForm = props => {
         onChange={handleInputValueChange}
         name='comment'
         placeholder='comment'></textarea>
-      <button
-        type='submit'
-        className='btn--enforced btn--form-submit'
-        style={{ display: areYouSure ? 'none' : 'block' }}>
-        {props.buttonName}
-      </button>
-      <ArchiveButton
-        buttonName={props.buttonName}
+      <FormButtonsModule
+        submitButtonName={props.buttonName}
         areYouSure={areYouSure}
         setAreYouSure={setAreYouSure}
         setShowEditModal={props.setShowEditModal}

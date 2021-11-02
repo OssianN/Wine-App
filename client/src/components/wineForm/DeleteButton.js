@@ -1,19 +1,15 @@
 import React from 'react'
 
-const ArchiveButton = ({ areYouSure, handleAreYouSure }) => {
-  if (areYouSure) {
-    return null
-  }
-
+const DeleteButton = ({ areYouSure, handleAreYouSure }) => {
   return (
     <button
       type='button'
       onClick={handleAreYouSure}
       className='btn--enforced btn--form-archive'
       style={{ display: areYouSure ? 'none' : 'block' }}>
-      Archive
+      Delete
     </button>
   )
 }
 
-export default ArchiveButton
+export default DeleteButton
