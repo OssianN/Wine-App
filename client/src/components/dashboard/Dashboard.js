@@ -3,7 +3,7 @@ import axios from 'axios'
 import WineGrid from '../wineGrid/WineGrid'
 import AddWine from '../wineForm/AddWine'
 import EditWine from '../wineForm/EditWine'
-import MainHeader from '../header/MainHeader'
+import Search from '../header/Search'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { setWineArr } from '../../actions/wineActions'
@@ -11,7 +11,9 @@ import Settings from '../header/Settings'
 import InitialSetup from '../header/InitialSetup'
 import Hamburger from '../header/Hamburger'
 import ArchivedWines from '../wineGrid/ArchivedWines'
-import '../../App.css'
+import ArchiveButton from '../header/ArchiveButton'
+import '../../styles/App.css'
+import '../../styles/header.css'
 
 const Dashboard = () => {
   const [updateOnPost, setUpdateOnPost] = useState(0)
@@ -53,21 +55,24 @@ const Dashboard = () => {
 
   return (
     <div className='dashboard'>
-      <Hamburger
-        showSettings={showSettings}
-        setShowSettings={setShowSettings}
-      />
-      <Settings
-        showSettings={showSettings}
-        setShowSettings={setShowSettings}
-        setShowArchived={setShowArchived}
-      />
-      <MainHeader
-        setSearchArr={setSearchArr}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-        showArchived={showArchived}
-      />
+      <header className='main__header'>
+        <Search
+          setSearchArr={setSearchArr}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          showArchived={showArchived}
+        />
+        <ArchiveButton setShowArchived={setShowArchived} />
+        <Hamburger
+          showSettings={showSettings}
+          setShowSettings={setShowSettings}
+        />
+        <Settings
+          showSettings={showSettings}
+          setShowSettings={setShowSettings}
+          setShowArchived={setShowArchived}
+        />
+      </header>
       <h1 className='header'>This is the wine we whine about</h1>
       <AddWine
         updateOnPost={updateOnPost}

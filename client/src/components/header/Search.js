@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-const MainHeader = ({
+const Search = ({
   setSearchArr,
   searchValue,
   setSearchValue,
@@ -68,15 +68,15 @@ const MainHeader = ({
   }, [searchValue, setSearchArr, wineArr])
 
   return (
-    <div className='main-header'>
+    <>
       <input
         type='text'
         onChange={handleChange}
         value={searchValue}
         className='search'
         placeholder='search'></input>
-    </div>
+    </>
   )
 }
 
-export default MainHeader
+export default Search

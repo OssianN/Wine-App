@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import '../../hamburger.css';
+import React, { useState, useEffect } from 'react'
+import '../../styles/hamburger.css'
 
 const Hamburger = ({ showSettings, setShowSettings }) => {
-  const [isOpen, setIsOpen] = useState('hamburger--closed');
+  const [isOpen, setIsOpen] = useState('hamburger--closed')
 
   const toggleSettings = () => {
-    setShowSettings(!showSettings);
+    setShowSettings(!showSettings)
   }
 
   useEffect(() => {
-    showSettings
-    ? setIsOpen('hamburger--open')
-    : setIsOpen('hamburger--closed');
-  }, [showSettings]);
+    showSettings ? setIsOpen('hamburger--open') : setIsOpen('hamburger--closed')
+  }, [showSettings])
 
   return (
     <>
       <button className='hamburger' onClick={toggleSettings}>
-        <div id='nav-icon2' className={`hamburger ${isOpen}`}>
+        <div id='nav-icon2' className={`${isOpen}`}>
           <span></span>
           <span></span>
           <span></span>
@@ -27,7 +25,7 @@ const Hamburger = ({ showSettings, setShowSettings }) => {
         </div>
       </button>
     </>
-  );
+  )
 }
 
-export default Hamburger;
+export default Hamburger

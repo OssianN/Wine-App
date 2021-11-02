@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import LogOutButton from './LogOutButton'
 import InitialSetup from './InitialSetup'
 import { useSelector } from 'react-redux'
-import './settings.css'
 
 const Settings = ({ showSettings, setShowSettings, setShowArchived }) => {
   const [totalPrice, setTotalPrice] = useState(0)
@@ -19,10 +18,6 @@ const Settings = ({ showSettings, setShowSettings, setShowArchived }) => {
 
   const priceReducer = (acc, curr) => acc + parseInt(curr)
 
-  const handleShowArchived = () => {
-    setShowArchived(prev => !prev)
-  }
-
   useEffect(() => {
     const totalPrice = wineArr.map(extractPrice).reduce(priceReducer, 0)
     setTotalPrice(totalPrice)
@@ -34,15 +29,12 @@ const Settings = ({ showSettings, setShowSettings, setShowArchived }) => {
 
   return (
     <div className='settings-container' style={{ right: leftMargin }}>
-      <h2>{user.name}</h2>
+      <h2 className='settings__name'>{user.name}</h2>
       <LogOutButton />
       <div className='settings__price-container'>
-        <p className='settings__price-p'>Total price for this storage:</p>
-        <p>{totalPrice} kr</p>
+        <h4 className='settings__price-header'>Total price for this storage: </h4>
+        <p className='settings__price-p'>{totalPrice} kr</p>
       </div>
-      <button className='btn' onClick={handleShowArchived}>
-        Show Archived
-      </button>
       <InitialSetup setShowSettings={setShowSettings} />
     </div>
   )

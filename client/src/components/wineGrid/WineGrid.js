@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Card from '../card/Card.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPickedWine } from '../../actions/setPickedWine'
@@ -81,7 +81,7 @@ const WineGrid = props => {
     )
   }
 
-  return <div className='wineGrid'>{renderCards(cardArr)}</div>
+  return <div className='wine-grid'>{renderCards(cardArr)}</div>
 }
 
 export default WineGrid
