@@ -5,7 +5,6 @@ import '../../styles/grid.css'
 
 const ArchivedWines = ({ setShowEditModal, searchValue, searchArr }) => {
   const wines = useSelector(state => state.wineArr.archived)
-
   const wineArr = searchValue ? searchArr : wines
 
   const sortById = (a, b) => {
