@@ -8,4 +8,4 @@ A digital layout for your wine shelf.
 
 You can also enter what you payed for each wine and the app will present the total value of your wine storage.
 
-https://mywineshelf.herokuapp.com
+https://mywineshelf.vercel.app
